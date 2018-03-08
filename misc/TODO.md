@@ -3,7 +3,7 @@
 ## Plan Projet
 
 #### Presentation de l'entreprise
-  * Who ?
+  * Who?
 
 #### Analyse des besoins
   * Who?
