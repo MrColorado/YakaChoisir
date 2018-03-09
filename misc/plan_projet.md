@@ -1,14 +1,14 @@
-# Le projet Tickets
+﻿# Le projet Tickets
 
 ## Situation des associations de l'EPITA
 
-### Les évenements des associations
+### Les évènements des associations
 
   L'EPITA est une école d'ingénieurs en informatique basée à Paris, mais aussi à
   Lyon, Rennes, Strasbourg et Toulouse où sont situés des campus de cycle
   préparatoire intégré.
 
-  La vie associative de l’école est riche, et les associations qui organisent évènements ont besoin de nouveaux outils pour les aider à gérer les
+  La vie associative de l’école est riche, et les associations qui organisent les évènements ont besoin de nouveaux outils pour les aider à gérer les
   inscriptions ainsi que la vérification des billets des participants aux
   évènements.
 
@@ -40,7 +40,7 @@ de leurs sorties et entrées au cours de l’évènement.
 ### Stratégie
 
 1.  Inscription à l’évènement
-    * Billeterie EPITA (sur place)
+    * billetterie EPITA (sur place)
     * Réservations en ligne
 2.  Vérification aux entrées
     * Vérification automatique (achat sur place)
