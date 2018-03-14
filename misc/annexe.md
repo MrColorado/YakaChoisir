@@ -3,14 +3,18 @@
 ## Home
 
 ![alt text](mockup/home.png)
+![alt text](mockup/diagram_home.jpg)
 
 ## Événements
 
 ![alt text](mockup/event.png)
 
+![alt text](mockup/diagram_events.jpg)
+
 ## Mes événements
 
 ![alt text](mockup/my_event.png)
+![alt text](mockup/diagram_my_events.jpg)
 
 ## Informations personnelles
 
