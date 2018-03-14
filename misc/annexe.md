@@ -1,41 +1,48 @@
 # Annexe
+## Page d'accueil
 
-## Home
+![Mockup de la page d'accueil](mockup/home.png)
 
-![alt text](mockup/home.png)
-![alt text](mockup/diagram_home.jpg)
+![Logigramme de la page d'accueil](mockup/diagram_home.jpg)
+
+\pagebreak
 
 ## Événements
 
-![alt text](mockup/event.png)
+![Mockup de la page événement](mockup/event.png)
 
-![alt text](mockup/diagram_events.jpg)
+![logigramme de la page événement](mockup/diagram_events.jpg)
+
+\pagebreak
 
 ## Mes événements
 
-![alt text](mockup/my_event.png)
-![alt text](mockup/diagram_my_events.jpg)
+![Mockup de la page mes événements](mockup/my_event.png)
+
+![Logigramme de la page mes événements](mockup/diagram_my_events.jpg)
+\pagebreak
 
 ## Informations personnelles
 
-![alt text](mockup/account.png)
+![Mockup de la page informations personnelles](mockup/account.png)
+\pagebreak
 
 ## Mes associations
 
-![alt text](mockup/asso1.png)
+![Mockup de la page mes associations](mockup/asso1.png)
 
+![Mockup de la page mes associations](mockup/asso2.png)
 
-![alt text](mockup/asso2.png)
-
-
-![alt text](droit/droit_asso.jpg)
+![Droit de la page mes associations](droit/droit_asso.jpg)
+\pagebreak
 
 ## Application mobile
 
-![alt text](mockup/appli.png)
+![Mockup de l'application mobile](mockup/appli.png)
 
-![alt text](droit/droit_appli.jpg)
+![Droit de l'application mobile](droit/droit_appli.jpg)
+\pagebreak
 
 ## Droits généraux
 
-![alt text](droit/droit_general.jpg)
+![Droit de l'application](droit/droit_general.jpg)
