@@ -4,15 +4,15 @@
 
 ![alt text](mockup/home.png)
 
-## Evenements
+## Événements
 
 ![alt text](mockup/event.png)
 
-## Mes evenements
+## Mes événements
 
 ![alt text](mockup/my_event.png)
 
-## Information personnel
+## Informations personnelles
 
 ![alt text](mockup/account.png)
 
@@ -24,15 +24,14 @@
 ![alt text](mockup/asso2.png)
 
 
-[alt text](mockup/droit_asso.jpg)
+![alt text](droit/droit_asso.jpg)
 
 ## Application mobile
 
 ![alt text](mockup/appli.png)
 
-
 ![alt text](droit/droit_appli.jpg)
 
-## Droit general
+## Droits généraux
 
 ![alt text](droit/droit_general.jpg)
