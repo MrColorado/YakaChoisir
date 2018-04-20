@@ -10,14 +10,22 @@ class User(models.Model):
     lastname = models.CharField(max_length=100)
     mail = models.CharField(max_length=100)
     mail_secondary = models.CharField(max_length=100, blank=True) # Blank is preferred. Do not use null.
-    gender = models.NullBooleanField;
+    MALE = 'M'
+    FEMALE = 'F'
+    NON_BINARY = 'N'
+    GENDER_CHOICES = (
+        (MALE, 'Homme'),
+        (FEMALE, 'Femme'),
+        (NON_BINARY, 'Non binaire'),
+    )
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
 
     class Meta:
         verbose_name = "Utilisateur"
         ordering = ['id']
 
     def __str__(self):
-        return "{name} {lastname} ({mail})".format(self.firstname, self.lastname, self.mail)
+        return "{0} {1} ({2})".format(self.firstname, self.lastname, self.mail)
 
 
 class Members(models.Model):
@@ -31,10 +39,11 @@ class Members(models.Model):
         ordering = ['id']
 
     def __str__(self):
-        return "{name} fait partie de l'association {asso}".format(self.user_id, self.association_id)
+        return "{0} fait partie de l'association {1}".format(self.user_id, self.association_id)
 
 class Association(models.Model):
-
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
 class Event(models.Model):
 
 class Attend(models.Model):
