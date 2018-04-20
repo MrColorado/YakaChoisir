@@ -64,3 +64,9 @@ python manage.py makemigrations
 # Actually update the database
 python manage.py migrate
 ```
+
+## To run server
+
+```
+python3 manage.py runserver
+```

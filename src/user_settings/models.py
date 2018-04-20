@@ -8,8 +8,8 @@ from django.utils import timezone
 class User(models.Model):
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
-    mail = models.CharField(max_length=100)
-    mail_secondary = models.CharField(max_length=100, blank=True) # Blank is preferred. Do not use null.
+    mail = models.EmailField(max_length=100)
+    mail_secondary = models.EmailField(max_length=100, blank=True) # Blank is preferred. Do not use null.
     MALE = 'M'
     FEMALE = 'F'
     NON_BINARY = 'N'
@@ -45,8 +45,18 @@ class Association(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     date_creation = models.DateTimeField(default=timezone.now())
+    mail = models.EmailField(max_length=100)
+    photo = models.ImageField()
+    site = models.URLField()
 
 class Event(models.Model):
+    association_id = models.ForeignKey(Association, on_delete=models.DO_NOTHING)
+    title = models.CharField(max_length=100)
+    date_begin = models.DateTimeField()
+    date_end = models.DateTimeField()
+    validated = models.BooleanField()
+    description = models.TextField(blank=True)
+    price = models.
 
 class Attend(models.Model):
 
