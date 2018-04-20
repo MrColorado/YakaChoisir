@@ -4,48 +4,51 @@
     <!-----------------------------------------------Meta Tags--------------------------------------------------------->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Test</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="js/bootstrap.min.js">
-    <link rel="stylesheet" href="css/style.css">
+    <title> {% block title %} Billetterie {% endblock %}</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
     <body>
         <header>
-            <nav class="navbar navbar-dark bg-dark">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-xs-6">
-                        <img src="img/epita_logo.png" href="#"/>
+            {% block nav %}
+                <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-xs-6">
+                            <img src="../../img/epita_logo.png" href="#"/>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-xs-6" style="padding-top: 13px;">
+                            <h3>Billetterie</h3>
+                        </div>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-xs-6" style="padding-top: 13px;">
-                        <h3>Billetterie</h3>
-                    </div>
-                </div>
-                <ul class="nav nav-pills pull-right">
-                   <li style="margin-right: 4px;">
-                       <form class="input-append hidden-tablet" style="margin-bottom: 4px; margin-top: 4px;">
-                           <div class="input-group">
-                               <input id="kw" class="span2" title="Enter keyword(s) to find" name="kw" maxlength="40" type="texte" style="margin-right: 0px">
-                               <button class="btn btn-light" type="submit">
-                                   <i class ="fa fa-search" title="Search"></i>
-                               </button>
-                           </div>
-                       </form>
-                   </li>
-                   <li>
-                       <form class="hidden-tablet" style="margin-top: 4px; margin-bottom: 4px;">
-                           <button type="button" class="btn btn-light">Connexion</button>
-                       </form>
-                   </li>
-                </ul>
-            </nav>
+                    <ul class="nav nav-pills pull-right">
+                       <li style="margin-right: 4px;">
+                           <form class="input-append hidden-tablet" style="margin-bottom: 4px; margin-top: 4px;">
+                               <div class="input-group">
+                                   <input id="kw" class="span2" title="Enter keyword(s) to find" name="kw" maxlength="40" type="texte" style="margin-right: 0px">
+                                   <button class="btn btn-light" type="submit">
+                                       <i class ="fa fa-search" title="Search"></i>
+                                   </button>
+                               </div>
+                           </form>
+                       </li>
+                       <li>
+                           <form class="hidden-tablet" style="margin-top: 4px; margin-bottom: 4px;">
+                               <button type="button" class="btn btn-light">Connexion</button>
+                           </form>
+                       </li>
+                    </ul>
+                </nav>
+            {% endblock %}
+            {% block panel %}
             <nav class="nav nav-pills nav-fill navbar-dark" style="background-color: #e3f2fd;">
-                <a class="nav-item nav-link active" href="index.html"> Active </a>
+                <a class="nav-item nav-link active" href="home/index.html"> Active </a>
                 <a class="nav-item nav-link" href="#">Link</a>
-                <a class="nav-item nav-link" href="index.html">Link</a>
+                <a class="nav-item nav-link" href="home/index.html">Link</a>
                 <a class="nav-item nav-link disabled" href="#">Disabled</a>
             </nav>
+            {% endblock %}
         </header>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
