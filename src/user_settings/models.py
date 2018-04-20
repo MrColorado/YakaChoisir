@@ -44,6 +44,8 @@ class Members(models.Model):
 class Association(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
+    date_creation = models.DateTimeField(default=timezone.now())
+
 class Event(models.Model):
 
 class Attend(models.Model):
