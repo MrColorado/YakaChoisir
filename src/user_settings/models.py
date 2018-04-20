@@ -19,21 +19,31 @@ class User(models.Model):
     def __str__(self):
         return "{name} {lastname} ({mail})".format(self.firstname, self.lastname, self.mail)
 
-class User(models.Moodel):
 
-class Members(models.Moodel):
+class Members(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    association_id = models.ForeignKey(Association, on_delete=models.DO_NOTHING)
+    role = models.CharField(max_length=100, blank=True)
+    date = models.DateTimeField(default=timezone.now(), verbose_name="Date d'ajout du membre")
 
-class Association(models.Moodel):
+    class Meta:
+        verbose_name = "Liste des membres des associations"
+        ordering = ['id']
 
-class Event(models.Moodel):
+    def __str__(self):
+        return "{name} fait partie de l'association {asso}".format(self.user_id, self.association_id)
 
-class Attend(models.Moodel):
+class Association(models.Model):
 
-class Staff(models.Moodel):
+class Event(models.Model):
 
-class SystemAdmin(models.Moodel):
+class Attend(models.Model):
 
-class AssociationsManager(models.Moodel):
+class Staff(models.Model):
+
+class SystemAdmin(models.Model):
+
+class AssociationsManager(models.Model):
 
 
 
