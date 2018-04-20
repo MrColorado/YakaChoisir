@@ -32,3 +32,35 @@ Apparently the following works as well:
 git checkout dev
 git rebase your_feature_branch
 ```
+
+# Project Architecture
+
+## Django
+
+Django's project is in `./src`, and each of its applications are `src`
+subfolders.
+
+## HTML/CSS and Bootstrap
+
+They're all located in `/templates` folders. Either in the global `templates`
+folder or in one of the applications' subfolders.
+
+## Create new project application
+
+Execute the following in `src` directory.
+
+```
+python3 manage.py startapp app_name
+```
+
+## SQL Database
+
+To update database:
+
+```
+# Check what has changed and needs to be updated
+python manage.py makemigrations
+
+# Actually update the database
+python manage.py migrate
+```

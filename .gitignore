@@ -1,6 +1,7 @@
 # Custom
 
 *.pdf
+.idea/
 
 # Created by https://www.gitignore.io/api/python,django,pycharm,intellij
 
