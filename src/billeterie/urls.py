@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from home import views
+from home import views as home_views
+from user_settings import views as user_settings_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home),
+    path('', home_views.home),
+    path('settings/', user_settings_views.user_settings, name='settings')
 ]
