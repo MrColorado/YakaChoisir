@@ -1,7 +1,6 @@
 from django.db import models
 # Django's datetime supports timezones defined in settings.py
 
-
 # TODO move models to their related Django app.
 class User(models.Model):
     firstname = models.CharField(max_length=100)
