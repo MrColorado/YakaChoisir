@@ -79,6 +79,10 @@ class Attend(models.Model):
     ticket_number = models.UUIDField()
 
 class Staff(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    event_id = models.ForeignKey(Event, on_delete=models.DO_NOTHING)
+    date_begin = models.DateTimeField()
+    date_end = models.DateTimeField()
 
 class SystemAdmin(models.Model):
     user_id = models.CharField(max_length=100)
