@@ -21,6 +21,6 @@ from user_settings import views as user_settings_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_views.home),
+    path('', home_views.home, name='home'),
     path('settings/', user_settings_views.user_settings, name='settings')
 ]
