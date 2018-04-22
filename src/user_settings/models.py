@@ -56,15 +56,35 @@ class Event(models.Model):
     date_end = models.DateTimeField()
     validated = models.BooleanField()
     description = models.TextField(blank=True)
-    price = models.
+    price = models.DecimalField(decimal_places=2) # TODO find a better way to store money fields
+    place = models.CharField(max_length=100)
+    photo = models.ImageField()
+    size = models.IntegerField()
+    PREMIUM = 'PR'
+    PAID = 'PA'
+    FREE = 'FR'
+    PRIORITY = (
+        (PREMIUM, 'Premium'),
+        (PAID, 'Payant'),
+        (FREE, 'Gratuit'),
+
+    )
+    priority = models.CharField(max_length=2, choices=PRIORITY)
+
 
 class Attend(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    event_id = models.ForeignKey(Event, on_delete=models.DO_NOTHING)
+    date_entry = models.DateTimeField()
+    ticket_number = models.UUIDField()
 
 class Staff(models.Model):
 
 class SystemAdmin(models.Model):
+    user_id = models.CharField(max_length=100)
 
 class AssociationsManager(models.Model):
+    user_id = models.CharField(max_length=100)
 
 
 
