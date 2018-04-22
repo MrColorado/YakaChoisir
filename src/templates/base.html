@@ -17,7 +17,7 @@
                 <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
                     <div class="row">
                         <div class="col-sm-6 col-md-6 col-xs-6">
-                            <img src="../static/img/epita_logo.png" href="#"/>
+                            <img src="{% static 'img/epita_logo.png' %}" href="#"/>
                         </div>
                         <div class="col-sm-6 col-md-6 col-xs-6" style="padding-top: 13px;">
                             <h3>Billetterie</h3>
@@ -47,7 +47,7 @@
                 <a class="nav-item nav-link active" href="{% url 'home' %}"> Acceuil </a>
                 <a class="nav-item nav-link" href="#"> Evénements </a>
                 <a class="nav-item nav-link" href="home/index.html"> Mes événements </a>
-                <a class="nav-item nav-link disabled" href="{% url 'settings' %}"> Mon compte </a>
+                <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
             </nav>
             {% endblock %}
         </header>
