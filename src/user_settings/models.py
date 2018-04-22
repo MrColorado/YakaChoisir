@@ -4,7 +4,7 @@ from django.utils import timezone
 
 # Create your models here.
 # TODO move models to their related Django app.
-
+# FIXME incription date and if intern/extern
 class User(models.Model):
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
@@ -41,6 +41,7 @@ class Members(models.Model):
     def __str__(self):
         return "{0} fait partie de l'association {1}".format(self.user_id, self.association_id)
 
+#FIXME STATUT juridique
 class Association(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
@@ -49,6 +50,7 @@ class Association(models.Model):
     photo = models.ImageField()
     site = models.URLField()
 
+# FIXME deadline , size interne, size externe, token staff
 class Event(models.Model):
     association_id = models.ForeignKey(Association, on_delete=models.DO_NOTHING)
     title = models.CharField(max_length=100)
@@ -72,6 +74,7 @@ class Event(models.Model):
     priority = models.CharField(max_length=2, choices=PRIORITY)
 
 
+# FIXME hashcode of the ticket
 class Attend(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     event_id = models.ForeignKey(Event, on_delete=models.DO_NOTHING)
