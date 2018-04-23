@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/npm.js"></script>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
     <body>
@@ -45,7 +50,7 @@
             {% block panel %}
             <nav class="nav nav-pills nav-fill navbar-dark" style="background-color: #e3f2fd;">
                 <a class="nav-item nav-link active" href="{% url 'home' %}"> Acceuil </a>
-                <a class="nav-item nav-link" href="#"> Evénements </a>
+                <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
                 <a class="nav-item nav-link" href="home/index.html"> Mes événements </a>
                 <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
             </nav>
@@ -57,7 +62,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
         {% block body %}
-
         {% endblock %}
     </body>
 </html>

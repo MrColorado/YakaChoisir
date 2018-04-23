@@ -18,9 +18,11 @@ from django.urls import path
 
 from home import views as home_views
 from user_settings import views as user_settings_views
+from event import views as event_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_views.home, name='home'),
-    path('settings/', user_settings_views.user_settings, name='settings')
+    path('settings/', user_settings_views.user_settings, name='settings'),
+    path('event/', event_views.event, name='event')
 ]
