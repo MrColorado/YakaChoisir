@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block panel %}
-    <nav class="nav nav-pills nav-fill navbar-dark" style="background-color: #e3f2fd;">
+    <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
         <a class="nav-item nav-link" href="{% url 'home' %}"> Acceuil </a>
         <a class="nav-item nav-link active" href="{% url 'event' %}"> Evénements </a>
         <a class="nav-item nav-link" href="#"> Mes événements </a>
@@ -11,23 +11,12 @@
 {% endblock %}
 
 {% block  body%}
-    <style>
-        img{
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-    div.container2{
-        position: relative;
-        right: 50%;
-    }
-    </style>
-    <div class="container" style="margin-top: 30px">
+    <div class="container" id="specific_event_container">
         <div class="row justify-content-center">
-            <div class="col-sm-6" style="border: #ffc107 dashed;">
-                <img src="{% static "img/photo1.jpg" %}">
+            <div class="col-sm-6">
+                <img id="specific_event_img" src="{% static "img/photo1.jpg" %}">
             </div>
-            <div class="col-sm-12" style="border: #004085 dashed;">
+            <div class="col-sm-12" id="specific_event_col">
                 <h1>Titre</h1>
                 <p>Description: </p>
                 <p>Date de début: </p>

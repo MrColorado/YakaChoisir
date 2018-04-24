@@ -31,11 +31,64 @@
     src: url("../fonts/Futura-Bold.ttf");
 }
 
+/*---------------------------------------------------------BASE-------------------------------------------------------*/
+
+#base_nav {
+    background: #0d2436;
+    font-family: ralewayExtraBold;
+    color: white;
+}
+
+#base_nav_input {
+    font-family: ralewayRegular;
+}
+
+#base_panel {
+    background: #e3f2fd;
+    font-family: ralewayMedium;
+}
+
+#base_footer {
+    background: #0d2436;
+    font-family: ralewayLight;
+    color: white;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    color: white;
+    text-align: center;
+    background: #0d2436;
+    font-family: ralewayLight;
+}
+
+#container {
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
+
+/*---------------------------------------------------SPECIFIC-EVENT---------------------------------------------------*/
+
+#specific_event_img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+#specific_event_col {
+    padding-top: 10px;
+    border: #000000 dashed;
+}
+
+#specific_event_flex {
+    flex-direction: column;
+}
+
 
 /*-------------------------------------------------------SETTINGS-----------------------------------------------------*/
 
 #test {
-    border: #0b2e13 dashed;
     justify-content: center;
     align-items: center;
     flex-direction: column;

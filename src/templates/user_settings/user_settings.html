@@ -2,10 +2,10 @@
 {% load staticfiles %}
 
 {% block panel %}
-    <nav class="nav nav-pills nav-fill navbar-dark" style="background-color: #e3f2fd;">
+    <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
         <a class="nav-item nav-link" href="{% url 'home' %}"> Acceuil </a>
-        <a class="nav-item nav-link" href="#"> Evénements </a>
-        <a class="nav-item nav-link" href="home/index.html"> Mes événements </a>
+        <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
+        <a class="nav-item nav-link" href="{% url 'specific_event' %}"> Mes événements </a>
         <a class="nav-item nav-link active" href="{% url 'settings' %}"> Mon compte </a>
     </nav>
 {% endblock %}
