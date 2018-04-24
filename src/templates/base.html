@@ -42,7 +42,11 @@
                        </li>
                        <li>
                            <form class="hidden-tablet" style="margin-top: 4px; margin-bottom: 4px;">
-                               <button type="button" class="btn btn-light">Connexion</button>
+                               {% if user.is_authenticated %}
+                                    <button type="button" class="btn btn-light">Deconnexion</button>
+                               {% else %}
+                                    <button type="button" class="btn btn-light">Connexion</button>
+                               {% endif %}
                            </form>
                        </li>
                     </ul>

@@ -32,7 +32,7 @@
 }
 
 
-/*---------------------------------------------------------Header------------------------------------------------------*/
+/*-------------------------------------------------------SETTINGS-----------------------------------------------------*/
 
 #test {
     border: #0b2e13 dashed;
@@ -40,9 +40,8 @@
     align-items: center;
     flex-direction: column;
 }
-
-#test2 {
-    border: #f5c6cb dashed;
+#test1 {
+    border: #1c7430 dashed;
     justify-content: center;
     align-items: center;
     flex-direction: column;
