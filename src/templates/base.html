@@ -43,9 +43,11 @@
                        <li>
                            <form class="hidden-tablet" style="margin-top: 4px; margin-bottom: 4px;">
                                {% if user.is_authenticated %}
-                                    <button type="button" class="btn btn-light">Deconnexion</button>
+                                   Bienvenue {{ user.username }}
+                                    <a type="button" class="btn btn-light" href="{% url 'logout' %}">Deconnexion</a>
                                {% else %}
-                                    <button type="button" class="btn btn-light">Connexion</button>
+                                   Not logged
+                                    <a type="button" class="btn btn-light" href="{% url 'login' %}">Connexion</a>
                                {% endif %}
                            </form>
                        </li>
