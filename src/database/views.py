@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from src.database.models import Event
+from database.models import Event
 
 # Create your views here.
 
