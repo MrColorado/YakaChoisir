@@ -1,11 +1,12 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
-class User(models.Model):
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
-    mail = models.EmailField(max_length=100)
+class myUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     mail_secondary = models.EmailField(max_length=100, blank=True)  # Blank is preferred. Do not use null.
     MALE = 'M'
     FEMALE = 'F'
@@ -15,15 +16,23 @@ class User(models.Model):
         (FEMALE, 'Femme'),
         (NON_BINARY, 'Non binaire'),
     )
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    inscription_date = models.DateTimeField()
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
 
     class Meta:
         verbose_name = "Utilisateur"
         ordering = ['id']
 
     def __str__(self):
-        return "{0} {1} ({2})".format(self.firstname, self.lastname, self.mail)
+        return "{0} {1} ({2})".format(self.user.first_name, self.user.last_name, self.user.email)
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            myUser.objects.create(user=instance)
+
+    #@receiver(post_save, sender=User)
+    #def save_user_profile(sender, instance, **kwargs):
+    #   instance.profile.save()
 
 
 class SystemAdmin(models.Model):
@@ -45,7 +54,7 @@ class Association(models.Model):
 
 
 class Members(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING)
     association_id = models.ForeignKey(Association, on_delete=models.DO_NOTHING)
     role = models.CharField(max_length=100, blank=True)
     date = models.DateTimeField(default=timezone.now, verbose_name="Date d'ajout du membre")
@@ -85,14 +94,14 @@ class Event(models.Model):
 
 
 class Attend(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING)
     event_id = models.ForeignKey(Event, on_delete=models.DO_NOTHING)
     date_entry = models.DateTimeField()
     ticket_number = models.UUIDField()
 
 
 class Staff(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING)
     event_id = models.ForeignKey(Event, on_delete=models.DO_NOTHING)
     date_begin = models.DateTimeField()
     date_end = models.DateTimeField()

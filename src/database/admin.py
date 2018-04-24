@@ -9,4 +9,6 @@ admin.site.register(Members)
 admin.site.register(Event)
 admin.site.register(Attend)
 admin.site.register(Staff)
+admin.site.register(myUser)
+
 
