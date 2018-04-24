@@ -13,6 +13,7 @@
         right: 50%;
     }
     </style>
+
     <div class="container" style="margin-top: 30px">
     <div class="row">
         <div class="col-sm-4">
@@ -30,4 +31,25 @@
         </div>
     </div>
     </div>
+
+     {% for e in events %}
+         <div class="container" style="margin-top: 30px">
+             <div class="row">
+                 <div class="col-sm-4">
+                     <div class="container2">
+                         <img {{e.photo}} class="float-left">
+                     </div>
+                 </div>
+                 <div class="col-sm-8">
+                     <h1>{{ e.title}}</h1>
+                     <p>Un super events dans une super boite de nuit</p>
+                     <blockquote class="blockquote-reverse">
+                         <p>{{ e.description }}</p>
+                         <footer> {{ e.association_id }}</footer>
+                     </blockquote>
+                 </div>
+             </div>
+         </div>
+     {% endfor %}
+
 {% endblock %}

@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-
 # Create your views here.
 
 def home(request):
@@ -16,3 +15,7 @@ def event(request):
 
 def specific_event(request):
     return render(request, 'events/specific_event.html')
+
+def event(request):
+    events = Event.objects.all()
+    return render(request, 'page_defilante/page_defilente.html', {'events': events})
