@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_views.home, name='home'),
     path('settings/', user_settings_views.user_settings, name='settings'),
-    path('event/', event_views.event, name='event')
+    path('event/', event_views.event, name='event'),
+    path('event/specific_event', event_views.specific_event, name='specific_event')
 ]
