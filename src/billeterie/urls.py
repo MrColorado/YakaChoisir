@@ -16,14 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from home import views as home_views
-from user_settings import views as user_settings_views
-from event import views as event_views
+from database import views as database_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_views.home, name='home'),
-    path('settings/', user_settings_views.user_settings, name='settings'),
-    path('event/', event_views.event, name='event'),
-    path('event/specific_event', event_views.specific_event, name='specific_event')
+    path('', database_views.home, name='home'),
+    path('settings/', database_views.user_settings, name='settings'),
+    path('event/', database_views.event, name='event'),
+    path('event/specific_event', database_views.specific_event, name='specific_event')
 ]

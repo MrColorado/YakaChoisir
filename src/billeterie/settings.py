@@ -31,10 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'user_settings.apps.UserSettingsConfig',
-    'association.apps.AssociationConfig',
-    'event.apps.EventConfig',
-    'home.apps.HomeConfig',
+    'database.apps.DatabaseConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,3 +126,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
