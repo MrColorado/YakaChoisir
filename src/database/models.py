@@ -17,7 +17,6 @@ class User(models.Model):
     )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     inscription_date = models.DateTimeField()
-    is_intern = models.BooleanField()
 
     class Meta:
         verbose_name = "Utilisateur"

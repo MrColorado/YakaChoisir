@@ -1,2 +1,4 @@
 Django==2.0.4
 Pillow==5.1.0
+
+social-auth-app-django

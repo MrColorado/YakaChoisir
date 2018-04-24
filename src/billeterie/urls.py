@@ -15,14 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import  url, include
 
 from database import views as database_views
+from django.contrib.auth import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
     path('', database_views.home, name='home'),
     path('settings/', database_views.user_settings, name='settings'),
     path('event/', database_views.event, name='event'),
-    path('event/specific_event', database_views.specific_event, name='specific_event')
+    path('event/specific_event', database_views.specific_event, name='specific_event'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    url(r'^login/$', views.login, name='login'),
+    url(r'^logout/$', views.logout, name='logout'),
+    url(r'^auth/', include('social_django.urls', namespace='social')),
 ]
