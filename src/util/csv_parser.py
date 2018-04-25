@@ -1,28 +1,40 @@
 import csv
-import sys
+import os
 
-with open(sys.argv[1], "r") as csvfile:
-    reader = csv.DictReader(csvfile, dialect='excel')
 
-    print(reader.fieldnames)
+class CSVParser:
+    """
+    Excel CSV file parser.
+    Extracts association and members from provided CSV file
+    """
 
-    asso = reader.fieldnames[0];
-    statut = reader.fieldnames[1];
-    tutelle = reader.fieldnames[2];
-    nom = reader.fieldnames[3];
-    prenom = reader.fieldnames[4];
-    fonction = reader.fieldnames[5];
-    mailPerso = reader.fieldnames[6];
-    mailIonis = reader.fieldnames[7];
+    def __init__(self, filename):
+        self.filename = filename
+        with open(self.filename, "r") as csvfile:
+            reader = csv.DictReader(csvfile, dialect='excel')
 
-    for line in reader:
-        print("{asso} - {statut} : {nom} {prenom} est {fonction} ({mail}) ({mailPerso})"
-              .format(
-            asso=line[asso],
-            statut=line[statut],
-            nom=line[nom],
-            prenom=line[prenom],
-            fonction=line[fonction],
-            mail=line[mailIonis],
-            mailPerso=line[mailIonis]
-        ))
+            self.asso = reader.fieldnames[0]
+            self.statut = reader.fieldnames[1]
+            self.tutelle = reader.fieldnames[2]
+            self.nom = reader.fieldnames[3]
+            self.prenom = reader.fieldnames[4]
+            self.fonction = reader.fieldnames[5]
+            self.mailPerso = reader.fieldnames[6]
+            self.mailIonis = reader.fieldnames[7]
+
+    def __str__(self):
+        str = ""
+        with open(self.filename, "r") as csvfile:
+            reader = csv.DictReader(csvfile, dialect='excel')
+            for line in reader:
+                str += "{asso} - {statut} : {nom} {prenom} est {fonction} ({mail}) ({mailPerso})".format(
+                    asso=line[self.asso],
+                    statut=line[self.statut],
+                    nom=line[self.nom],
+                    prenom=line[self.prenom],
+                    fonction=line[self.fonction],
+                    mail=line[self.mailIonis],
+                    mailPerso=line[self.mailIonis]
+                )
+                str += os.linesep
+        return str
