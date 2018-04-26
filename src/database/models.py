@@ -102,7 +102,7 @@ class Event(models.Model):
     token_staff = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return "{0} par {1}".format(self.title,self.association_id.name)
+        return "{0} par {1}".format(self.title, self.association_id.name)
 
 
 class Attend(models.Model):
@@ -112,7 +112,7 @@ class Attend(models.Model):
     ticket_number = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return "{0] {1} participe à {2}".format(self.user_id.user.first_name,self.user_id.user.last_name,
+        return "{0] {1} participe à {2}".format(self.user_id.user.first_name, self.user_id.user.last_name,
                                                 self.event_id.title)
 
 
@@ -123,5 +123,5 @@ class Staff(models.Model):
     date_end = models.DateTimeField()
 
     def __str__(self):
-        return "{0} {1} staff {2}".format(self.user_id.user.first_name,self.user_id.user.last_name,
+        return "{0} {1} staff {2}".format(self.user_id.user.first_name, self.user_id.user.last_name,
                                           self.event_id.title)
