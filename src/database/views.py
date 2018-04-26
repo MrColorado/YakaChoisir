@@ -25,3 +25,6 @@ def specific_event(request, Myid):
     if len(res_event):
         return render(request, 'events/specific_event.html', {'res_event': res_event})
     return render(request, 'not_found.html')
+
+def create_event(request):
+    return render(request, 'create_event/create_event.html')

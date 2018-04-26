@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<style>
+    #create_event{
+        margin-top: 2%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color: #0d2436;
+        font-family: ralewayExtraBold;
+    }
+#form{
+    margin-top: 5%;
+}
+</style>
+
+    <div class="container" id="create_event">
+    <div class="container">
+    <h1> Creez votre evenement!</h1></div>
+        <div class="container" id="form">
+            <div class="form-group row">
+                <select class="custom-select">
+                    <option selected>Association</option>
+                    <option value="1">EPITAnime</option>
+                    <option value="2">EPITAnice</option>
+                   <option value="3">EPITAris</option>
+                </select>
+            </div>
+            <div class="form-group row">
+                <label for="example-text-input" class="col-2 col-form-label">Nom de l'evenement</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" value="Convention de celibataire" id="example-text-input">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="exampleTextarea">Description :</label>
+                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+            </div>
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Nombre maximum d'interne IONIS</label>
+                <div class="col-10">
+                    <input class="form-control" type="number" value="42" id="example-number-input">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Nombre maximum d'externe IONIS</label>
+                <div class="col-10">
+                    <input class="form-control" type="number" value="42" id="example-number-input">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Date et heure du debut</label>
+                <div class="col-10">
+                    <input class="form-control" type="datetime-local" value="2017-08-19T13:45:00" id="example-datetime-local-input">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Date et heure de fin</label>
+                <div class="col-10">
+                    <input class="form-control" type="datetime-local" value="2017-08-19T13:45:00" id="example-datetime-local-input">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Date et heure de fin d'inscription</label>
+                <div class="col-10">
+                    <input class="form-control" type="datetime-local" value="2017-08-19T13:45:00" id="example-datetime-local-input">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-text-input" class="col-2 col-form-label">Adresse</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" value="94270 200 rue volaite" id="example-text-input">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Prix en euro</label>
+                <div class="col-10">
+                    <input class="form-control" type="number" value="7.50" id="example-number-input">
+                </div>
+            </div>
+        <div>
+        </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+{% endblock %}
