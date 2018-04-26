@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from database.models import Event
+from database.forms import createEventForm
 
 
 # Create your views here.
@@ -27,4 +28,15 @@ def specific_event(request, Myid):
     return render(request, 'not_found.html')
 
 def create_event(request):
-    return render(request, 'create_event/create_event.html')
+    if request.method == 'POST':
+        form = createEventForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+
+
+            creer = True;
+
+    else:
+        form = createEventForm()
+
+    return render(request, 'create_event/create_event.html', locals())
