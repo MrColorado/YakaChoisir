@@ -51,6 +51,7 @@ class AssociationsManager(models.Model):
 class Association(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
+    tutelle = models.ForeignKey("self", null=True, on_delete=models.SET_NULL)
     date_creation = models.DateTimeField(default=timezone.now)
     mail = models.EmailField(max_length=100, blank=True)
     photo = models.ImageField(upload_to='associations', blank=True)

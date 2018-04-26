@@ -1,8 +1,9 @@
 import csv
 import os
 
+from django.contrib.auth.models import User
 
-# from src.databasIe.models import Association#, Members, User
+from src.database.models import Association, Members, myUser
 
 
 class CSVParser:
@@ -57,27 +58,40 @@ class CSVParser:
         """
         Fills up Django database with provided association and members.
         """
-        res = ""
         current_asso = None
         for line in self.entries:
             # Association line
             if line[self.asso] != "":
-                current_asso = line[self.asso]
+                current_asso = Association()
+                current_asso.name = line[self.asso]
+                current_asso.tutelle = Association.objects.get(name=line[self.tutelle])
+                current_asso.statut = line[self.statut]
+                current_asso.mail = line[self.mailIonis] if line[self.mailIonis] != "" else line[self.mailPerso]
 
-                res += "New Association {name} {statut} {mail} would have been created\n".format(
-                    name=line[self.asso],
-                    statut=line[self.statut],
-                    mail=line[self.mailIonis] if line[self.mailIonis] != "" else line[self.mailPerso]
-                )
+                current_asso.save()
             # Member line
             if line[self.nom] != "":
-                res += "New {asso} member:\n\t{prenom} {nom} est un {role} et est joignable a {mail} ou "\
-                       "{mailSecondaire}".format(
-                        asso=current_asso,
-                        prenom=line[self.prenom],
-                        nom=line[self.nom],
-                        role=line[self.fonction],
-                        mail=line[self.mailIonis],
-                        mailSecondaire=line[self.mailPerso]
-                        )
-        return res
+
+                # Create Django User entry
+                newUser = User.objects.create_user(line[self.mailIonis])
+                newUser.first_name = line[self.prenom]
+                newUser.last_name = line[self.nom]
+                newUser.email = line[self.mailIonis]
+                newUser.is_staff = False
+
+                newUser.save()
+
+                # create MyUser entry
+                newMyUser = myUser()
+                newMyUser.user = newUser
+                newMyUser.mail_secondary=line[self.mailPerso]
+
+                newMyUser.save()
+
+                # Add to Members table
+                AssoMemberEntry = Members()
+                AssoMemberEntry.association_id = current_asso
+                AssoMemberEntry.user_id = newMyUser
+                AssoMemberEntry.role = line[self.fonction]
+
+                AssoMemberEntry.save()
