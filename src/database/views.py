@@ -46,7 +46,6 @@ def create_event(request):
             photo = form.cleaned_data['photo']
 
 
-
             creer = True;
 
     else:
