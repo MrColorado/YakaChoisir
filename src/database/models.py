@@ -30,27 +30,36 @@ class myUser(models.Model):
         if created:
             myUser.objects.create(user=instance)
 
-    #@receiver(post_save, sender=User)
-    #def save_user_profile(sender, instance, **kwargs):
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
     #   instance.profile.save()
 
 
 class SystemAdmin(models.Model):
-    user_id = models.CharField(max_length=100)
+    user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return "{0} {1} ({2})".format(self.user_id.first_name, self.user_id.last_name, self.user_id.email)
 
 
 class AssociationsManager(models.Model):
-    user_id = models.CharField(max_length=100)
+    user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return "{0} {1} ({2})".format(self.user_id.first_name, self.user_id.last_name, self.user_id.email)
 
 
 class Association(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     date_creation = models.DateTimeField(default=timezone.now)
-    mail = models.EmailField(max_length=100)
-    photo = models.ImageField()
-    site = models.URLField()
+    mail = models.EmailField(max_length=100, blank=True)
+    photo = models.ImageField(blank=True)
+    site = models.URLField(blank=True)
     statut = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "{0}".format(self.name)
 
 
 class Members(models.Model):
@@ -77,7 +86,7 @@ class Event(models.Model):
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)  # TODO find a better way to store money fields
     place = models.CharField(max_length=100)
-    photo = models.ImageField()
+    photo = models.ImageField(blank=True)
     size_intern = models.IntegerField()
     size_extern = models.IntegerField()
     PREMIUM = 'PR'
@@ -90,14 +99,21 @@ class Event(models.Model):
 
     )
     priority = models.CharField(max_length=2, choices=PRIORITY)
-    token_staff = models.UUIDField()
+    token_staff = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return "{0} par {1}".format(self.title,self.association_id.name)
 
 
 class Attend(models.Model):
     user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING)
     event_id = models.ForeignKey(Event, on_delete=models.DO_NOTHING)
     date_entry = models.DateTimeField()
-    ticket_number = models.UUIDField()
+    ticket_number = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return "{0] {1} participe à {2}".format(self.user_id.user.first_name,self.user_id.user.last_name,
+                                                self.event_id.title)
 
 
 class Staff(models.Model):
@@ -105,3 +121,7 @@ class Staff(models.Model):
     event_id = models.ForeignKey(Event, on_delete=models.DO_NOTHING)
     date_begin = models.DateTimeField()
     date_end = models.DateTimeField()
+
+    def __str__(self):
+        return "{0} {1} staff {2}".format(self.user_id.user.first_name,self.user_id.user.last_name,
+                                          self.event_id.title)
