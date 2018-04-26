@@ -17,17 +17,18 @@
                 <img id="specific_event_img" src="{% static "img/photo1.jpg" %}">
             </div>
             <div class="col-sm-12" id="specific_event_col">
-                <h1>Titre</h1>
-                <p>Description: </p>
-                <p>Date de début: </p>
-                <p>Date de fin: </p>
-                <p>Date deadline: </p>
-                <p>Nombre de places intern restantes: </p>
-                <p>Nombre de places extern restantes: </p>
-                <p>Inscrit: </p>
-                <p>Prix: </p>
+                <h1> {{ res_event.first.title }}</h1>
+                <p>Description: {{ res_event.fisrt.description }}</p>
+                <p>Date de début: {{ res_event.first.date_begin }}</p>
+                <p>Date de fin: {{ res_event.first.date_end }} </p>
+                <p>Date deadline: {{ res_event.first.date_deadline }}</p>
+                <p>Nombre de places intern restantes: {{ res_event.first.size_intern }}</p>
+                <p>Nombre de places extern restantes: {{ res_event.first.size_extern }}</p>
+                <p>Lieu: {{ res_event.first.place }}</p>
+                <p>Inscrit: {{ res_event.first. }}</p>
+                <p>Prix: {{ res_event.first.price }} euros </p>
                 <div class="d-flex" id="test">
-                    <button type="button" class="btn btn-success">Inscrition</button>
+                    <button type="button" class="btn btn-success">Inscription</button>
                 </div>
             </div>
         </div>
