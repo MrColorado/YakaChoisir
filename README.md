@@ -32,6 +32,22 @@ Apparently the following works as well:
 git checkout dev
 git rebase your_feature_branch
 ```
+## delete your branch after merging the feature :
+
+delete the branch remotly : 
+```
+git push <remote_name> --delete <branch_name>
+```
+delete the branch localy :
+```
+git branch -d <branch_name>
+```
+or if some problem linked to merge you can force with :
+```
+git branch -D <branch_name>
+```
+
+**in ALL case be CAREFUL when deleting a branch**
 
 # Project Architecture
 
