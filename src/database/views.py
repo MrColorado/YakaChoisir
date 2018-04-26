@@ -21,6 +21,7 @@ def event(request):
 
 
 def specific_event(request, Myid):
-    res_event = Event.objects.filter(id=Myid)
-    #res_event = get_object_or_404(Event, Myid)
+    res_event = Event.objects.get(id=Myid)
+    if res_event is None:
+        return render(request, 'not_found.html')
     return render(request, 'events/specific_event.html', {'res_event': res_event})
