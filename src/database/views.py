@@ -33,7 +33,7 @@ def create_event(request):
         form = createEventForm(request.POST)
         if form.is_valid():
 
-            assoc_name = form.cleaned_data['association_name']
+            #assoc_name = form.cleaned_data['association_name']
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
             price = form.cleaned_data['price']
@@ -45,6 +45,10 @@ def create_event(request):
             date_deadline = form.cleaned_data['date_deadline']
             photo = form.cleaned_data['photo']
 
+            newEvent = Event.objects.create('asd', title, date_begin, date_end, date_deadline,
+                                            True, description, price, place, photo, size_intern, size_extern,
+                                            'PR', '')
+            newEvent.save()
 
             creer = True;
 
