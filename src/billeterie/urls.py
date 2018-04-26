@@ -29,6 +29,7 @@ urlpatterns = [
     path('event/specific_event/<int:Myid>/', database_views.specific_event, name='specific_event'),
 
 
+    path('create_event/', database_views.create_event, name='create_event'),
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.logout, name='logout'),
