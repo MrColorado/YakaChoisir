@@ -3,9 +3,9 @@ from database.models import Association
 
 
 class createEventForm(forms.Form):
-    association_name = forms.CharField(widget=forms.Select(attrs={
-        'class': 'custom-select',
-    }))
+    #association_name = forms.CharField(widget=forms.Select(attrs={
+    #    'class': 'custom-select',
+    #}))
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
     price = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control',
