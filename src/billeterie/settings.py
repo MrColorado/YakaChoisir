@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'database.apps.DatabaseConfig',
     'social_django',
+    'epita_connect',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,6 +76,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
     'social_core.backends.google.GoogleOpenId',  # for Google authentication
     'social_core.backends.google.GoogleOAuth2',  # for Google authentication
+    'epita_connect.backend.EpitaOpenIdConnect',  # for OpenId cri Epita authentification
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -138,3 +140,10 @@ LOGOUT_REDIRECT_URL = 'home'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='207735899591-d34tqq7bvnk521ks4lrv825pfqopnos6.apps.googleusercontent.com'  #Paste CLient Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'WWY5kMbRv9Y1UWuGoTd8eeSw' #Paste Secret Key
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_EPITA_KEY = '031021'
+SOCIAL_AUTH_EPITA_SECRET = '97593354782061112fdeab765fd8faf9694903adfd8fa2d345a46be1'
+SOCIAL_AUTH_EPITA_SCOPE = ['epita']
+SOCIAL_AUTH_EPITA_EXTRA_DATA = ['promo']
+SOCIAL_AUTH_EPITA_BETA = False
