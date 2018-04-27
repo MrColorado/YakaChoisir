@@ -17,13 +17,14 @@
                 <div class="d-flex" id="test">
                     <h3> Informations personnels</h3>
                     <ul>
-                        <li> nom </li>
-                        <li> prenom </li>
-                        <li> genre </li>
-                        <li> mail principale </li>
-                        <li> mail secondaire </li>
+                        <li> nom : {{ user_info.user.last_name }} </li>
+                        <li> prenom : {{ user_info.user.first_name }}</li>
+                        <li> pseudo : {{ user_info.user.username }} </li>
+                        <li> genre : {{ user_info.gender }}</li>
+                        <li> mail principale : {{ user_info.user.email }}</li>
+                        <li> mail secondaire  : {{ user_info.mail_secondary }}</li>
                         <li> externe </li>
-                        <li> date d'inscription </li>
+                        <li> date d'inscription :  </li>
                     </ul>
                 </div>
             </div>
