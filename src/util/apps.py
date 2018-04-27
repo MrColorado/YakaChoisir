@@ -4,7 +4,7 @@ import os
 from django.apps import AppConfig
 from django.contrib.auth.models import User
 
-from src.database.models import Association, myUser, Members
+from database.models import Association, myUser, Members
 
 
 class UtilConfig(AppConfig):
@@ -79,29 +79,24 @@ class CSVParser:
                 current_asso.mail = line[self.mailIonis] if line[self.mailIonis] != "" else line[self.mailPerso]
 
                 current_asso.save()
-            # Member line
-            if line[self.nom] != "":
-
+            # Member with an email address line
+            if line[self.nom] != "" and line[self.mailIonis] != "":
                 # Create Django User entry
-                newUser = User.objects.create_user(line[self.mailIonis])
-                newUser.first_name = line[self.prenom]
-                newUser.last_name = line[self.nom]
-                newUser.email = line[self.mailIonis]
-                newUser.is_staff = False
-
-                newUser.save()
-
+                user = User.objects.create_user(line[self.mailIonis])
+                user.first_name = line[self.prenom]
+                user.last_name = line[self.nom]
+                user.email = line[self.mailIonis]
+                user.is_staff = False
                 # create MyUser entry
-                newMyUser = myUser()
-                newMyUser.user = newUser
-                newMyUser.mail_secondary=line[self.mailPerso]
+                my_user = myUser.objects.get(user=user)
+                my_user.mail_secondary = line[self.mailPerso]
 
-                newMyUser.save()
+                #user.save() TODO
 
                 # Add to Members table
                 AssoMemberEntry = Members()
                 AssoMemberEntry.association_id = current_asso
-                AssoMemberEntry.user_id = newMyUser
+                AssoMemberEntry.user_id = my_user
                 AssoMemberEntry.role = line[self.fonction]
 
                 AssoMemberEntry.save()

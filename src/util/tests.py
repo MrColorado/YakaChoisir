@@ -2,7 +2,7 @@ from django.test import TestCase
 
 # Create your tests here.
 from src.database.models import myUser, Members, Association
-from src.util.apps import CSVParser
+from .apps import CSVParser
 
 
 class CSVParserTests(TestCase):
