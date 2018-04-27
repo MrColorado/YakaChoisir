@@ -2,7 +2,7 @@ from django.shortcuts import render
 from database.models import Event, myUser
 from database.models import Association
 from database.forms import createEventForm
-from django.contrib.auth.models import User
+
 
 # Create your views here.
 
@@ -66,6 +66,8 @@ def create_event(request):
 
         creer = True;
 
+    elif Association.objects.all().count() == 0:
+        return render(request, 'not_found.html')
     else:
         form = createEventForm()
 

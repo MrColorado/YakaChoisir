@@ -1,23 +1,19 @@
 from django import forms
 from database.models import Association
-from django.contrib.auth.models import Group
-from django.db.models import DEFERRED
+
 
 class createEventForm(forms.Form):
-    #association_name = forms.CharField(widget=forms.Select(attrs={
-    #   'class': 'custom-select',
-    #}))
-
     asso_list = []
-    for a in Association.objects.all():
-        asso_list.append((a.id, a.name))
-    print(asso_list)
+    #tmp = Association.objects.all()
+    #for a in tmp:
+    #    asso_list.append(tmp.id, tmp.name)
+    #
+    #association_name = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
+    #    'class': 'form-control',
+    #    'value': 'Association'
+    #}
+    #), choices=asso_list)
 
-    association_name = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
-        'class': 'form-control',
-        'value': 'Association'
-    }
-                                                                                    ), choices= asso_list)
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
     price = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control',
