@@ -25,12 +25,8 @@
     <h1> Creez votre evenement!</h1></div>
         <div class="container" id="form">
             <div class="form-group row">
-               <!-- <select class="custom-select">
-                    <option selected>Association</option>
-                    {% for a in assos %}
-                        <option>{{ a.name }}</option>
-                    {% endfor %}
-                </select>-->
+                <label for="example-number-input" class="col-2 col-form-label">Votre association :</label>
+                {{ form.association_name }}
             </div>
             <div class="form-group row">
                 <label for="example-text-input" class="col-2 col-form-label">Nom de l'evenement</label>
