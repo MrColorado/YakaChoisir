@@ -58,7 +58,7 @@ class Association(models.Model):
     statut = models.CharField(max_length=50)
 
     def __str__(self):
-        return "{0} sous la tutelle de {1}".format(self.name, self.tutelle)
+        return "{0}".format(self.name)
 
 
 class Members(models.Model):

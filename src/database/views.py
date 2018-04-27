@@ -40,7 +40,7 @@ def create_event(request):
         title = form.data['title']
         description = form.data['description']
         price = form.data['price']
-        place = form.data['place']
+        place = form.data['place']dmin/database/event/
         size_intern = form.data['size_intern']
         size_extern = form.data['size_extern']
         date_begin = form.data['date_begin']
@@ -66,8 +66,6 @@ def create_event(request):
 
         creer = True;
 
-    elif Association.objects.all().count() == 0:
-        return render(request, 'not_found.html')
     else:
         form = createEventForm()
 
