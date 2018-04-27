@@ -51,7 +51,6 @@ class AssociationsManager(models.Model):
 class Association(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    tutelle = models.ForeignKey("self", null=True, on_delete=models.SET_NULL)
     date_creation = models.DateTimeField(default=timezone.now)
     mail = models.EmailField(max_length=100, blank=True)
     photo = models.ImageField(upload_to='associations', blank=True)
@@ -89,17 +88,8 @@ class Event(models.Model):
     photo = models.ImageField(upload_to='event', blank=True)
     size_intern = models.IntegerField()
     size_extern = models.IntegerField()
-    PREMIUM = 'PR'
-    PAID = 'PA'
-    FREE = 'FR'
-    PRIORITY = (
-        (PREMIUM, 'Premium'),
-        (PAID, 'Payant'),
-        (FREE, 'Gratuit'),
-
-    )
-    priority = models.CharField(max_length=2, choices=PRIORITY)
-    token_staff = models.CharField(max_length=100, blank=True)
+    premium = models.NullBooleanField()
+    token_staff = models.CharField(max_length=100)
 
     def __str__(self):
         return "{0} par {1}".format(self.title, self.association_id.name)
