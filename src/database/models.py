@@ -86,7 +86,7 @@ class Event(models.Model):
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)  # TODO find a better way to store money fields
     place = models.CharField(max_length=100)
-    photo = models.ImageField(blank=True)
+    photo = models.ImageField(upload_to='event', blank=True)
     size_intern = models.IntegerField()
     size_extern = models.IntegerField()
     PREMIUM = 'PR'
