@@ -29,3 +29,11 @@ class MyUserTests(TestCase):
         print(myUser.objects.all())
         print(Association.objects.all())
         print(Members.objects.all())
+
+    def test_trim_email(self):
+        email_ok = 'pass@domain.com'
+        email_fail = 'pass@domain.com;'
+        self.assertEqual(email_ok, CSVParser.trim_email(email_ok))
+        self.assertEqual(email_ok, CSVParser.trim_email(email_fail))
+        self.assertEqual(None, CSVParser.trim_email(None))
+

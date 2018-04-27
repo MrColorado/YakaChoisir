@@ -76,7 +76,13 @@ class CSVParser:
                 current_asso.save()
             # Member with an email address line
             if line[self.nom] != "" and line[self.mailIonis] != "":
+
+                # Remove extra ; in email addresses
+                line[self.mailIonis] = self.trim_email(line[self.mailIonis])
+                line[self.mailPerso] = self.trim_email(line[self.mailPerso])
+
                 # Check if the user has already been added
+                # TODO if user already exists but is part of multiple associations, add it to Members anyway.
                 select = User.objects.filter(email=line[self.mailIonis])
                 if select.count() > 0:
                     continue
@@ -100,3 +106,15 @@ class CSVParser:
                 AssoMemberEntry.role = line[self.fonction]
 
                 AssoMemberEntry.save()
+
+    @staticmethod
+    def trim_email(email):
+        """
+        Remove extra ';' at the end of email addresses from Excel file
+        :param email: email address from Excel file
+        :return: correct email address or None
+        """
+        if email is None or email == "":
+            return email
+
+        return email[:-1] if email[-1] == ';' else email

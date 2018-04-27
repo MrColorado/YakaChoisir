@@ -1,3 +1,5 @@
+from unittest import TestCase
+
 from django.test import TestCase
 
 # Create your tests here.
@@ -17,3 +19,4 @@ class CSVParserTests(TestCase):
         print(myUser.objects.all())
         print(Members.objects.all())
         print(Association.objects.all())
+
