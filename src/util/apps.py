@@ -1,9 +1,14 @@
 import csv
 import os
 
+from django.apps import AppConfig
 from django.contrib.auth.models import User
 
-from src.database.models import Association, Members, myUser
+from src.database.models import Association, myUser, Members
+
+
+class UtilConfig(AppConfig):
+    name = 'util'
 
 
 class CSVParser:
@@ -64,7 +69,12 @@ class CSVParser:
             if line[self.asso] != "":
                 current_asso = Association()
                 current_asso.name = line[self.asso]
-                current_asso.tutelle = Association.objects.get(name=line[self.tutelle])
+                """
+                try:
+                    current_asso.tutelle = Association.objects.get(name=line[self.tutelle])
+                except:
+                    current_asso.tutelle = None
+                    """
                 current_asso.statut = line[self.statut]
                 current_asso.mail = line[self.mailIonis] if line[self.mailIonis] != "" else line[self.mailPerso]
 

@@ -1,17 +1,18 @@
-from unittest import TestCase
+from django.test import TestCase
 
-from src.database.models import Association, Members, myUser
-from src.util.csv_parser import CSVParser
+# Create your tests here.
+from src.database.models import myUser, Members, Association
+from src.util.apps import CSVParser
 
 
-class TestCSVParser(TestCase):
+class CSVParserTests(TestCase):
+
     def test___str__(self):
         test = CSVParser('../../misc/asso.csv')
         print(test)
 
     def test_to_database(self):
-        django.setup()
-        test = CSVParser('../../misc/asso.csv')
+        test = CSVParser('/home/rod/projects/YakaChoisir/misc/asso.csv')
         test.to_database()
         print(myUser.objects.all())
         print(Members.objects.all())
