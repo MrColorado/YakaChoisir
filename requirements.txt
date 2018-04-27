@@ -1,4 +1,6 @@
 Django==2.0.4
 Pillow==5.1.0
+
 social-auth-backend-epita==0.0.4
 social-auth-app-django==2.1.0
+python-social-auth[django]
