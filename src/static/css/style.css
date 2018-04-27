@@ -124,3 +124,22 @@
     font-family: ralewayMedium;
     color: black;
 }
+
+#row_event {
+    font-family: ralewayMedium;
+}
+
+#col_event {
+    font-family: ralewayMedium;
+    align-self: center;
+    align-content: center;
+    align-items: center;
+    text-align: center
+}
+
+#event_img {
+    display: block;
+    width: 100%;
+    height:1000%;
+    height: auto;
+}
