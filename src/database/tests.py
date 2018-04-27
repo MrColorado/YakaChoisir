@@ -29,5 +29,3 @@ class MyUserTests(TestCase):
         print(myUser.objects.all())
         print(Association.objects.all())
         print(Members.objects.all())
-
-

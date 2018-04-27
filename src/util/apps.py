@@ -69,18 +69,18 @@ class CSVParser:
             if line[self.asso] != "":
                 current_asso = Association()
                 current_asso.name = line[self.asso]
-                """
-                try:
-                    current_asso.tutelle = Association.objects.get(name=line[self.tutelle])
-                except:
-                    current_asso.tutelle = None
-                    """
+                # TODO tutelle ?
                 current_asso.statut = line[self.statut]
                 current_asso.mail = line[self.mailIonis] if line[self.mailIonis] != "" else line[self.mailPerso]
 
                 current_asso.save()
             # Member with an email address line
             if line[self.nom] != "" and line[self.mailIonis] != "":
+                # Check if the user has already been added
+                select = User.objects.filter(email=line[self.mailIonis])
+                if select.count() > 0:
+                    continue
+
                 # Create Django User entry
                 user = User.objects.create_user(line[self.mailIonis])
                 user.first_name = line[self.prenom]
@@ -91,7 +91,7 @@ class CSVParser:
                 my_user = myUser.objects.get(user=user)
                 my_user.mail_secondary = line[self.mailPerso]
 
-                #user.save() TODO
+                user.save()
 
                 # Add to Members table
                 AssoMemberEntry = Members()
