@@ -30,10 +30,9 @@ class myUser(models.Model):
         if created:
             myUser.objects.create(user=instance)
 
-    # @receiver(post_save, sender=User)
-    # def save_user_profile(sender, instance, **kwargs):
-    #   instance.profile.save()
-
+    #@receiver(post_save, sender=User)
+    #def save_user_profile(sender, instance, **kwargs):
+    #    myUser.objects.get(user=User)
 
 class SystemAdmin(models.Model):
     user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING, null=True)
