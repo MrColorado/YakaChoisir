@@ -54,7 +54,7 @@ class Association(models.Model):
     description = models.TextField(blank=True)
     date_creation = models.DateTimeField(default=timezone.now)
     mail = models.EmailField(max_length=100, blank=True)
-    photo = models.ImageField(blank=True)
+    photo = models.ImageField(upload_to='associations', blank=True)
     site = models.URLField(blank=True)
     statut = models.CharField(max_length=50)
 
