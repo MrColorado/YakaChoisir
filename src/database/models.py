@@ -36,14 +36,14 @@ class myUser(models.Model):
 
 
 class SystemAdmin(models.Model):
-    user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING)
+    user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
         return "{0} {1} ({2})".format(self.user_id.first_name, self.user_id.last_name, self.user_id.email)
 
 
 class AssociationsManager(models.Model):
-    user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING)
+    user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
         return "{0} {1} ({2})".format(self.user_id.first_name, self.user_id.last_name, self.user_id.email)
