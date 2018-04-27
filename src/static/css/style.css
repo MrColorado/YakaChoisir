@@ -99,6 +99,12 @@
     align-items: center;
     flex-direction: column;
 }
+#test2 {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: darkblue dashed;
+}
 
 /*-------------------------------------------------------LOGIN--------------------------------------------------------*/
 
@@ -110,4 +116,11 @@
     flex-direction: column;
     box-shadow: 1px 1px 12px #555;
     font-family: ralewayMedium;
+}
+
+/*-------------------------------------------------------EVENT--------------------------------------------------------*/
+
+#create_event {
+    font-family: ralewayMedium;
+    color: black;
 }

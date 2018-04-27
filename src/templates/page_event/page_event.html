@@ -20,94 +20,35 @@
         position: relative;
         right: 50%;
     }
-    div.createEvent{
-            position: relative;
-            right: 50%;
-            border: 5px solid gray;
-            background: lightgrey;
-            height: 100px;
-    }
-
-    div.createEvent:hover {
-        position: relative;
-        right: 50%;
-        border: 5px solid gray;
-        background: darkgray;
-        height: 100px;
-        cursor:pointer;
-    }
-
-    #createEvent{
-        color: #0d2436;
-        font-family: ralewayExtraBold;    }
-
-    span.customlink{
-        position:absolute;
-        width:100%;
-        height:100%;
-        top:0;
-        margin-rightar: %;
-    }
-
-    div.imgCreateEvent{
-        margin-top: 10%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-    }
     </style>
 
     <div class="container" style="margin-top: 30px">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="createEvent">
-            <a href="{% url 'create_event' %}" style="text-decoration: none">
-                <span class="customlink"></span>
-                <div class="imgCreateEvent" id="createEvent">
-                    create an event
+        <div class="row" style="border: black dashed">
+            <div class="col-sm-4" style="align-self: center">
+                <div class="d-flex" id="test">
+                    <a href="{% url 'create_event' %}">
+                        <button type="button" class="btn btn-secondary btn-lg">Créer un évenement</button>
+                    </a>
                 </div>
-            </a>
+            </div>
+            <div class="col-sm-8" style="align-self: center">
+                <h3>Creer un nouvel événement pour vos associations </h3>
             </div>
         </div>
-        <div class="col-sm-8" id="createEvent">
-            <h1>Creer un Evenement</h1>
-            <blockquote class="blockquote-reverse">
-                Creer un noucel evenement pour votre association.
-            </blockquote>
-        </div>
-    </div>
     </div>
 
-    <!--<div class="container" style="margin-top: 30px">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="container2">
-                <img src="../../static/img/photo1.jpg" class="float-left">
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <h1>Events 1</h1>
-            <p>Un super events dans une super boite de nuit</p>
-            <blockquote class="blockquote-reverse">
-                <p>cet event se deroulera au 25 rue du blabla et coutera 10000 euros par personne, evidement entree gratuite pour les mineurs</p>
-                <footer> Une super assos</footer>
-            </blockquote>
-        </div>
-    </div>
-    </div>-->
-
-     {% for e in events %}
+    {% for e in events %}
          <div class="container" style="margin-top: 30px">
-             <div class="row">
-                 <div class="col-sm-4">
-                     <div class="container2">
-                         <img src="{{e.photo.url}}" class="float-left">
+             <div class="row" style="border: yellow dashed">
+                 <div class="col-sm-4" style="border: black dashed">
+                     <div class="d-flex">
+                         <a href="{% url 'specific_event' e.id %}">
+                             <img src="{{e.photo.url}}" class="float-left">
+                         </a>
                      </div>
                  </div>
-                 <div class="col-sm-8">
+                 <div class="col-sm-8" style="border: #1c7430 dashed">
                      <h1>{{ e.title}}</h1>
-                     <p>Un super events dans une super boite de nuit</p>
                      <blockquote class="blockquote-reverse">
                          <p>{{ e.description }}</p>
                          <footer> {{ e.association_id }}</footer>
