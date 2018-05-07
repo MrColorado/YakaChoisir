@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'database.apps.DatabaseConfig',
     'social_django',
     'epita_connect',
     'django.contrib.admin',
