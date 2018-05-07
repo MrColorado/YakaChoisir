@@ -20,11 +20,11 @@ class MyUserTests(TestCase):
         self.assertEqual(userExtend.mail_secondary, 'hello@gmail.com')
 
     def test_csvParserPrint(self):
-        parser = CSVParser('/home/rod/projects/YakaChoisir/misc/asso.csv')
+        parser = CSVParser('../misc/asso.csv')
         print(parser)
 
     def test_csvParserWriteDB(self):
-        parser = CSVParser('/home/rod/projects/YakaChoisir/misc/asso.csv')
+        parser = CSVParser('../misc/asso.csv')
         parser.to_database()
         print(myUser.objects.all())
         print(Association.objects.all())
