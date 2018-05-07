@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'database.apps.DatabaseConfig',
+    #'database.apps.DatabaseConfig',
     'social_django',
     'epita_connect',
     'django.contrib.admin',
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'database',
+    'util',
 ]
 
 MIDDLEWARE = [

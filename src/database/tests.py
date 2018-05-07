@@ -24,7 +24,7 @@ class MyUserTests(TestCase):
         print(parser)
 
     def test_csvParserWriteDB(self):
-        parser = CSVParser('/home/mrcolorado/projects/YakaChoisir/misc/asso.csv')
+        parser = CSVParser('/home/rod/projects/YakaChoisir/misc/asso.csv')
         parser.to_database()
         print(myUser.objects.all())
         print(Association.objects.all())
