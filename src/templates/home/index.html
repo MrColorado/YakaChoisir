@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <style>
+    img{
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    </style>
+<div class="container" xmlns:max-width="http://www.w3.org/1999/xhtml"
+     xmlns:max-height="http://www.w3.org/1999/xhtml" xmlns:height="http://www.w3.org/1999/xhtml"
+     xmlns:width="http://www.w3.org/1999/xhtml">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="../../static/img/photo1.jpg" alt="photo1">
+                <div class="carousel-caption">
+                    <h3>L'afrique c bien</h3>
+                    <p>L'autruche c'est mieux</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="../../static/img/photo2.jpg" alt="photo2">
+                <div class="carousel-caption">
+                    <h3>y'a pas d'eau ici</h3>
+                    <p>mais il fait beaux</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="../../static/img/photo3.jpg" alt="photo3">
+                <div class="carousel-caption">
+                    <h3>Oulalala</h3>
+                    <p>alalalala</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div></div>
+{% endblock %}

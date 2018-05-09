@@ -1,0 +1,145 @@
+
+/*---------------------------------------------------------FONTS------------------------------------------------------*/
+
+@font-face {
+    font-family: ralewayExtraBold;
+    src: url("../fonts/Raleway-ExtraBold.ttf");
+}
+
+@font-face {
+    font-family: ralewayLight;
+    src: url("../fonts/Raleway-Light.ttf");
+}
+
+@font-face {
+    font-family: ralewayMedium;
+    src: url("../fonts/Raleway-Medium.ttf");
+}
+
+@font-face {
+    font-family: ralewayRegular;
+    src: url("../fonts/Raleway-Regular.ttf");
+}
+
+@font-face {
+    font-family: RobotoThin;
+    src: url("../fonts/Roboto-Thin.ttf");
+}
+
+@font-face {
+    font-family: FuturaBold;
+    src: url("../fonts/Futura-Bold.ttf");
+}
+
+/*---------------------------------------------------------BASE-------------------------------------------------------*/
+
+#base_nav {
+    background: #0d2436;
+    font-family: ralewayExtraBold;
+    color: white;
+}
+
+#base_nav_input {
+    font-family: ralewayRegular;
+}
+
+#base_panel {
+    background: #e3f2fd;
+    font-family: ralewayMedium;
+}
+
+#base_footer {
+    background: #0d2436;
+    font-family: ralewayLight;
+    color: white;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    color: white;
+    text-align: center;
+    background: #0d2436;
+    font-family: ralewayLight;
+}
+
+#container {
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
+
+/*---------------------------------------------------SPECIFIC-EVENT---------------------------------------------------*/
+
+#specific_event_img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+#specific_event_col {
+    padding-top: 10px;
+    border: #000000 dashed;
+}
+
+#specific_event_flex {
+    flex-direction: column;
+}
+
+
+/*-------------------------------------------------------SETTINGS-----------------------------------------------------*/
+
+#test {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#test1 {
+    border: #1c7430 dashed;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#test2 {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: darkblue dashed;
+}
+
+/*-------------------------------------------------------LOGIN--------------------------------------------------------*/
+
+#flex_login {
+    background: lightgray;
+    border: gray 1px solid;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 1px 1px 12px #555;
+    font-family: ralewayMedium;
+}
+
+/*-------------------------------------------------------EVENT--------------------------------------------------------*/
+
+#create_event {
+    font-family: ralewayMedium;
+    color: black;
+}
+
+#row_event {
+    font-family: ralewayMedium;
+}
+
+#col_event {
+    font-family: ralewayMedium;
+    align-self: center;
+    align-content: center;
+    align-items: center;
+    text-align: center
+}
+
+#event_img {
+    display: block;
+    width: 100%;
+    height:1000%;
+    height: auto;
+}

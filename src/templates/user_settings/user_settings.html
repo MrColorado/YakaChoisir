@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block panel %}
+    <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
+        <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
+        <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
+        <a class="nav-item nav-link disabled" href="#"> Mes événements </a>
+        <a class="nav-item nav-link active" href="{% url 'settings' %}"> Mon compte </a>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row justify-content-around">
+            <div class="col-xs-12 col-md-8">
+                <div class="d-flex" id="test">
+                    <h3> Informations personnels</h3>
+                    <ul>
+                        <li> nom : {{ user_info.user.last_name }} </li>
+                        <li> prenom : {{ user_info.user.first_name }}</li>
+                        <li> pseudo : {{ user_info.user.username }} </li>
+                        <li> genre : {{ user_info.gender }}</li>
+                        <li> mail principale : {{ user_info.user.email }}</li>
+                        <li> mail secondaire  : {{ user_info.mail_secondary }}</li>
+                        <li> externe </li>
+                        <li> date d'inscription :  </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-2" style="border: 3px dashed #ffc107">
+                <div class="d-flex" id="test1">
+                    <div class="d-flex" id="test">
+                        <img src="{% static 'img/unknown.png' %}">
+                        <p>Admin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
