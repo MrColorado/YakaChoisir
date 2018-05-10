@@ -20,18 +20,20 @@ from django.conf.urls.static import static
 
 
 from billeterie import settings
-from database import views as database_views
+from database.views import event_views
+from database.views import home_views
+from database.views import user_views
 from django.contrib.auth import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', database_views.home, name='home'),
-    path('user_settings/', database_views.user_information, name='settings'),
-    path('event/', database_views.event, name='event'),
+    path('', home_views.home, name='home'),
+    path('user_settings/', user_views.user_information, name='settings'),
 
-    path('event/specific_event/<int:event_id>/', database_views.specific_event, name='specific_event'),
+    path('event/', event_views.event, name='event'),
+    path('event/specific_event/<int:event_id>/', event_views.specific_event, name='specific_event'),
+    path('create_event/', event_views.create_event, name='create_event'),
 
-    path('create_event/', database_views.create_event, name='create_event'),
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.logout, name='logout'),

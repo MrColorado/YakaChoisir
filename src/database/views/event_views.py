@@ -3,20 +3,6 @@ from database.models import Event, myUser
 from database.models import Association
 from database.forms import createEventForm
 
-
-# Create your views here.
-
-def home(request):
-    return render(request, 'home/index.html')
-
-
-def user_settings(request):
-    return render(request, 'user_settings/user_settings.html')
-
-
-# def event(request):
-#    return render(request, 'event/event.html')
-
 def event(request):
     events = Event.objects.all()
     return render(request, 'page_event/page_event.html', {'events': events})
@@ -28,14 +14,9 @@ def specific_event(request, event_id):
         return render(request, 'events/specific_event.html', {'res_event': res_event})
     return render(request, 'not_found.html')
 
-
 def create_event(request):
     if request.method == 'POST':
         form = createEventForm(request.POST)
-
-        #print(form.errors)
-        #if form.is_valid():
-
         assoc_name = form.data['association_name']
         title = form.data['title']
         description = form.data['description']
@@ -47,9 +28,7 @@ def create_event(request):
         date_end = form.data['date_end']
         date_deadline = form.data['date_deadline']
         photo = form.data['photo']
-
         assoc = Association.objects.get(id=assoc_name)
-
         newEvent = Event(association_id=assoc,
                          title=title,
                          date_begin=date_begin,
@@ -63,20 +42,8 @@ def create_event(request):
                          size_intern=size_intern,
                          size_extern=size_extern)
         newEvent.save()
-
         creer = True;
-
     else:
         form = createEventForm()
-
     assos = Association.objects.all();
     return render(request, 'create_event/create_event.html', locals(), {'assos': assos})
-
-
-def user_information(request):
-    if request.user.is_anonymous:
-        return render(request, 'not_found.html')
-    user_info = myUser.objects.get(user=request.user)
-    return render(request, 'user_settings/user_settings.html', {'user_info': user_info})
-
-

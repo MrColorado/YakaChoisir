@@ -4,9 +4,10 @@ from database.models import Association
 
 class createEventForm(forms.Form):
     asso_list = []
+    '''
     for a in Association.objects.all():
         asso_list.append((a.id, a.name))
-
+    '''
     association_name = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Association'
