@@ -5,13 +5,13 @@ from database.forms import createEventForm
 
 def event(request):
     events = Event.objects.all()
-    return render(request, 'page_event/page_event.html', {'events': events})
+    return render(request, 'event/page_event.html', {'events': events})
 
 
 def specific_event(request, event_id):
     res_event = Event.objects.filter(id=event_id)
     if len(res_event):
-        return render(request, 'events/specific_event.html', {'res_event': res_event})
+        return render(request, 'event/specific_event.html', {'res_event': res_event})
     return render(request, 'not_found.html')
 
 def create_event(request):
@@ -45,5 +45,5 @@ def create_event(request):
         creer = True;
     else:
         form = createEventForm()
-    assos = Association.objects.all();
-    return render(request, 'create_event/create_event.html', locals(), {'assos': assos})
+    assos = Association.objects.all()
+    return render(request, 'event/create_event.html', locals(), {'assos': assos})

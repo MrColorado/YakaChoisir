@@ -31,7 +31,7 @@ urlpatterns = [
     path('user_settings/', user_views.user_information, name='settings'),
 
     path('event/', event_views.event, name='event'),
-    path('event/specific_event/<int:event_id>/', event_views.specific_event, name='specific_event'),
+    path('event/<int:event_id>/', event_views.specific_event, name='specific_event'),
     path('create_event/', event_views.create_event, name='create_event'),
 
     path('accounts/', include('django.contrib.auth.urls')),
