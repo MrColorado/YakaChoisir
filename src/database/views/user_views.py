@@ -1,9 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from database.models import Event, myUser
 
-def user_settings(request):
-    return render(request, 'user_settings/user_settings.html')
+from database.models import myUser
 
+
+@login_required
 def user_information(request):
     if request.user.is_anonymous:
         return render(request, 'not_found.html')
