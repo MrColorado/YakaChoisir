@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-import datetime
+from django.utils import timezone
 
 from database.models import Event, myUser
 from database.models import Attend
@@ -21,14 +21,24 @@ def specific_event(request, event_id):
 
 
 @login_required
-def my_event(request, userId):
+def my_event(request, current_user):
     events = []
-    event_id = Attend.objects.filter(user_id=userId)
+    event_id = Attend.objects.filter(user_id=current_user)
     for e in event_id:
-        event = Event.objects.get(id=e)
-        if event and event.date_begin > datetime.datetime.now():
-            events.append(Event.objects.get(event))
+        ev = Event.objects.get(id=e)
+        if ev and ev.date_begin > timezone.now():
+            events.append(Event.objects.get(ev))
     return render(request, 'event/my_event.html/', {'my_event': events})
+
+
+@login_required
+def register(request, current_event):
+    new_attend = Attend(user_id=myUser.objects.get(user=request.user),
+                        event_id=Event.objects.get(id=current_event),
+                        date_entry=timezone.now(),
+                        ticket_number="test")
+    new_attend.save()
+    return render(request, "home/index.html")
 
 
 def create_event(request):
@@ -59,7 +69,7 @@ def create_event(request):
                          size_intern=size_intern,
                          size_extern=size_extern)
         newEvent.save()
-        creer = True;
+        creer = True
     else:
         form = createEventForm()
     assos = Association.objects.all()
