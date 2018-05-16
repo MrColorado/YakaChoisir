@@ -33,12 +33,19 @@ def my_event(request, current_user):
 
 @login_required
 def register(request, current_event):
-    new_attend = Attend(user_id=myUser.objects.get(user=request.user),
-                        event_id=Event.objects.get(id=current_event),
+    my_event = Event.objects.get(id=current_event)
+    my_user = myUser.objects.get(user=request.user)
+
+    if Attend.objects.filter(event_id=my_event, user_id=my_user):
+        return render(request, "event/register.html", {'res_event': None})
+
+    new_attend = Attend(user_id=my_user,
+                        event_id=my_event,
                         date_entry=timezone.now(),
                         ticket_number="test")
     new_attend.save()
-    return render(request, "home/index.html")
+
+    return render(request, "event/register.html", {'res_event': my_event})
 
 
 def create_event(request):

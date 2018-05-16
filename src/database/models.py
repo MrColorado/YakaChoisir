@@ -102,7 +102,7 @@ class Attend(models.Model):
     ticket_number = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return "{0] {1} participe à {2}".format(self.user_id.user.first_name, self.user_id.user.last_name,
+        return "{0} {1} participe à {2}".format(self.user_id.user.first_name, self.user_id.user.last_name,
                                                 self.event_id.title)
 
 

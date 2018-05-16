@@ -10,7 +10,7 @@
     </nav>
 {% endblock %}
 
-{% block  body%}
+{% block body%}
     <div class="container" id="specific_event_container">
         <div class="row justify-content-center">
             <div class="col-sm-6">
@@ -23,7 +23,7 @@
                 <p>Date de fin: {{ res_event.first.date_end }} </p>
                 <p>Date deadline: {{ res_event.first.date_deadline }}</p>
                 <p>Nombre de places intern restantes: {{ res_event.first.size_intern }}</p>
-                <p>Nombre de places extern restantes: {{ res_event.first.size_extern }}</p>
+                <p>Nombre de places extern restantes: {{ res_event.first.size_ext }}</p>
                 <p>Lieu: {{ res_event.first.place }}</p>
                 <p>Inscrit: </p>
                 <p>Prix: {{ res_event.first.price }} euros </p>

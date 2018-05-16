@@ -143,3 +143,15 @@
     height:1000%;
     height: auto;
 }
+
+#flex_register {
+    background: lightgray;
+    border: gray 1px solid;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 1px 1px 12px #555;
+    font-family: ralewayMedium;
+    align-self: center;
+    padding: 15px;
+}
