@@ -21,13 +21,13 @@ def specific_event(request, event_id):
 
 
 @login_required
-def my_event(request, current_user):
+def my_event(request):
     events = []
-    event_id = Attend.objects.filter(user_id=current_user)
+    my_user = myUser.objects.get(user=request.user)
+    event_id = Attend.objects.filter(user_id=my_user)
     for e in event_id:
-        ev = Event.objects.get(id=e)
-        if ev and ev.date_begin > timezone.now():
-            events.append(Event.objects.get(ev))
+        if e.event_id.date_begin > timezone.now():
+            events.append(e.event_id)
     return render(request, 'event/my_event.html/', {'my_event': events})
 
 

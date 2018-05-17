@@ -34,6 +34,7 @@ urlpatterns = [
     path('create_event/', event_views.create_event, name='create_event'),
     path('event/<int:event_id>/', event_views.specific_event, name='specific_event'),
     path('register/<int:current_event>/', event_views.register, name='register'),
+    path('my_event/', event_views.my_event, name='my_event'),
 
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^login/$', views.login, name='login'),

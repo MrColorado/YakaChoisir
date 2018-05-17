@@ -59,7 +59,7 @@
             <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
                 <a class="nav-item nav-link active" href="{% url 'home' %}"> Accueil </a>
                 <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
-                <a class="nav-item nav-link disabled" href="#"> Mes événements </a>
+                <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
                 <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
             </nav>
             {% endblock %}
