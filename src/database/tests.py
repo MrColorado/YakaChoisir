@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 
-from util.apps import CSVParser
 from .models import myUser, Association, Members
 from django.test import TestCase
 
@@ -19,21 +18,4 @@ class MyUserTests(TestCase):
 
         self.assertEqual(userExtend.mail_secondary, 'hello@gmail.com')
 
-    def test_csvParserPrint(self):
-        parser = CSVParser('../misc/asso.csv')
-        print(parser)
-
-    def test_csvParserWriteDB(self):
-        parser = CSVParser('../misc/asso.csv')
-        parser.to_database()
-        print(myUser.objects.all())
-        print(Association.objects.all())
-        print(Members.objects.all())
-
-    def test_trim_email(self):
-        email_ok = 'pass@domain.com'
-        email_fail = 'pass@domain.com;'
-        self.assertEqual(email_ok, CSVParser.trim_email(email_ok))
-        self.assertEqual(email_ok, CSVParser.trim_email(email_fail))
-        self.assertEqual(None, CSVParser.trim_email(None))
 
