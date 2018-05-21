@@ -31,3 +31,14 @@ class createEventForm(forms.Form):
                                                                           'type': 'datetime-local'}))
     photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
                                                            'class': 'form-control-file'}))
+
+
+class createAssociationForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+    date_creation = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
+                                                                          'type': 'datetime-local'}))
+    email = forms.EmailField() #FIXME
+    photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
+                                                           'class': 'form-control-file'}))
+    site =  forms.URLField(widget=forms.URLInput(attrs={'class': 'form-control'}))

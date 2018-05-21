@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<style>
+    #create_event{
+        margin-top: 2%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color: #0d2436;
+        font-family: ralewayExtraBold;
+    }
+#form{
+    margin-top: 5%;
+}
+</style>
+
+<form action="{% url "create_association" %}" method="post">
+    {% csrf_token %}
+
+    <div class="container" id="create_event">
+    <div class="container">
+    <h1> Creez votre evenement!</h1></div>
+        <div class="container" id="form">
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Nom de l'association :</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group row">
+                <label for="exampleTextarea">Description :</label>
+                {{ form.description }}
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Date de création de l'association : </label>
+                <div class="col-10">
+                    {{ form.date_creation }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Adresse mail de l'association : </label>
+                <div class="col-10">
+                    {{ form.mail }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="exampleInputFile">Affiche de l'association :</label>
+                {{ form.photo }}
+                <small id="fileHelp" class="form-text text-muted">Importer l'affiche de votre evenement en .jpg</small>
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Site web de l'association : </label>
+                <div class="col-10">
+                    {{ form.site }}
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit" />
+    </div>
+</form>
+{% endblock %}
