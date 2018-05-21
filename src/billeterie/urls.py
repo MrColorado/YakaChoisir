@@ -31,13 +31,15 @@ urlpatterns = [
     path('', home_views.home, name='home'),
     path('user_settings/', user_views.user_information, name='settings'),
 
-    path('event/', event_views.event, name='event'),
-    path('create_event/', event_views.create_event, name='create_event'),
-    path('event/<int:event_id>/', event_views.specific_event, name='specific_event'),
-    path('register/<int:current_event>/', event_views.register, name='register'),
-    path('my_event/', event_views.my_event, name='my_event'),
+    path('evenements/', event_views.event, name='event'),
+    path('creation_evenement/', event_views.create_event, name='create_event'),
+    path('evenements/<int:event_id>/', event_views.specific_event, name='specific_event'),
+    path('inscription/<int:current_event>/', event_views.register, name='register'),
+    path('mes_evenements/', event_views.my_event, name='my_event'),
 
-    path('association/', association_views.association, name='association'),
+    path('associations/', association_views.association, name='association'),
+    path('mes_associations/', association_views.my_association, name='my_association'),
+
 
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^login/$', views.login, name='login'),

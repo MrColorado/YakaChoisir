@@ -4,32 +4,31 @@
     <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
         <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
         <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
-        <a class="nav-item nav-link active" href="{% url 'my_event' %}"> Mes événements </a>
+        <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
         <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
-        <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes Associations </a>
-        <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon Compte </a>
+        <a class="nav-item nav-link active" href="{% url 'my_association' %}"> Mes associations </a>
+        <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
     </nav>
 {% endblock %}
 
 {% block  body%}
 
-    {% for e in my_event %}
+    {% for e in my_association %}
          <div class="container" style="margin-top: 30px">
              <div class="row" id="row_event">
                  <div class="col-sm-4">
                      <div class="d-flex">
-                         <a href="{% url 'specific_event' e.id %}">
+                         <a href="{% url 'my_association' %}">
                              <img src="{{e.photo.url}}" id="event_img">
                          </a>
                      </div>
                  </div>
                  <div class="col-sm-8" id="col_event">
-                     <a href="{% url 'specific_event' e.id %}" style="color: black; text-decoration: none">
+                     <a href="{% url 'my_association' %}" style="color: black; text-decoration: none">
                          <h1>{{ e.title}}</h1>
                      </a>
                      <div style="padding-top: 10px">
-                         <p> Description de l'événement: {{ e.description }}</p>
-                         <p> Nom de l'association: {{ e.association_id }}</p>
+                         <p>{{ e.description }}</p>
                     </div>
                  </div>
              </div>
