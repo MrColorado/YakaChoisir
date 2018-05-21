@@ -10,13 +10,13 @@
         {% endif %}
         <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
         {% if user.is_authenticated %}
-            <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes Associations </a>
+            <a class="nav-item nav-link" href="{% url 'association' %}"> Mes Associations </a>
             <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
         {% endif %}
     </nav>
 {% endblock %}
 
-{% block  body%}
+{% block body%}
 
     <div class="container" style="margin-top: 30px">
         <div class="row" id="row_event">
@@ -28,32 +28,31 @@
                 </div>
             </div>
             <div class="col-sm-8" id="col_event" style="background-color: rgba(13, 36, 54, 0.03);">
-                <h3>Creer un nouvel événement pour vos associations </h3>
+                <h3>Créer une nouvelle assocition </h3>
             </div>
         </div>
     </div>
 
-    {% for e in events %}
+    {% for e in associations %}
          <div class="container" style="margin-top: 30px">
              <div class="row" id="row_event">
                  <div class="col-sm-4">
                      <div class="d-flex">
-                         <a href="{% url 'specific_event' e.id %}">
+                         <a href="{% url 'association' %}">
                              <img src="{{e.photo.url}}" id="event_img">
                          </a>
                      </div>
                  </div>
                  <div class="col-sm-8" id="col_event">
-                     <a href="{% url 'specific_event' e.id %}" style="color: black; text-decoration: none">
-                         <h1>{{ e.title}}</h1>
+                     <a href="{% url 'association' %}" style="color: black; text-decoration: none">
+                         <h1>{{ e.name }}</h1>
                      </a>
                      <div style="padding-top: 10px">
-                         <p> Description de l'événement: {{ e.description }}</p>
-                         <p> Nom de l'association: {{ e.association_id }}</p>
+                         <p>Description de de l'assocition : {{ e.description }}</p>
+                         <p>Nom de l'association: {{ e.association_id }}</p>
                     </div>
                  </div>
              </div>
          </div>
      {% endfor %}
-
 {% endblock %}

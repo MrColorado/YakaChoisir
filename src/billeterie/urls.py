@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from billeterie import settings
 from database.views import event_views
 from database.views import home_views
+from database.views import association_views
 from database.views import user_views
 from django.contrib.auth import views
 
@@ -35,6 +36,8 @@ urlpatterns = [
     path('event/<int:event_id>/', event_views.specific_event, name='specific_event'),
     path('register/<int:current_event>/', event_views.register, name='register'),
     path('my_event/', event_views.my_event, name='my_event'),
+
+    path('association/', association_views.association, name='association'),
 
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^login/$', views.login, name='login'),
