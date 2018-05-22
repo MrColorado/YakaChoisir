@@ -30,6 +30,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_views.home, name='home'),
     path('user_settings/', user_views.user_information, name='settings'),
+    path('my_event/', user_views.is_god, name='my_event'),
 
     path('evenements/', event_views.event, name='event'),
     path('creation_evenement/', event_views.create_event, name='create_event'),

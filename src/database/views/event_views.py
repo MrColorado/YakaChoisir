@@ -48,6 +48,7 @@ def register(request, current_event):
     return render(request, "event/register.html", {'res_event': my_event})
 
 
+@login_required
 def create_event(request):
     if request.method == 'POST':
         form = createEventForm(request.POST)
