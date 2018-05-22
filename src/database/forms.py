@@ -38,7 +38,7 @@ class createAssociationForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
     date_creation = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
                                                                           'type': 'datetime-local'}))
-    email = forms.EmailField() #FIXME
+    mail = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
     photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
-                                                           'class': 'form-control-file'}))
-    site =  forms.URLField(widget=forms.URLInput(attrs={'class': 'form-control'}))
+                                                           'class': 'form-control'}))
+    site = forms.URLField(widget=forms.URLInput(attrs={'class': 'form-control'}))

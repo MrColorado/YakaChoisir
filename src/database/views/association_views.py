@@ -26,7 +26,7 @@ def create_association(request):
         date_creation = form.data['date_creation']
         photo = form.data['photo']
         site = form.data['site']
-        status = 'valid'
+        status = "valid"
         assoc = Association(name=name,
                                   date_creation=date_creation,
                                   description=description,
@@ -37,4 +37,4 @@ def create_association(request):
     else:
         form = createAssociationForm()
     assos = Association.objects.all()
-    return render(request, 'association/create_asssocition')
+    return render(request, 'association/create_association.html', locals(), {'assos': assos})
