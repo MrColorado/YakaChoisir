@@ -19,6 +19,7 @@ def my_association(request):
 
 
 def create_association(request):
+    already = False;
     if request.method == 'POST':
         form = createAssociationForm(request.POST)
         name = form.data['name']
@@ -26,15 +27,18 @@ def create_association(request):
         date_creation = form.data['date_creation']
         photo = form.data['photo']
         site = form.data['site']
-        status = "valid"
+        statut = form.data['statut']  # status juridique
         assoc = Association(name=name,
-                                  date_creation=date_creation,
-                                  description=description,
-                                  photo=photo,
-                                  site=site,
-                                  status=status)
+                            date_creation=date_creation,
+                            description=description,
+                            photo=photo,
+                            site=site,
+                            statut=statut)
+        if len(Association.objects.filter(name=name)):
+            already = True
+            return render(request, 'association/create_association.html', locals())
         assoc.save()
     else:
         form = createAssociationForm()
     assos = Association.objects.all()
-    return render(request, 'association/create_association.html', locals(), {'assos': assos})
+    return render(request, 'home/index.html')

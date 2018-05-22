@@ -34,6 +34,12 @@
 <form action="{% url "create_association" %}" method="post">
     {% csrf_token %}
 
+    {% if already %}
+        <div class="flex-column" style="text-align: center">
+            <h1>Cette association existe déjà</h1>
+        </div>
+    {% endif %}
+
     <div class="container" id="create_event">
     <div class="container">
         <h1> Créez votre association</h1>
@@ -68,6 +74,12 @@
                 <label for="example-datetime-local-input" class="col-2 col-form-label">Site web de l'association : </label>
                 <div class="col-10">
                     {{ form.site }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Status juridique de l'association : </label>
+                <div class="col-10">
+                    {{ form.statut }}
                 </div>
             </div>
         </div>

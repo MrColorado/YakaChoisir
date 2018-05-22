@@ -42,3 +42,4 @@ class createAssociationForm(forms.Form):
     photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
                                                            'class': 'form-control'}))
     site = forms.URLField(widget=forms.URLInput(attrs={'class': 'form-control'}))
+    statut = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
