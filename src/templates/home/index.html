@@ -14,35 +14,29 @@
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
+            {% for nb in numbers %}
+                <li data-target="#myCarousel" data-slide-to={{ nb }}></li>
+            {% endfor %}
         </ol>
 
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="../../static/img/photo1.jpg" alt="photo1">
-                <div class="carousel-caption">
-                    <h3>L'afrique c bien</h3>
-                    <p>L'autruche c'est mieux</p>
+            {% for e in first %}
+                <div class="carousel-item active">
+                    <img src="{{ e.photo.url }}" alt="photo1">
+                    <div class="carousel-caption">
+                        <h3>{{ e.title }}</h3>
+                    </div>
                 </div>
-            </div>
-
+            {% endfor %}
+        {% for e in events %}
             <div class="carousel-item">
-                <img src="../../static/img/photo2.jpg" alt="photo2">
+                <img src="{{ e.photo.url }}" alt="photo1">
                 <div class="carousel-caption">
-                    <h3>y'a pas d'eau ici</h3>
-                    <p>mais il fait beaux</p>
+                    <h3>{{ e.title }}</h3>
+                    <!--<p>L'autruchie c'est mieux</p>-->
                 </div>
             </div>
+        {% endfor %}
 
-            <div class="carousel-item">
-                <img src="../../static/img/photo3.jpg" alt="photo3">
-                <div class="carousel-caption">
-                    <h3>Oulalala</h3>
-                    <p>alalalala</p>
-                </div>
-            </div>
-        </div>
         <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
             <span class="carousel-control-prev-icon"></span>
         </a>

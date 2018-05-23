@@ -9,7 +9,11 @@ from database.forms import createEventForm
 
 
 def event(request):
-    events = Event.objects.all()
+    events = []
+    allEvents = Event.objects.all()
+    for e in allEvents:
+        if e.validated:
+            events.append(e)
     return render(request, 'event/page_event.html', {'events': events})
 
 

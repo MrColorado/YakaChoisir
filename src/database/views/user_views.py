@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from database.models import myUser
 from database.models import Members
+from database.models import AssociationsManager
 from database.models import SystemAdmin
 
 @login_required
@@ -14,9 +15,10 @@ def user_information(request):
 @login_required
 def is_god(request):
     user_info = myUser.objects.get(user=request.user)
-    #members = Members.objects.filter(user_id=user_info)
+    members = Members.objects.filter(user_id=user_info)
     god = False
-    if (SystemAdmin.objects.filter(user_id=user_info)):
+    print (SystemAdmin.objects.filter(user_id=user_info))
+    if (SystemAdmin.objects.filter(user_id=user_info) or AssociationsManager.objects.filter(user_id=user_info)):
         god = True
 
     return render(request, 'event/my_event.html', {'god': god})
