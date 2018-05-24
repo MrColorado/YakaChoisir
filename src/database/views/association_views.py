@@ -18,6 +18,15 @@ def my_association(request):
     return render(request, 'association/my_association.html/', {'associations': associations})
 
 
+def specific_association(request, asso_id):
+    res_asso = Association.objects.filter(id=asso_id)
+    print(res_asso)
+    if len(res_asso):
+        print({'res_asso': res_asso})
+        render(request, 'association/specific_association.html', {'res_asso': res_asso})
+    render(request, 'not_found.html')
+
+
 def create_association(request):
     already = False;
     if request.method == 'POST':
@@ -41,4 +50,5 @@ def create_association(request):
     else:
         form = createAssociationForm()
     assos = Association.objects.all()
+    #return render(request, 'association/create_association.html', locals())
     return render(request, 'home/index.html')

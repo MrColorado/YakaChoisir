@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block panel %}
+    <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
+        <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
+        <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
+        {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
+        {% endif %}
+        <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
+        {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes Associations </a>
+            <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
+        {% endif %}
+    </nav>
+{% endblock %}
+
+{% block body%}
+    <div class="container" id="specific_event_container">
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <img id="specific_event_img" src="{{ res_asso.first.photo.url }}">
+            </div>
+            <div class="col-sm-12" id="specific_event_col">
+                <h1> {{ res_asso.first.name }}</h1>
+                <p>Description: {{ res_asso.fisrt.description }}</p>
+                <p>Date de création: {{ res_asso.first.date_creation }}</p>
+                <p>Mail: {{ res_asso.first.mail }}</p>
+                <p>Status: {{ res_asso.first.mail }}</p>
+                <div class="d-flex" id="test">
+                    <a href="{{ res_asso.first.site }}">
+                        <button class="btn btn-success">Pour plus d'informations</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
