@@ -35,7 +35,7 @@ class SystemAdmin(models.Model):
     user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
-        return "{0} {1} ({2})".format(self.user_id.first_name, self.user_id.last_name, self.user_id.email)
+        return "{0} {1} ({2})".format(self.user_id.user.first_name, self.user_id.user.last_name, self.user_id.user.email)
 
 
 class AssociationsManager(models.Model):
@@ -46,13 +46,13 @@ class AssociationsManager(models.Model):
 
 
 class Association(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True)
     date_creation = models.DateTimeField(default=timezone.now)
     mail = models.EmailField(max_length=100, blank=True)
     photo = models.ImageField(upload_to='associations', blank=True)
     site = models.URLField(blank=True)
-    statut = models.CharField(max_length=50)
+    statut = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return "{0}".format(self.name)
@@ -67,6 +67,7 @@ class Members(models.Model):
     class Meta:
         verbose_name = "Liste des membres des associations"
         ordering = ['id']
+        unique_together = ("user_id", "association_id")
 
     def __str__(self):
         return "{0} fait partie de l'association {1}".format(self.user_id, self.association_id)
@@ -82,7 +83,7 @@ class Event(models.Model):
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)  # TODO find a better way to store money fields
     place = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to='event', blank=True)
+    photo = models.ImageField(upload_to='event')
     size_intern = models.IntegerField()
     size_extern = models.IntegerField()
     premium = models.NullBooleanField()
@@ -97,6 +98,10 @@ class Attend(models.Model):
     event_id = models.ForeignKey(Event, on_delete=models.DO_NOTHING)
     date_entry = models.DateTimeField()
     ticket_number = models.CharField(max_length=100, blank=True)
+
+    class Meta:
+        # you cant attend multiple times to the same event
+        unique_together = ("user_id", "event_id")
 
     def __str__(self):
         return "{0} {1} participe à {2}".format(self.user_id.user.first_name, self.user_id.user.last_name,
