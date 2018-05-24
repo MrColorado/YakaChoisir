@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+import django.db
 
 from .models import myUser, Association, Members
 from django.test import TestCase
@@ -17,5 +18,4 @@ class MyUserTests(TestCase):
         userExtend.mail_secondary = 'hello@gmail.com'
 
         self.assertEqual(userExtend.mail_secondary, 'hello@gmail.com')
-
 
