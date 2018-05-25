@@ -43,8 +43,6 @@ urlpatterns = [
     path('association/<int:asso_id>/', association_views.specific_association, name='specific_association'),
     path('mes_associations/', association_views.my_association, name='my_association'),
 
-
-
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.logout, name='logout'),

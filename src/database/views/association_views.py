@@ -31,19 +31,16 @@ def create_association(request):
         form = createAssociationForm(request.POST)
         name = form.data['name']
         description = form.data['description']
-        print(description)
         date_creation = form.data['date_creation']
         photo = form.data['photo']
         site = form.data['site']
         statut = form.data['statut']  # status juridique
-        print(statut)
         assoc = Association(name=name,
                             date_creation=date_creation,
                             description=description,
                             photo=photo,
                             site=site,
                             statut=statut)
-        print(assoc.description)
         if len(Association.objects.filter(name=name)):
             already = True
             return render(request, 'association/create_association.html', locals())
