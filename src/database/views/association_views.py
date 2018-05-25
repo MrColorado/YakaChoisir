@@ -47,8 +47,8 @@ def create_association(request):
             already = True
             return render(request, 'association/create_association.html', locals())
         assoc.save()
+        return render(request, 'home/index.html')
     else:
         form = createAssociationForm()
     assos = Association.objects.all()
-    #return render(request, 'association/create_association.html', locals())
-    return render(request, 'home/index.html')
+    return render(request, 'association/create_association.html', locals())
