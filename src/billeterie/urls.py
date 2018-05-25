@@ -39,10 +39,9 @@ urlpatterns = [
     path('mes_evenements/', event_views.my_event, name='my_event'),
 
     path('associations/', association_views.association, name='association'),
-    path('association/<int:asso_id>', association_views.create_association, name='create_association'),
-    path('mes_associations/', association_views.my_association, name='my_association'),
     path('creation_association/', association_views.create_association, name='create_association'),
-    path('specific_association/<int:asso_id>/', association_views.specific_association, name='specific_association'),
+    path('association/<int:asso_id>/', association_views.specific_association, name='specific_association'),
+    path('mes_associations/', association_views.my_association, name='my_association'),
 
 
 

@@ -20,11 +20,9 @@ def my_association(request):
 
 def specific_association(request, asso_id):
     res_asso = Association.objects.filter(id=asso_id)
-    print(res_asso)
     if len(res_asso):
-        print({'res_asso': res_asso})
-        render(request, 'association/specific_association.html', {'res_asso': res_asso})
-    render(request, 'not_found.html')
+        return render(request, 'association/specific_association.html', {'res_asso': res_asso})
+    return render(request, 'not_found.html')
 
 
 def create_association(request):
@@ -33,16 +31,19 @@ def create_association(request):
         form = createAssociationForm(request.POST)
         name = form.data['name']
         description = form.data['description']
+        print(description)
         date_creation = form.data['date_creation']
         photo = form.data['photo']
         site = form.data['site']
         statut = form.data['statut']  # status juridique
+        print(statut)
         assoc = Association(name=name,
                             date_creation=date_creation,
                             description=description,
                             photo=photo,
                             site=site,
                             statut=statut)
+        print(assoc.description)
         if len(Association.objects.filter(name=name)):
             already = True
             return render(request, 'association/create_association.html', locals())
