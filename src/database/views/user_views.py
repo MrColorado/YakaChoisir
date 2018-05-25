@@ -26,12 +26,15 @@ def is_god(request):
     return render(request, 'event/my_event.html', {'god': god})
 
 
-def modifUser(request):
+@login_required
+def modifyUser(request):
+    print("yolo")
+
     if request.method == 'POST':
         form = modifyUser(request.POST)
         user_to_modifiy = myUser.objects.get(user=request.user)
         user_to_modifiy.mail_secondary = form.data['secondary_email']
         user_to_modifiy.save()
-    else:
-        form = modifyUser()
-    return render(request, 'user_settings/user_settings.html', {})
+        print("yolo")
+
+    return render(request, 'user_settings/test.html', {'form' : form})

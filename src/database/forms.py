@@ -59,13 +59,10 @@ class member_list(forms.Form):
 class modifyUser(forms.Form):
     secondary_email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     GENDER_OPTIONS = (
-        ('Male','M'),
+        ('Male', 'M'),
         ('Female', 'F'),
     )
     gender = forms.MultipleChoiceField(widget=forms.Select(attrs={
-        'class' : 'form-control',
-        'value' : 'Gender'
+        'class': 'form-control',
+        'value': 'Gender'
     }), choices=GENDER_OPTIONS)
-
-
-

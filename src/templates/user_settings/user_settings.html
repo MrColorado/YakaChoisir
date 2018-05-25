@@ -44,24 +44,8 @@
     </div>
 
 
-     <form action="{% url 'modifyUser' %}" method="post">
-    {% csrf_token %}
 
-     <div class="container" id="create_event">
-    <div class="container">
-    <h4> modifier vos informations</h4></div>
-        <div class="container" id="form">
-            <div class="form-group row">
-                <label for="example-number-input" class="col-2 col-form-label">votre email secondaire :</label>
-                {{ form.secondary_email }}
-            </div>
-            <div class="form-group row">
-                <label for="example-text-input" class="col-2 col-form-label">genre :</label>
-                <div class="col-10">
-                    {{ form.gender }}
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+
+    <a href="{% url 'modifyUser' %}"> YOLO </a></a>
+
 {% endblock %}
