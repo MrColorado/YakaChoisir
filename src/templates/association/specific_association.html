@@ -17,23 +17,55 @@
 {% endblock %}
 
 {% block body%}
-    <div class="container" id="specific_event_container">
-        <div class="row justify-content-center">
-            <div class="col-sm-6">
-                <img id="specific_event_img" src="{{ res_asso.first.photo.url }}">
-            </div>
-            <div class="col-sm-12" id="specific_event_col">
-                <h1> {{ res_asso.first.name }}</h1>
-                <p>Description: {{ res_asso.first.description }}</p>
-                <p>Date de création: {{ res_asso.first.date_creation }}</p>
-                <p>Mail: {{ res_asso.first.mail }}</p>
-                <p>Statut: {{ res_asso.first.statut }}</p>
-                <div class="d-flex" id="test">
-                    <a href="{{ res_asso.first.site }}">
-                        <button class="btn btn-success">Pour plus d'informations</button>
-                    </a>
+    <style>
+    #create_event{
+        margin-top: 2%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color: #0d2436;
+        font-family: ralewayExtraBold;
+    }
+#form{
+    margin-top: 5%;
+}
+</style>
+
+    <form action="{% url "specific_association" res_asso.first.id %}" method="post">
+        {% csrf_token %}
+        <div class="container" id="specific_event_container">
+            <div class="row justify-content-center">
+                <div class="col-sm-6">
+                    <img id="specific_event_img" src="{{ res_asso.first.photo.url }}">
+                </div>
+                <div class="col-sm-12" id="specific_event_col">
+                    <h1> {{ res_asso.first.name }}</h1>
+                    <p>Description: {{ res_asso.first.description }}</p>
+                    <p>Date de création: {{ res_asso.first.date_creation }}</p>
+                    <p>Mail: {{ res_asso.first.mail }}</p>
+                    <p>Statut: {{ res_asso.first.statut }}</p>
+
+                    <div class="d-flex" id="test">
+                        <a href="{{ res_asso.first.site }}">
+                            <button class="btn btn-success">Pour plus d'informations</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="container" id="create_event">
+        <div class="container" id="form">
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Adresse mail du nouveau membre :</label>
+                {{ form.new_member }}
+            </div>
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Rôle dans l'association :</label>
+                {{ form.role }}
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Valider" />
+        </div>
+    </form>
+
 {% endblock %}

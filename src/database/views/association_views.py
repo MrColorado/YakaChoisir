@@ -5,6 +5,7 @@ from database.models import myUser
 from database.models import Members
 
 from database.forms import createAssociationForm
+from database.forms import member_list
 
 
 def association(request):
@@ -19,14 +20,28 @@ def my_association(request):
 
 
 def specific_association(request, asso_id):
-    res_asso = Association.objects.filter(id=asso_id)
-    if len(res_asso):
-        return render(request, 'association/specific_association.html', {'res_asso': res_asso})
+    if request.method == 'POST':
+        form = member_list(request.POST)
+        user_id = myUser.objects.get(id=form.data['new_member'])
+        print(user_id)
+        role = form.data['role']
+        print(role)
+        member = Members(user_id=user_id,
+                         association_id=Association.objects.get(id=asso_id),
+                         role=role
+                         )
+        member.save()
+        return render(request, 'home/index.html')
+    else:
+        form = member_list()
+        res_asso = Association.objects.filter(id=asso_id)
+        if len(res_asso):
+            return render(request, 'association/specific_association.html', locals(), {'res_asso': res_asso})
     return render(request, 'not_found.html')
 
 
 def create_association(request):
-    already = False;
+    already = False
     if request.method == 'POST':
         form = createAssociationForm(request.POST)
         name = form.data['name']

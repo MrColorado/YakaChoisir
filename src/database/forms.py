@@ -1,18 +1,17 @@
 from django import forms
 from database.models import Association
+from database.models import myUser
 
 
 class createEventForm(forms.Form):
     asso_list = []
-    '''
     for a in Association.objects.all():
         asso_list.append((a.id, a.name))
-    '''
     association_name = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Association'
-    }
-    ), choices=asso_list)
+        }
+        ), choices=asso_list)
 
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
@@ -43,3 +42,16 @@ class createAssociationForm(forms.Form):
                                                            'class': 'form-control'}))
     site = forms.URLField(widget=forms.URLInput(attrs={'class': 'form-control'}))
     statut = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+class member_list(forms.Form):
+    members = []
+    for m in myUser.objects.all():
+        members.append((m.id, m.user.email))
+        new_member = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
+        'class': 'form-control',
+        'value': 'Utilisateur'
+        }
+        ), choices=members)
+    role = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
