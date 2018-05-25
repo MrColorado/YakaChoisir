@@ -86,3 +86,28 @@ def create_event(request):
         form = createEventForm()
     assos = Association.objects.all()
     return render(request, 'event/create_event.html', locals(), {'assos': assos})
+
+
+def modifUser(request)
+    if request.method == 'POST':
+        form = createEventForm(request.POST)
+        secondary_email = form.data['secondary_email']
+        user_to_modifiy
+        newEvent = Event(association_id=assoc,
+                         title=title,
+                         date_begin=date_begin,
+                         date_end=date_end,
+                         date_deadline=date_deadline,
+                         validated=True,
+                         description=description,
+                         price=price,
+                         place=place,
+                         photo=photo,
+                         size_intern=size_intern,
+                         size_extern=size_extern)
+        newEvent.save()
+        creer = True
+    else:
+        form = createEventForm()
+    assos = Association.objects.all()
+    return render(request, 'user_settings/user_settings.html', locals(), {'assos': assos})

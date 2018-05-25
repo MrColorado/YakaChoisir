@@ -55,3 +55,7 @@ class member_list(forms.Form):
     ), choices=members)
     role = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
+
+class modifyUser(forms.Form):
+    secondary_email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
