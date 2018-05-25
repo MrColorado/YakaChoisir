@@ -24,9 +24,7 @@ def specific_association(request, asso_id):
     if request.method == 'POST':
         form = member_list(request.POST)
         user_id = myUser.objects.get(id=form.data['new_member'])
-        print(user_id)
         role = form.data['role']
-        print(role)
         member = Members(user_id=user_id,
                          association_id=Association.objects.get(id=asso_id),
                          role=role

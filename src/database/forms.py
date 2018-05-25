@@ -48,10 +48,10 @@ class member_list(forms.Form):
     members = []
     for m in myUser.objects.all():
         members.append((m.id, m.user.email))
-        new_member = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
-        'class': 'form-control',
-        'value': 'Utilisateur'
-        }
-        ), choices=members)
+    new_member = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
+   'class': 'form-control',
+    'value': 'Utilisateur'
+    }
+    ), choices=members)
     role = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
