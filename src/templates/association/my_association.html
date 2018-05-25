@@ -11,15 +11,15 @@
     </nav>
 {% endblock %}
 
-{% block  body%}
+{% block body %}
 
-    {% for e in my_association %}
+    {% for e in associations %}
          <div class="container" style="margin-top: 30px">
              <div class="row" id="row_event">
                  <div class="col-sm-4">
                      <div class="d-flex">
                          <a href="{% url 'specific_association' e.id %}">
-                             <img src="{{e.photo.url}}" id="event_img">
+                             <img src="{{ e.photo.url }}" id="event_img">
                          </a>
                      </div>
                  </div>

@@ -16,6 +16,7 @@ def association(request):
 def my_association(request):
     my_user = myUser.objects.get(user=request.user)
     associations = Members.objects.filter(user_id=my_user)
+    print(associations[0])
     return render(request, 'association/my_association.html/', {'associations': associations})
 
 
