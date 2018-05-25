@@ -39,14 +39,5 @@ def user_modify(request):
             user_to_modify.gender = form.data['gender']
             user_to_modify.save()
             return render(request, 'user_settings/user_settings.html', {'user_info': user_to_modify})
-        user_to_modify.save()
-        return render(request, 'user_settings/user_settings.html', {'user_info': user_to_modify})
     form = modifyUser()
     return render(request, 'user_settings/modify_user.html', locals(), {'user_info': user_to_modify})
-'''        else:
-            return render(request,'not_found.html')
-    else:
-        form = modifyV2(request.POST)
-<<<<<<< HEAD
-<<<<<<< HEAD
-        return render(request, 'user_settings/user_settings.html', {'form': form})'''
