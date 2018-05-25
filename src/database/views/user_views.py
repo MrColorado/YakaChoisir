@@ -46,9 +46,10 @@ def modifyUserinfoV2(request):
         form = modifyV2(request.POST)
         if form.is_valid():
             user_to_modify = myUser.objects.get(user=request.user)
-            user_to_modify.mail_secondary = 'ylolooolo@epita.fr'
+            user_to_modify.mail_secondary = form.data['mail_secondary']
+            user_to_modify.gender = form.data['gender']
             user_to_modify.save()
-            return render(request, 'user_settings/user_settings.html')
+            return render(request, 'user_settings/user_settings.html', {'user_info': user_to_modify})
         else:
             return render(request,'not_found.html')
     else:

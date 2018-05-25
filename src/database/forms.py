@@ -72,4 +72,6 @@ class modifyUser(forms.Form):
 
 class modifyV2(forms.Form):
     mail_secondary = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    gender = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
 

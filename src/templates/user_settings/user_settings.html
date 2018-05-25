@@ -26,7 +26,7 @@
                         <li> mail principale : {{ user_info.user.email }}</li>
                         <li> mail secondaire  : {{ user_info.mail_secondary }}</li>
                         <li> externe </li>
-                        <li> date d'inscription :  </li>
+                        <li> date d'inscription :  {{ user_info.user.last_login.date }}</li>
                     </ul>
                 </div>
             </div>
@@ -47,7 +47,14 @@
      <form action="{% url 'modifyUserinfoV2' %}" method="post" >
     {% csrf_token %}
                  <h4> modifier vos informations</h4>
-                 <input type="text" name="mail_secondary" value="{{ form.mail_secondary }}">
+         Email Secondaire :
+                 <input type="text" name="mail_secondary" value="{{ form.mail_secondary }}"><br>
+         Genre:
+                <input type="text" name="gender" value="{{ form.gender }}"><br>
+         Externe:
+         <br>
+         Date d'inscription:
+         <br>
          <input type="submit" value="valider">
 </form>
 
