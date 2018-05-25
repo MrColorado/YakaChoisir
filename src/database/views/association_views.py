@@ -34,12 +34,14 @@ def create_association(request):
         date_creation = form.data['date_creation']
         photo = form.data['photo']
         site = form.data['site']
+        mail = form.data['mail']
         statut = form.data['statut']  # status juridique
         assoc = Association(name=name,
                             date_creation=date_creation,
                             description=description,
                             photo=photo,
                             site=site,
+                            mail=mail,
                             statut=statut)
         if len(Association.objects.filter(name=name)):
             already = True
