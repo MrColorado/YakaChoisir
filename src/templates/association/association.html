@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block panel %}
     <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel"
@@ -38,9 +39,15 @@
              <div class="row" id="row_event">
                  <div class="col-sm-4">
                      <div class="d-flex">
-                         <a href="{% url 'specific_association' e.id %}">
-                             <img src="{{e.photo.url}}" id="event_img">
-                         </a>
+                         {% if e.photo %}
+                            <a href="{% url 'specific_association' e.id %}">
+                                <img src="{{e.photo.url}}" id="event_img">
+                            </a>
+                         {% else %}
+                            <a href="{% url 'specific_association' e.id %}">
+                                <img src="{% static "img/lonely_kitten.jpg" %}" id="event_img">
+                            </a>
+                         {% endif %}
                      </div>
                  </div>
                  <div class="col-sm-8" id="col_event">
