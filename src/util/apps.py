@@ -17,6 +17,8 @@ class CSVParser:
     Extracts association and members from provided CSV file
     """
 
+    path_default_asso_logo = 'media/lonely_kitten.jpg'
+
     def __init__(self, filename):
         """
         Create a new CSVParser object.
@@ -118,3 +120,12 @@ class CSVParser:
             return email
 
         return email[:-1] if email[-1] == ';' else email
+
+def load_csv(path: str):
+    """
+    Adds associations and members to database
+    :param path: path to .csv file
+    :return: Nothing
+    """
+    csv_parser = CSVParser(path)
+    csv_parser.to_database()
