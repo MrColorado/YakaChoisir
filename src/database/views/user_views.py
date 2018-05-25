@@ -16,15 +16,12 @@ def user_information(request):
 
 @login_required
 def modifyUserinfo(request):
-    print("yolo")
-
     if request.method == 'POST':
 
         form = modifyUser(request.POST)
         user_to_modify = myUser.objects.get(user=request.user)
         user_to_modify.mail_secondary = form.data['secondary_email']
         user_to_modify.save()
-        print("yolo")
 
 
 def user_modify(request):
@@ -41,3 +38,13 @@ def user_modify(request):
         return render(request, 'user_settings/user_settings.html', {'user_info': user_to_modify})
     form = modifyUser()
     return render(request, 'user_settings/modify_user.html', locals(), {'user_info': user_to_modify})
+#@login_required
+#def is_god(request):
+#    user_info = myUser.objects.get(user=request.user)
+#    members = Members.objects.filter(user_id=user_info)
+#    god = False
+#    print (SystemAdmin.objects.filter(user_id=user_info))
+#    if (SystemAdmin.objects.filter(user_id=user_info) or AssociationsManager.objects.filter(user_id=user_info)):
+#        god = True
+#
+#    return render(request, 'event/my_event.html', {'god': god})
