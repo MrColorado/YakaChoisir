@@ -32,10 +32,11 @@ urlpatterns = [
     path('user_settings/', user_views.user_information, name='settings'),
     path('user_settings/', user_views.modifyUserinfo, name='modifyUserinfo'),
     path('user/', user_views.modifyUserinfoV2, name='modifyUserinfoV2'),
-    path('my_event/', user_views.is_god, name='my_event'),
+    #path('my_event/', user_views.is_god, name='my_event'),
 
     path('evenements/', event_views.event, name='event'),
     path('creation_evenement/', event_views.create_event, name='create_event'),
+    path('change_event/<int:event_id>/', event_views.modify_event, name='modify_event'),
     path('evenements/<int:event_id>/', event_views.specific_event, name='specific_event'),
     path('inscription/<int:current_event>/', event_views.register, name='register'),
     path('mes_evenements/', event_views.my_event, name='my_event'),
