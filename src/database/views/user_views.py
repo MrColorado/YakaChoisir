@@ -34,5 +34,4 @@ def modifUser(request):
         user_to_modifiy.save()
     else:
         form = modifyUser()
-    assos = Association.objects.all()
-    return render(request, 'user_settings/user_settings.html', locals(), {'assos': assos})
+    return render(request, 'user_settings/user_settings.html', {})
