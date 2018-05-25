@@ -5,7 +5,7 @@ from database.models import myUser
 from database.models import Members
 from database.models import AssociationsManager
 from database.models import SystemAdmin
-from database.forms import modifyUser
+from database.forms import *
 
 
 @login_required
@@ -27,14 +27,30 @@ def is_god(request):
 
 
 @login_required
-def modifyUser(request):
+def modifyUserinfo(request):
     print("yolo")
 
     if request.method == 'POST':
+
         form = modifyUser(request.POST)
-        user_to_modifiy = myUser.objects.get(user=request.user)
-        user_to_modifiy.mail_secondary = form.data['secondary_email']
-        user_to_modifiy.save()
+        user_to_modify = myUser.objects.get(user=request.user)
+        user_to_modify.mail_secondary = form.data['secondary_email']
+        user_to_modify.save()
         print("yolo")
 
-    return render(request, 'user_settings/test.html', {'form' : form})
+    return render(request, 'user_settings/user_settings.html', {})
+
+def modifyUserinfoV2(request):
+    print("testest")
+    if request.method == 'POST':
+        form = modifyV2(request.POST)
+        if form.is_valid():
+            user_to_modify = myUser.objects.get(user=request.user)
+            user_to_modify.mail_secondary = 'ylolooolo@epita.fr'
+            user_to_modify.save()
+            return render(request, 'user_settings/user_settings.html')
+        else:
+            return render(request,'not_found.html')
+    else:
+        form = modifyV2(request.POST)
+        return render(request, 'user_settings/user_settings.html', {'form': form})

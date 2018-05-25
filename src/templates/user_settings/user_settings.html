@@ -44,8 +44,12 @@
     </div>
 
 
+     <form action="{% url 'modifyUserinfoV2' %}" method="post" >
+    {% csrf_token %}
+                 <h4> modifier vos informations</h4>
+                 <input type="text" name="mail_secondary" value="{{ form.mail_secondary }}">
+         <input type="submit" value="valider">
+</form>
 
-
-    <a href="{% url 'modifyUser' %}"> YOLO </a></a>
 
 {% endblock %}
