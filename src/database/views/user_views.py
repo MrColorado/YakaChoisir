@@ -13,6 +13,9 @@ def user_information(request):
     return render(request, 'user_settings/user_settings.html', {'user_info': user_info})
 
 '''
+=======
+
+>>>>>>> [create_event] write the beginning of the create event function
 @login_required
 def modifyUserinfo(request):
     if request.method == 'POST':
@@ -43,15 +46,5 @@ def user_modify(request):
             return render(request,'not_found.html')
     else:
         form = modifyV2(request.POST)
+<<<<<<< HEAD
         return render(request, 'user_settings/user_settings.html', {'form': form})'''
-
-#@login_required
-#def is_god(request):
-#    user_info = myUser.objects.get(user=request.user)
-#    members = Members.objects.filter(user_id=user_info)
-#    god = False
-#    print (SystemAdmin.objects.filter(user_id=user_info))
-#    if (SystemAdmin.objects.filter(user_id=user_info) or AssociationsManager.objects.filter(user_id=user_info)):
-#        god = True
-#
-#    return render(request, 'event/my_event.html', {'god': god})
