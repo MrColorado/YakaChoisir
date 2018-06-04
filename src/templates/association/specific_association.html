@@ -36,8 +36,14 @@
         <div class="container" id="specific_event_container">
             <div class="row justify-content-center">
                 <div class="col-sm-6">
-                    <img id="specific_event_img" src="{{ res_asso.first.photo.url }}">
+
+                {% if res_asso.first.photo %}
+                    <img src="{{res_asso.photo.url}}" id="event_img">
+                {% else %}
+                    <img src="{% static "img/lonely_kitten.jpg" %}" id="event_img">
+                {% endif %}
                 </div>
+
                 <div class="col-sm-12" id="specific_event_col">
                     <h1> {{ res_asso.first.name }}</h1>
                     <p>Description: {{ res_asso.first.description }}</p>

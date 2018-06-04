@@ -41,7 +41,7 @@
                      <div class="d-flex">
                          {% if e.photo %}
                             <a href="{% url 'specific_association' e.id %}">
-                                <img src="{{e.photo.url}}" id="event_img">
+                                <img src="{{ e.photo.url }}" id="event_img">
                             </a>
                          {% else %}
                             <a href="{% url 'specific_association' e.id %}">
