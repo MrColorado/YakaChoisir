@@ -47,4 +47,5 @@ def user_modify(request):
     else:
         form = modifyV2(request.POST)
 <<<<<<< HEAD
+<<<<<<< HEAD
         return render(request, 'user_settings/user_settings.html', {'form': form})'''
