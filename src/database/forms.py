@@ -37,27 +37,34 @@ class createEventForm(forms.Form):
 
 class modifyEventForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        self.res_event = kwargs.pop(self, 'res_event')
+        event = kwargs.pop('event')
         super(modifyEventForm, self).__init__(*args, **kwargs)
+        self.fields['association_name'].widget = forms.TextInput(attrs={'class': 'form-control',
+                                                            'value': event.association_id})
         self.fields['title'].widget = forms.TextInput(attrs={'class': 'form-control',
-                                                          'value': self.res_event})
+                                                            'value': event.title})
+        self.fields['description'].widget = forms.Textarea(attrs={'class': 'form-control',
+                                                            'placeholder': event.description})
+        self.fields['price'].widget = forms.NumberInput(attrs={'class': 'form-control',
+                                                            'value': event.price})
+        self.fields['place'].widget = forms.TextInput(attrs={'class': 'form-control',
+                                                               'value': event.place})
+        self.fields['size_intern'].widget = forms.NumberInput(attrs={'class': 'form-control',
+                                                            'value': event.size_intern})
+        self.fields['size_extern'].widget = forms.NumberInput(attrs={'class': 'form-control',
+                                                            'value': event.size_extern})
+        self.fields['date_begin'].widget = forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local',
+                                                            'default': event.date_begin})
 
 
-    #association_name = forms.Textarea(widget=forms.Textarea(attrs={'class': 'form-control'
-     #                                                              }))
-
+    association_name = forms.CharField()
     title = forms.CharField()
-    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
-    price = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control',
-                                                               'value': '0'}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
-    place = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    size_intern = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control',
-                                                                     'value': '100'}))
-    size_extern = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control',
-                                                                     'value': '100'}))
-    date_begin = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
-                                                                       'type': 'datetime-local'}))
+    description = forms.CharField()
+    price = forms.DecimalField()
+    place = forms.CharField()
+    size_intern = forms.IntegerField()
+    size_extern = forms.IntegerField()
+    date_begin = forms.DateTimeField()
     date_end = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
                                                                      'type': 'datetime-local'}))
     date_deadline = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',

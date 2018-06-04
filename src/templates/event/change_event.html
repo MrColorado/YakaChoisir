@@ -2,7 +2,7 @@
 
 {% block body %}
 <style>
-    #create_event{
+    #modify_event{
         margin-top: 2%;
         display: flex;
         justify-content: center;
@@ -17,9 +17,10 @@
 
     {% if creer %}l'event a ete changer!{% endif %}
 
+    <form action="{% url 'modify_event' event_id %}" method="post">
     {% csrf_token %}
 
-    <div class="container" id="create_event">
+    <div class="container" id="modify_event">
     <div class="container">
     <h1> Modifiez l'evenement</h1></div>
         <div class="container" id="form">
