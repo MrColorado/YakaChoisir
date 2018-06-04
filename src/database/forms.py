@@ -5,6 +5,7 @@ from database.models import myUser
 from django.forms import ModelForm
 from database.models import myUser
 
+
 class createEventForm(forms.Form):
     asso_list = []
     for a in Association.objects.all():
@@ -51,10 +52,10 @@ class member_list(forms.Form):
     for m in myUser.objects.all():
         members.append((m.id, m.user.email))
     new_member = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
-   'class': 'form-control',
-    'value': 'Utilisateur'
-    }
-    ), choices=members)
+        'class': 'form-control',
+        'value': 'Utilisateur'
+        }
+        ), choices=members)
     role = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
@@ -63,15 +64,13 @@ class modifyUser(forms.Form):
     GENDER_OPTIONS = (
         ('Male', 'M'),
         ('Female', 'F'),
-    )
+        )
     gender = forms.MultipleChoiceField(widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Gender'
-    }), choices=GENDER_OPTIONS)
+        }), choices=GENDER_OPTIONS)
 
 
 class modifyV2(forms.Form):
     mail_secondary = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
     gender = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-
-

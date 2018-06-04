@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
     'database',
     'util',
-]
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    ]
 
 ROOT_URLCONF = 'billeterie.urls'
 
@@ -60,7 +60,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-        ],
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,10 +70,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
-            ],
+                ],
+            },
         },
-    },
-]
+    ]
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
@@ -81,7 +81,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',  # for Google authentication
     'epita_connect.backend.EpitaOpenIdConnect',  # for OpenId cri Epita authentification
     'django.contrib.auth.backends.ModelBackend',
-)
+    )
 
 WSGI_APPLICATION = 'billeterie.wsgi.application'
 
@@ -92,8 +92,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -101,17 +101,17 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+        },
+    ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -133,16 +133,15 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-]
+    ]
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='207735899591-d34tqq7bvnk521ks4lrv825pfqopnos6.apps.googleusercontent.com'  #Paste CLient Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'WWY5kMbRv9Y1UWuGoTd8eeSw' #Paste Secret Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '207735899591-d34tqq7bvnk521ks4lrv825pfqopnos6.apps.googleusercontent.com'  # Paste
+# CLient Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'WWY5kMbRv9Y1UWuGoTd8eeSw'  # Paste Secret Key
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_EPITA_KEY = '031021'
@@ -150,7 +149,6 @@ SOCIAL_AUTH_EPITA_SECRET = '97593354782061112fdeab765fd8faf9694903adfd8fa2d345a4
 SOCIAL_AUTH_EPITA_SCOPE = ['epita']
 SOCIAL_AUTH_EPITA_EXTRA_DATA = ['promo']
 SOCIAL_AUTH_EPITA_BETA = False
-
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
