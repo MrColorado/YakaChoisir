@@ -89,6 +89,7 @@ class member_list(forms.Form):
     members = []
     for m in myUser.objects.all():
         members.append((m.id, m.user.email))
+    members.sort(key=lambda tup: tup[1])
     new_member = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Utilisateur'
