@@ -98,7 +98,7 @@ class add_member_form(forms.Form):
         }
         ), choices=members)
 
-    s = [("Président", "Président"), ("Vice-Président", "Vice-Président"), ("Trésorier", "Trésorier"),
+    s = [("Retirer", "Retirer"), ("Président", "Président"), ("Vice-Président", "Vice-Président"), ("Trésorier", "Trésorier"),
          ("Secrétaire", "Secrétaire"), ("Membre", "Membre")]
     role = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',

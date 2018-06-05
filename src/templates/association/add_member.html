@@ -30,6 +30,9 @@
     margin-top: 5%;
 }
 </style>
+    {% for e in current_member %}
+        <p>{{ e }}</p>
+    {% endfor %}
     <form action="{% url "add_member" res_asso.id %}" method="post">
         {% csrf_token %}
         <div class="container" id="create_event">

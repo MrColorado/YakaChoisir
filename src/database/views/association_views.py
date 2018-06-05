@@ -30,18 +30,31 @@ def specific_association(request, asso_id):
 
 def add_members(request, asso_id):
     res_asso = Association.objects.get(id=asso_id)
+    current_member = []
+    for c in Members.objects.all():
+        if c.association_id == res_asso:
+            current_member.append(c.user_id.user.first_name + " " + c.user_id.user.last_name + " " + c.role)
+    print(current_member)
     if request.method == 'POST':
         form = add_member_form(request.POST)
         user_id = myUser.objects.get(id=form.data['new_member'])
         role = form.data['role']
+        if role == "Retirer":
+            Members.objects.filter(association_id=res_asso, user_id=user_id).delete()
+            return render(request, 'association/specific_association.html', locals(),
+                          {'current_member': current_member, 'res_asso': res_asso})
         member = Members(user_id=user_id,
                          association_id=Association.objects.get(id=asso_id),
                          role=role
                          )
+        if len(Members.objects.filter(association_id=res_asso, user_id=user_id)):
+            member = Members.objects.get(association_id=res_asso, user_id=user_id)
+            member.role = role
         member.save()
-        return render(request, 'association/specific_association.html', {'res_asso': res_asso})
+        return render(request, 'association/specific_association.html', locals(),
+                      {'current_member': current_member, 'res_asso': res_asso})
     form = add_member_form()
-    return render(request, 'association/add_member.html', locals(), {'res_asso': res_asso})
+    return render(request, 'association/add_member.html', locals(), {'current_member': current_member, 'res_asso': res_asso})
 
 
 def modify_association(request, asso_id):
