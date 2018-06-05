@@ -41,11 +41,11 @@ def specific_association(request, asso_id):
 def create_association(request):
     already = False
     if request.method == 'POST':
-        form = createAssociationForm(request.POST)
+        form = createAssociationForm(request.POST, request.FILES)
         name = form.data['name']
         description = form.data['description']
         date_creation = form.data['date_creation']
-        photo = form.data['photo']
+        photo = request.FILES['photo']
         site = form.data['site']
         mail = form.data['mail']
         statut = form.data['statut']  # status juridique

@@ -31,7 +31,7 @@
 }
 </style>
 
-<form action="{% url "create_association" %}" method="post">
+<form action="{% url "create_association" %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {% if already %}
