@@ -44,6 +44,7 @@ urlpatterns = [
     path('associations/', association_views.association, name='association'),
     path('creation_association/', association_views.create_association, name='create_association'),
     path('association/<int:asso_id>/', association_views.specific_association, name='specific_association'),
+    path('association/<int:asso_id>/modification', association_views.modify_association, name='modify_association'),
     path('mes_associations/', association_views.my_association, name='my_association'),
 
     path('accounts/', include('django.contrib.auth.urls')),
