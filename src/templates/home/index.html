@@ -21,19 +21,23 @@
 
             {% for e in first %}
                 <div class="carousel-item active">
+                    <a href="{% url 'specific_event' e.id %}">
                     <img src="{{ e.photo.url }}" alt="photo1">
                     <div class="carousel-caption">
                         <h3>{{ e.title }}</h3>
                     </div>
+                    </a>
                 </div>
             {% endfor %}
         {% for e in events %}
             <div class="carousel-item">
+                <a href="{% url 'specific_event' e.id %}">
                 <img src="{{ e.photo.url }}" alt="photo1">
                 <div class="carousel-caption">
                     <h3>{{ e.title }}</h3>
                     <!--<p>L'autruchie c'est mieux</p>-->
                 </div>
+                </a>
             </div>
         {% endfor %}
 
