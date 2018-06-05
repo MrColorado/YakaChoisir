@@ -2,8 +2,6 @@ from django import forms
 from database.models import Association
 from database.models import myUser
 
-
-
 class createEventForm(forms.Form):
 
     #if forms.is_valid() :
