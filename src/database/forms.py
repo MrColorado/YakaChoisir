@@ -82,7 +82,12 @@ class createAssociationForm(forms.Form):
     photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
                                                            'class': 'form-control'}))
     site = forms.URLField(widget=forms.URLInput(attrs={'class': 'form-control'}))
-    statut = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    s = [("Loi 1901", "Loi 1901"), ("Junior entreprise", "Junior entreprise")]
+    statut = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
+        'class': 'form-control',
+        'value': 'Utilisateur'
+        }
+        ), choices=s)
 
 
 class member_list(forms.Form):
@@ -95,7 +100,13 @@ class member_list(forms.Form):
         'value': 'Utilisateur'
         }
         ), choices=members)
-    role = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    s = [("Président", "Président"), ("Vice-Président", "Vice-Président"), ("Trésorier", "Trésorier"),
+         ("Secrétaire", "Secrétaire"), ("Membre", "Membre")]
+    role = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
+        'class': 'form-control',
+        'value': 'Utilisateur'
+        }
+        ), choices=s)
 
 
 class modifyUser(forms.Form):
