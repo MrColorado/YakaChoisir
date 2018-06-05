@@ -5,8 +5,8 @@ from database.models import myUser
 from database.models import Members
 
 from database.forms import createAssociationForm
-from database.forms import spec_asso
 from database.forms import mod_asso
+from database.forms import add_member_form
 
 
 def association(request):
@@ -24,8 +24,14 @@ def my_association(request):
 
 
 def specific_association(request, asso_id):
+    res_asso = Association.objects.get(id=asso_id)
+    return render(request, 'association/specific_association.html', {'res_asso': res_asso})
+
+
+def add_members(request, asso_id):
+    res_asso = Association.objects.get(id=asso_id)
     if request.method == 'POST':
-        form = spec_asso(request.POST)
+        form = add_member_form(request.POST)
         user_id = myUser.objects.get(id=form.data['new_member'])
         role = form.data['role']
         member = Members(user_id=user_id,
@@ -33,10 +39,9 @@ def specific_association(request, asso_id):
                          role=role
                          )
         member.save()
-        return render(request, 'home/index.html')
-    form = spec_asso()
-    res_asso = Association.objects.get(id=asso_id)
-    return render(request, 'association/specific_association.html', locals(), {'res_asso': res_asso})
+        return render(request, 'association/specific_association.html', {'res_asso': res_asso})
+    form = add_member_form()
+    return render(request, 'association/add_member.html', locals(), {'res_asso': res_asso})
 
 
 def modify_association(request, asso_id):
@@ -53,7 +58,7 @@ def modify_association(request, asso_id):
         if form.data['statut'] != "":
             asso.status = form.data['statut']
         asso.save()
-        return render(request, 'home/index.html')
+        return render(request, 'association/specific_association.html', {'res_asso': asso})
     form = mod_asso()
     asso = Association.objects.get(id=asso_id)
     return render(request, 'association/modify_association.html', locals(), {'asso': asso})

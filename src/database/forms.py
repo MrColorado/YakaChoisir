@@ -2,9 +2,6 @@ from django import forms
 from database.models import Association
 from database.models import myUser
 
-from django.forms import ModelForm
-from database.models import myUser
-
 
 class createEventForm(forms.Form):
 
@@ -90,7 +87,7 @@ class createAssociationForm(forms.Form):
         ), choices=s)
 
 
-class spec_asso(forms.Form):
+class add_member_form(forms.Form):
     members = []
     for m in myUser.objects.all():
         members.append((m.id, m.user.email))
