@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block panel %}
+    <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel"
+         xmlns:background-image="http://www.w3.org/1999/xhtml" xmlns:background-image="http://www.w3.org/1999/xhtml">
+        <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
+        <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
+        {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
+        {% endif %}
+        <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
+        {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes associations </a>
+            <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
+        {% endif %}
+    </nav>
+{% endblock %}
+
+{% block body %}
+<style>
+    #create_event{
+        margin-top: 2%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color: #0d2436;
+        font-family: ralewayExtraBold;
+    }
+#form{
+    margin-top: 5%;
+}
+</style>
+    <form action="{% url "add_member" res_asso.id %}" method="post">
+        {% csrf_token %}
+        <div class="container" id="create_event">
+            <div class="container" id="form">
+                <div class="form-group row">
+                    <label for="example-number-input" class="col-2 col-form-label">Adresse mail du nouveau membre :</label>
+                    {{ form.new_member }}
+                </div>
+                <div class="form-group row">
+                    <label for="example-number-input" class="col-2 col-form-label">Rôle dans l'association :</label>
+                    {{ form.role }}
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Valider" />
+        </div>
+    </form>
+{% endblock %}
