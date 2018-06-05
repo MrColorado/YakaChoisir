@@ -34,13 +34,13 @@
                  <div class="col-sm-4">
                      <div class="d-flex">
                          <a href="{% url 'specific_event' e.id %}">
-                             <img src="{{e.photo.url}}" id="event_img">
+                             <img src="{{ e.photo.url }}" id="event_img">
                          </a>
                      </div>
                  </div>
                  <div class="col-sm-8" id="col_event">
                      <a href="{% url 'specific_event' e.id %}" style="color: black; text-decoration: none">
-                         <h1>{{ e.title}}</h1>
+                         <h1>{{ e.first.title }}</h1>
                      </a>
                      <div style="padding-top: 10px">
                          <p> Description de l'événement: {{ e.description }}</p>
