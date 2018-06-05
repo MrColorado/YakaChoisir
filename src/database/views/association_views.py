@@ -5,7 +5,8 @@ from database.models import myUser
 from database.models import Members
 
 from database.forms import createAssociationForm
-from database.forms import member_list
+from database.forms import spec_asso
+from database.forms import mod_asso
 
 
 def association(request):
@@ -24,7 +25,7 @@ def my_association(request):
 
 def specific_association(request, asso_id):
     if request.method == 'POST':
-        form = member_list(request.POST)
+        form = spec_asso(request.POST)
         user_id = myUser.objects.get(id=form.data['new_member'])
         role = form.data['role']
         member = Members(user_id=user_id,
@@ -33,12 +34,29 @@ def specific_association(request, asso_id):
                          )
         member.save()
         return render(request, 'home/index.html')
-    else:
-        form = member_list()
-        res_asso = Association.objects.filter(id=asso_id)
-        if len(res_asso):
-            return render(request, 'association/specific_association.html', locals(), {'res_asso': res_asso})
-    return render(request, 'not_found.html')
+    form = spec_asso()
+    res_asso = Association.objects.get(id=asso_id)
+    return render(request, 'association/specific_association.html', locals(), {'res_asso': res_asso})
+
+
+def modify_association(request, asso_id):
+    if request.method == 'POST':
+        form = mod_asso(request.POST, request.FILES)
+        asso = Association.objects.get(id=asso_id)
+        if form.data['description'] != "":
+            asso.description = form.data['description']
+        asso.photo = request.FILES['photo']
+        if form.data['site'] != "":
+            asso.site = form.data['site']
+        if form.data['mail'] != "":
+            asso.mail = form.data['mail']
+        if form.data['statut'] != "":
+            asso.status = form.data['statut']
+        asso.save()
+        return render(request, 'home/index.html')
+    form = mod_asso()
+    asso = Association.objects.get(id=asso_id)
+    return render(request, 'association/modify_association.html', locals(), {'asso': asso})
 
 
 def create_association(request):
@@ -64,7 +82,5 @@ def create_association(request):
             return render(request, 'association/create_association.html', locals())
         assoc.save()
         return render(request, 'home/index.html')
-    else:
-        form = createAssociationForm()
-    assos = Association.objects.all()
+    form = createAssociationForm()
     return render(request, 'association/create_association.html', locals())

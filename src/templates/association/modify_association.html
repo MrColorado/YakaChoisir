@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block panel %}
+    <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel"
+         xmlns:background-image="http://www.w3.org/1999/xhtml" xmlns:background-image="http://www.w3.org/1999/xhtml">
+        <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
+        <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
+        {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
+        {% endif %}
+        <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
+        {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes associations </a>
+            <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
+        {% endif %}
+    </nav>
+{% endblock %}
+
+{% block body %}
+<style>
+    #create_event{
+        margin-top: 2%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color: #0d2436;
+        font-family: ralewayExtraBold;
+    }
+#form{
+    margin-top: 5%;
+}
+</style>
+
+<form action="{% url "modify_association" asso.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="container" id="create_event">
+    <div class="container">
+        <h1> Modifier les informations votre association</h1>
+    </div>
+            <div class="form-group row">
+                <label for="exampleTextarea">Description :</label>
+                {{ form.description }}
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Adresse mail de l'association : </label>
+                <div class="col-10">
+                    {{ form.mail }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="exampleInputFile">Logo de l'association :</label>
+                {{ form.photo }}
+                <small id="fileHelp" class="form-text text-muted">Importer le logo de votre association en .jpg</small>
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Site web de l'association : </label>
+                <div class="col-10">
+                    {{ form.site }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Status juridique de l'association : </label>
+                <div class="col-10">
+                    {{ form.statut }}
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit" />
+    </div>
+</form>
+{% endblock %}

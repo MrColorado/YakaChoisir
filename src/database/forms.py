@@ -52,7 +52,7 @@ class createAssociationForm(forms.Form):
         ), choices=s)
 
 
-class member_list(forms.Form):
+class spec_asso(forms.Form):
     members = []
     for m in myUser.objects.all():
         members.append((m.id, m.user.email))
@@ -62,9 +62,24 @@ class member_list(forms.Form):
         'value': 'Utilisateur'
         }
         ), choices=members)
+
     s = [("Président", "Président"), ("Vice-Président", "Vice-Président"), ("Trésorier", "Trésorier"),
          ("Secrétaire", "Secrétaire"), ("Membre", "Membre")]
     role = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
+        'class': 'form-control',
+        'value': 'Utilisateur'
+        }
+        ), choices=s)
+
+
+class mod_asso(forms.Form):
+    description = forms.CharField(initial="", required=False, widget=forms.Textarea(attrs={'class': 'form-control'}))
+    mail = forms.EmailField(initial="", required=False, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    photo = forms.ImageField(initial="", required=True, widget=forms.FileInput(attrs={'type': 'file',
+                                                           'class': 'form-control'}))
+    site = forms.URLField(initial="", required=False, widget=forms.URLInput(attrs={'class': 'form-control'}))
+    s = [("", ""), ("Loi 1901", "Loi 1901"), ("Junior entreprise", "Junior entreprise")]
+    statut = forms.MultipleChoiceField(required=False, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Utilisateur'
         }
