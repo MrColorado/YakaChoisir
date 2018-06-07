@@ -133,7 +133,6 @@ class modifyUser(forms.Form):
         ('', ''),
         ('Male', 'M'),
         ('Female', 'F'),
-#<<<<<<< HEAD
     ]
     gender = forms.MultipleChoiceField(required=False, widget=forms.Select(attrs={
         'class': 'form-control',
