@@ -24,8 +24,8 @@ def modifyUserinfo(request):
         user_to_modify = myUser.objects.get(user=request.user)
         user_to_modify.mail_secondary = form.data['secondary_email']
         user_to_modify.save()
+<<<<<<< HEAD
 '''
-
 def user_modify(request):
     user_to_modify = myUser.objects.get(user=request.user)
     print(user_to_modify)
