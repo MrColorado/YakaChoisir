@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block panel %}
+    <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
+        <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
+        <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
+        <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
+        <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
+        <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes associations </a>
+        <a class="nav-item nav-link active" href="{% url 'settings' %}"> Mon compte </a>
+    </nav>
+{% endblock %}
+
+{% block body %}
+<style>
+    #create_event{
+        margin-top: 2%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color: #0d2436;
+        font-family: ralewayExtraBold;
+    }
+#form{
+    margin-top: 5%;
+}
+</style>
+
+<form action="{% url "user_modify" %}" method="post">
+    {% csrf_token %}
+    <div class="container" id="create_event">
+        <h4> Modifier vos informations personelles</h4>
+        <div class="container" id="form">
+            <div class="form-group row">
+                <label for="exampleTextarea">Email secondaire :</label>
+                {{ form.mail_secondary }}
+            </div>
+            <div class="form-group row">
+                <label for="exampleTextarea">Genre :</label>
+                {{ form.gender }}
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Enregistrer" />
+    </div>
+</form>
+{% endblock %}

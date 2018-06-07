@@ -13,50 +13,30 @@
 {% endblock %}
 
 {% block body %}
+
     <div class="container-fluid">
         <div class="row justify-content-around">
             <div class="col-xs-12 col-md-8">
                 <div class="d-flex" id="test">
                     <h3> Informations personnels</h3>
                     <ul>
-                        <li> nom : {{ user_info.user.last_name }} </li>
-                        <li> prenom : {{ user_info.user.first_name }}</li>
-                        <li> pseudo : {{ user_info.user.username }} </li>
-                        <li> genre : {{ user_info.gender }}</li>
-                        <li> mail principale : {{ user_info.user.email }}</li>
-                        <li> mail secondaire  : {{ user_info.mail_secondary }}</li>
-                        <li> externe </li>
-                        <li> date d'inscription :  {{ user_info.user.last_login.date }}</li>
+                        <li> Nom : {{ user_info.user.last_name }} </li>
+                        <li> Prenom : {{ user_info.user.first_name }}</li>
+                        <li> Pseudo : {{ user_info.user.username }} </li>
+                        <li> Genre : {{ user_info.gender }}</li>
+                        <li> Mail principale : {{ user_info.user.email }}</li>
+                        <li> Mail secondaire  : {{ user_info.mail_secondary }}</li>
+                        <li> Date d'inscription :  {{ user_info.user.last_login.date }}</li>
                     </ul>
-                </div>
-            </div>
-
-
-            <div class="col-xs-12 col-md-2" style="border: 3px dashed #ffc107">
-                <div class="d-flex" id="test1">
-                    <div class="d-flex" id="test">
-                        <img src="{% static 'img/unknown.png' %}">
-                        <p>Admin</p>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-     <form action="{% url 'modifyUserinfoV2' %}" method="post" >
-    {% csrf_token %}
-                 <h4> modifier vos informations</h4>
-         Email Secondaire :
-                 <input type="text" name="mail_secondary" value="{{ form.mail_secondary }}"><br>
-         Genre:
-                <input type="text" name="gender" value="{{ form.gender }}"><br>
-         Externe:
-         <br>
-         Date d'inscription:
-         <br>
-         <input type="submit" value="valider">
-</form>
+    <div class="d-flex" id="test">
+        <a href="{% url "user_modify" %}">
+            <button class="btn btn-success">Modifier vos information personelles</button>
+        </a>
+    </div>
 
 
 {% endblock %}

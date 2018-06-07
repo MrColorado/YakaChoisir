@@ -26,20 +26,18 @@ def modifyUserinfo(request):
         user_to_modify.save()
         print("yolo")
 
-    return render(request, 'user_settings/user_settings.html', {})
 
-def modifyUserinfoV2(request):
-    print("testest")
+def user_modify(request):
+    user_to_modify = myUser.objects.get(user=request.user)
+    print(user_to_modify)
     if request.method == 'POST':
-        form = modifyV2(request.POST)
-        if form.is_valid():
-            user_to_modify = myUser.objects.get(user=request.user)
+        form = modifyUser(request.POST)
+        print(form.is_valid)
+        if form.data['mail_secondary'] != "":
             user_to_modify.mail_secondary = form.data['mail_secondary']
+        if form.data['gender'] != "":
             user_to_modify.gender = form.data['gender']
-            user_to_modify.save()
-            return render(request, 'user_settings/user_settings.html', {'user_info': user_to_modify})
-        else:
-            return render(request,'not_found.html')
-    else:
-        form = modifyV2(request.POST)
-        return render(request, 'user_settings/user_settings.html', {'form': form})
+        user_to_modify.save()
+        return render(request, 'user_settings/user_settings.html', {'user_info': user_to_modify})
+    form = modifyUser()
+    return render(request, 'user_settings/modify_user.html', locals(), {'user_info': user_to_modify})
