@@ -10,8 +10,8 @@ class createEventForm(forms.Form):
     association_name = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Association'
-        }
-        ), choices=asso_list)
+    }
+    ), choices=asso_list)
 
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
@@ -45,8 +45,8 @@ class createAssociationForm(forms.Form):
     statut = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Utilisateur'
-        }
-        ), choices=s)
+    }
+    ), choices=s)
 
 
 class add_member_form(forms.Form):
@@ -57,44 +57,42 @@ class add_member_form(forms.Form):
     new_member = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Utilisateur'
-        }
-        ), choices=members)
+    }
+    ), choices=members)
 
-    s = [("Retirer", "Retirer"), ("Président", "Président"), ("Vice-Président", "Vice-Président"), ("Trésorier", "Trésorier"),
+    s = [("Retirer", "Retirer"), ("Président", "Président"), ("Vice-Président", "Vice-Président"),
+         ("Trésorier", "Trésorier"),
          ("Secrétaire", "Secrétaire"), ("Membre", "Membre")]
     role = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Utilisateur'
-        }
-        ), choices=s)
+    }
+    ), choices=s)
 
 
 class mod_asso(forms.Form):
     description = forms.CharField(initial="", required=False, widget=forms.Textarea(attrs={'class': 'form-control'}))
     mail = forms.EmailField(initial="", required=False, widget=forms.EmailInput(attrs={'class': 'form-control'}))
     photo = forms.ImageField(initial="", required=True, widget=forms.FileInput(attrs={'type': 'file',
-                                                           'class': 'form-control'}))
+                                                                                      'class': 'form-control'}))
     site = forms.URLField(initial="", required=False, widget=forms.URLInput(attrs={'class': 'form-control'}))
     s = [("", ""), ("Loi 1901", "Loi 1901"), ("Junior entreprise", "Junior entreprise")]
     statut = forms.MultipleChoiceField(required=False, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Utilisateur'
-        }
-        ), choices=s)
+    }
+    ), choices=s)
 
 
 class modifyUser(forms.Form):
-    secondary_email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    GENDER_OPTIONS = (
+    mail_secondary = forms.EmailField(initial="", required=False, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    GENDER_OPTIONS = [
+        ('', ''),
         ('Male', 'M'),
         ('Female', 'F'),
-        )
-    gender = forms.MultipleChoiceField(widget=forms.Select(attrs={
+    ]
+    gender = forms.MultipleChoiceField(required=False, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Gender'
-        }), choices=GENDER_OPTIONS)
-
-
-class modifyV2(forms.Form):
-    mail_secondary = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    gender = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    }
+    ), choices=GENDER_OPTIONS)
