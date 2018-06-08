@@ -24,7 +24,7 @@
             </div>
             <div class="col-sm-12" id="specific_event_col">
                 <h1> {{ res_event.first.title }}</h1>
-                <p>Description: {{ res_event.fisrt.description }}</p>
+                <p>Description: {{ res_event.first.description }}</p>
                 <p>Date de début: {{ res_event.first.date_begin }}</p>
                 <p>Date de fin: {{ res_event.first.date_end }} </p>
                 <p>Date deadline: {{ res_event.first.date_deadline }}</p>
@@ -36,6 +36,11 @@
                 <div class="d-flex" id="test">
                     <a href="{% url 'register' res_event.first.id %}">
                         <button class="btn btn-success">Inscription</button>
+                    </a>
+                </div>
+                <div class="d-flex" id="test">
+                    <a href="{% url 'modify_event' res_event.first.id %}">
+                        <button class="btn btn-success">Modifier L'evenemt</button>
                     </a>
                 </div>
             </div>

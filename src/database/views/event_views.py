@@ -6,6 +6,8 @@ from database.models import Event, myUser
 from database.models import Attend
 from database.models import Association
 from database.forms import createEventForm
+from database.forms import modifyEventForm
+from database.models import Members
 
 
 def event(request):
@@ -13,7 +15,8 @@ def event(request):
     allEvents = Event.objects.all()
     for e in allEvents:
         if e.validated:
-            events.append(e)
+            if e.date_begin >= timezone.now():
+                events.append(e)
     return render(request, 'event/page_event.html', {'events': events})
 
 
@@ -26,13 +29,18 @@ def specific_event(request, event_id):
 
 @login_required
 def my_event(request):
-    events = []
     my_user = myUser.objects.get(user=request.user)
+    members = Members.objects.filter(user_id=my_user)
+    god = False
+    if members:
+        god = True
+
+    events = []
     event_id = Attend.objects.filter(user_id=my_user)
     for e in event_id:
-        if e.event_id.date_begin > timezone.now():
+        if e.event_id.date_begin >= timezone.now():
             events.append(e.event_id)
-    return render(request, 'event/my_event.html/', {'my_event': events})
+    return render(request, 'event/my_event.html/', {'my_event': events, 'god':god})
 
 
 @login_required
@@ -87,4 +95,23 @@ def create_event(request):
     assos = Association.objects.all()
     return render(request, 'event/create_event.html', locals(), {'assos': assos})
 
-
+@login_required
+def modify_event(request, event_id):
+    res_event = Event.objects.get(id=event_id)
+    if request.method == 'POST':
+        form = createEventForm(request.POST)
+        res_event.title = form.data['title']
+        res_event.description = form.data['description']
+        res_event.price = form.data['price']
+        res_event.place = form.data['place']
+        res_event.size_intern = form.data['size_intern']
+        res_event.size_extern = form.data['size_extern']
+        res_event.date_begin = form.data['date_begin']
+        res_event.date_end = form.data['date_end']
+        res_event.date_deadline = form.data['date_deadline']
+        res_event.photo = form.data['photo']
+        res_event.save()
+        creer = True
+    else:
+        form = modifyEventForm(request.GET, event=res_event)
+    return render(request, 'event/change_event.html', locals(), {'event_id': event_id})

@@ -30,11 +30,14 @@ def specific_association(request, asso_id):
 
 def add_members(request, asso_id):
     res_asso = Association.objects.get(id=asso_id)
+#<<<<<<< HEAD
     current_member = []
     for c in Members.objects.all():
         if c.association_id == res_asso:
             current_member.append(c.user_id.user.first_name + " " + c.user_id.user.last_name + " " + c.role)
     print(current_member)
+#=======
+#>>>>>>> [ASSO] modify add member
     if request.method == 'POST':
         form = add_member_form(request.POST)
         user_id = myUser.objects.get(id=form.data['new_member'])
@@ -51,10 +54,16 @@ def add_members(request, asso_id):
             member = Members.objects.get(association_id=res_asso, user_id=user_id)
             member.role = role
         member.save()
+#<<<<<<< HEAD
         return render(request, 'association/specific_association.html', locals(),
                       {'current_member': current_member, 'res_asso': res_asso})
     form = add_member_form()
     return render(request, 'association/add_member.html', locals(), {'current_member': current_member, 'res_asso': res_asso})
+'''=======
+        return render(request, 'association/specific_association.html', {'res_asso': res_asso})
+    form = add_member_form()
+    return render(request, 'association/add_member.html', locals(), {'res_asso': res_asso})
+>>>>>>> [ASSO] modify add member'''
 
 
 def modify_association(request, asso_id):

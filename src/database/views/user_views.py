@@ -8,21 +8,10 @@ from database.models import SystemAdmin
 from database.forms import *
 
 
-@login_required
-def is_god(request):
-    user_info = myUser.objects.get(user=request.user)
-    members = Members.objects.filter(user_id=user_info)
-    god = False
-    print(SystemAdmin.objects.filter(user_id=user_info))
-    if (SystemAdmin.objects.filter(user_id=user_info) or AssociationsManager.objects.filter(user_id=user_info)):
-        god = True
-    return render(request, 'event/my_event.html', {'god': god})
-
-
 def user_information(request):
     user_info = myUser.objects.get(user=request.user)
     return render(request, 'user_settings/user_settings.html', {'user_info': user_info})
-
+  
 
 def user_modify(request):
     user_to_modify = myUser.objects.get(user=request.user)

@@ -2,8 +2,9 @@ from django import forms
 from database.models import Association
 from database.models import myUser
 
-
 class createEventForm(forms.Form):
+
+    #if forms.is_valid() :
     asso_list = []
     for a in Association.objects.all():
         asso_list.append((a.id, a.name))
@@ -31,6 +32,42 @@ class createEventForm(forms.Form):
     photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
                                                            'class': 'form-control-file'}))
 
+class modifyEventForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        event = kwargs.pop('event')
+        super(modifyEventForm, self).__init__(*args, **kwargs)
+        self.fields['association_name'].widget = forms.TextInput(attrs={'class': 'form-control',
+                                                            'value': event.association_id})
+        self.fields['title'].widget = forms.TextInput(attrs={'class': 'form-control',
+                                                            'value': event.title})
+        self.fields['description'].widget = forms.Textarea(attrs={'class': 'form-control',
+                                                            'placeholder': event.description})
+        self.fields['price'].widget = forms.NumberInput(attrs={'class': 'form-control',
+                                                            'value': event.price})
+        self.fields['place'].widget = forms.TextInput(attrs={'class': 'form-control',
+                                                               'value': event.place})
+        self.fields['size_intern'].widget = forms.NumberInput(attrs={'class': 'form-control',
+                                                            'value': event.size_intern})
+        self.fields['size_extern'].widget = forms.NumberInput(attrs={'class': 'form-control',
+                                                            'value': event.size_extern})
+        self.fields['date_begin'].widget = forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local',
+                                                            'default': event.date_begin})
+
+
+    association_name = forms.CharField()
+    title = forms.CharField()
+    description = forms.CharField()
+    price = forms.DecimalField()
+    place = forms.CharField()
+    size_intern = forms.IntegerField()
+    size_extern = forms.IntegerField()
+    date_begin = forms.DateTimeField()
+    date_end = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
+                                                                     'type': 'datetime-local'}))
+    date_deadline = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
+                                                                          'type': 'datetime-local'}))
+    photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
+                                                           'class': 'form-control-file'}))
 
 class createAssociationForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -96,3 +133,4 @@ class modifyUser(forms.Form):
         'value': 'Gender'
     }
     ), choices=GENDER_OPTIONS)
+    
