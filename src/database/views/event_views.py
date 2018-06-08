@@ -15,7 +15,7 @@ def event(request):
     allEvents = Event.objects.all()
     for e in allEvents:
         if e.validated:
-            if e.date_begin > timezone.now():
+            if e.date_begin >= timezone.now():
                 events.append(e)
     return render(request, 'event/page_event.html', {'events': events})
 
@@ -38,7 +38,7 @@ def my_event(request):
     events = []
     event_id = Attend.objects.filter(user_id=my_user)
     for e in event_id:
-        if e.event_id.date_begin > timezone.now():
+        if e.event_id.date_begin >= timezone.now():
             events.append(e.event_id)
     return render(request, 'event/my_event.html/', {'my_event': events, 'god': god})
 
