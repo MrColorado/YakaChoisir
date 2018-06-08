@@ -1,6 +1,5 @@
 # Custom
 
-.gitignore
 *.pdf
 .idea/
 src/db.*
