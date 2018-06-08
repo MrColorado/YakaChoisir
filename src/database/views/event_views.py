@@ -15,6 +15,7 @@ from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 
+
 def event(request):
     events = []
     allEvents = Event.objects.all()
@@ -27,7 +28,8 @@ def event(request):
 def specific_event(request, event_id):
     res_event = Event.objects.filter(id=event_id)
     if len(res_event):
-        return render(request, 'event/specific_event.html', {'res_event': res_event})
+        return render(request, 'event/specific_event.html',
+                      {'res_event': res_event})
     return render(request, 'not_found.html')
 
 
@@ -47,12 +49,14 @@ def generate_pdf(event):
     buffer = BytesIO()
     p = canvas.Canvas(buffer, pagesize=letter)
     p.setFont('Helvetica', 10)
-    p.drawString(220, y, "PDF generate at "+timezone.now().strftime('%Y-%b-%d'))
+    p.drawString(220, y,
+                 "PDF generate at " + timezone.now().strftime('%Y-%b-%d'))
     p.showPage()
     p.save()
     pdf = buffer.getvalue()
     buffer.close()
     return pdf
+
 
 @login_required
 def register(request, current_event):
@@ -68,9 +72,10 @@ def register(request, current_event):
                         ticket_number="test")
     new_attend.save()
 
-
     obj = "[inscription]" + my_event.title
-    message = "<h1> YOLOLO </h1>"
+    message = "<h1> Votre inscription à l'évènement est enregistrée </h1><br>"
+    message += "Vous pourrez vous rendre à l'évènement avec le ticket transmit en " \
+               "pièce jointe soit imprimé soit présent sur votre téléphone <br>"
     pdf = generate_pdf(my_event)
     # send_mail(
     #     obj,
@@ -79,9 +84,9 @@ def register(request, current_event):
     #     [my_user.user.email],
     #     fail_silently=False,
     # )
-    msg = EmailMessage(obj,message,to=[my_user.user.email])
+    msg = EmailMessage(obj, message, to=[my_user.user.email])
 
-    msg.attach('my_pdf.pdf', pdf, 'application/pdf')
+    msg.attach('ticket.pdf', pdf, 'application/pdf')
 
     msg.content_subtype = "html"
     msg.send()
@@ -121,6 +126,5 @@ def create_event(request):
     else:
         form = createEventForm()
     assos = Association.objects.all()
-    return render(request, 'event/create_event.html', locals(), {'assos': assos})
-
-
+    return render(request, 'event/create_event.html', locals(),
+                  {'assos': assos})
