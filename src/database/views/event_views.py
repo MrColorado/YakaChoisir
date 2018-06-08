@@ -53,9 +53,10 @@ def register(request, current_event):
 
 
     obj = "[inscription]" + my_event.title
+    message = ""
     send_mail(
-        '[YAKACHOISIR] test email',
-        'this a test of sending email ',
+        obj,
+        message,
         'event@epita.fr',
         [my_user.user.email],
         fail_silently=False,
