@@ -9,6 +9,8 @@ from database.forms import createEventForm
 
 import smtplib
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+
 
 def event(request):
     events = []
@@ -37,6 +39,9 @@ def my_event(request):
     return render(request, 'event/my_event.html/', {'my_event': events})
 
 
+def generate_pdf(event):
+
+
 @login_required
 def register(request, current_event):
     my_event = Event.objects.get(id=current_event)
@@ -53,14 +58,17 @@ def register(request, current_event):
 
 
     obj = "[inscription]" + my_event.title
-    message = ""
-    send_mail(
-        obj,
-        message,
-        'event@epita.fr',
-        [my_user.user.email],
-        fail_silently=False,
-    )
+    message = "<h1> YOLOLO </h1>"
+    # send_mail(
+    #     obj,
+    #     message,
+    #     'event@epita.fr',
+    #     [my_user.user.email],
+    #     fail_silently=False,
+    # )
+    msg = EmailMessage(obj,message,to=[my_user.user.email])
+    msg.content_subtype = "html"
+    msg.send()
     return render(request, "event/register.html", {'res_event': my_event})
 
 
