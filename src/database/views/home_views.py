@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import datetime
 import pytz
+from django.http import HttpResponseRedirect
+
 
 from database.models import Event
 
@@ -29,15 +31,9 @@ def home(request):
             cpt = cpt + 1
             continue
 
+    if request.method == 'GET':
+        search = request.GET.get('search_box')
+        if search :
+            return HttpResponseRedirect(search)
 
     return render(request, 'home/index.html', {'events': events, 'first': first, 'numbers': numbers, 'thirty': thirty})
-
-
-'''def searchBar(request):
-    if request.method == 'POST' :
-        e
-    else :
-        e
-
-    return render(request, 'base.html')
-'''

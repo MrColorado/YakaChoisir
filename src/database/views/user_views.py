@@ -26,10 +26,8 @@ def modifyUserinfo(request):
 
 def user_modify(request):
     user_to_modify = myUser.objects.get(user=request.user)
-    print(user_to_modify)
     if request.method == 'POST':
         form = modifyUser(request.POST)
-        print(form.is_valid)
         if form.data['mail_secondary'] != "":
             user_to_modify.mail_secondary = form.data['mail_secondary']
         if form.data['gender'] != "":
@@ -38,13 +36,3 @@ def user_modify(request):
         return render(request, 'user_settings/user_settings.html', {'user_info': user_to_modify})
     form = modifyUser()
     return render(request, 'user_settings/modify_user.html', locals(), {'user_info': user_to_modify})
-#@login_required
-#def is_god(request):
-#    user_info = myUser.objects.get(user=request.user)
-#    members = Members.objects.filter(user_id=user_info)
-#    god = False
-#    print (SystemAdmin.objects.filter(user_id=user_info))
-#    if (SystemAdmin.objects.filter(user_id=user_info) or AssociationsManager.objects.filter(user_id=user_info)):
-#        god = True
-#
-#    return render(request, 'event/my_event.html', {'god': god})

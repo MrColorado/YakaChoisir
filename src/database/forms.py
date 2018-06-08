@@ -134,3 +134,6 @@ class modifyUser(forms.Form):
         'value': 'Gender'
     }
     ), choices=GENDER_OPTIONS)
+
+#class navBar(forms.Form):
+
