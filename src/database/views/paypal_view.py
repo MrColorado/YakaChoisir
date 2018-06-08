@@ -1,6 +1,9 @@
 from django.urls import reverse
 from django.shortcuts import render
 from paypal.standard.forms import PayPalPaymentsForm
+from paypal.standard.models import ST_PP_COMPLETED
+from paypal.standard.ipn.signals import valid_ipn_received
+
 
 from database.views import *
 
@@ -22,3 +25,7 @@ def view_that_asks_for_money(request):
     form = PayPalPaymentsForm(initial=paypal_dict)
     context = {"form": form}
     return render(request, "paypal/payment.html", context)
+
+
+
+

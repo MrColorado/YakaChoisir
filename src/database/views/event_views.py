@@ -7,6 +7,8 @@ from database.models import Attend
 from database.models import Association
 from database.forms import createEventForm
 
+import smtplib
+from django.core.mail import send_mail
 
 def event(request):
     events = []
@@ -49,6 +51,15 @@ def register(request, current_event):
                         ticket_number="test")
     new_attend.save()
 
+
+    obj = "[inscription]" + my_event.title
+    send_mail(
+        '[YAKACHOISIR] test email',
+        'this a test of sending email ',
+        'event@epita.fr',
+        [my_user.user.email],
+        fail_silently=False,
+    )
     return render(request, "event/register.html", {'res_event': my_event})
 
 
