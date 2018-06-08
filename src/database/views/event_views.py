@@ -52,35 +52,36 @@ def my_event(request):
     for e in event_id:
         if e.event_id.date_begin >= timezone.now():
             events.append(e.event_id)
-    return render(request, 'event/my_event.html/', {'my_event': events, 'god':god})
+    return render(request, 'event/my_event.html/',
+                  {'my_event': events, 'god': god})
 
 
-def generate_pdf(event):
-    y = 200
-    y1 = 50
+def generate_pdf(event, user):
     buffer = BytesIO()
     p = canvas.Canvas(buffer, pagesize=letter)
     p.setFont('Helvetica', 20)
-    p.drawString(25,30,"Ticket d'entrée")
+    p.drawString(25, 400, "Ticket d'entrée")
     p.setFont('Helvetica', 25)
-    p.drawString(25,60,event.title)
+    p.drawString(25, 350, event.title)
 
     logo_epita = ImageReader("http://localhost:8000/static/img/epita_logo.png")
-    p.drawImage(logo_epita,10,10,mask='auto')
+    p.drawImage(logo_epita, 10, 10, mask='auto')
 
-    myqr = ImageReader("https://chart.googleapis.com/chart?cht=qr&chl=Nicolas&chs=160x160&chld=L|0")
+    data_qr = user.user.first_name + user.user.last_name
+    data_qr.replace(" ", "")
+
+    myqr = ImageReader(
+        "https://chart.googleapis.com/chart?cht=qr&chl=" + data_qr + "&chs=160x160&chld=L|0")
     p.drawImage(myqr, 100, 100, mask='auto')
 
     p.setFont('Helvetica', 10)
-    p.drawString(220, y,
+    p.drawString(0, 0,
                  "PDF generate at " + timezone.now().strftime('%Y-%b-%d'))
     p.showPage()
     p.save()
     pdf = buffer.getvalue()
     buffer.close()
     return pdf
-
-
 
 
 @login_required
@@ -100,7 +101,7 @@ def register(request, current_event):
     message = "<h1> Votre inscription à l'évènement est enregistrée </h1><br>"
     message += "Vous pourrez vous rendre à l'évènement avec le ticket transmit en " \
                "pièce jointe soit imprimé soit présent sur votre téléphone <br>"
-    pdf = generate_pdf(my_event)
+    pdf = generate_pdf(my_event, my_user)
     # send_mail(
     #     obj,
     #     message,
@@ -150,7 +151,9 @@ def create_event(request):
     else:
         form = createEventForm()
     assos = Association.objects.all()
-    return render(request, 'event/create_event.html', locals(), {'assos': assos})
+    return render(request, 'event/create_event.html', locals(),
+                  {'assos': assos})
+
 
 @login_required
 def modify_event(request, event_id):
@@ -171,4 +174,5 @@ def modify_event(request, event_id):
         creer = True
     else:
         form = modifyEventForm(request.GET, event=res_event)
-    return render(request, 'event/change_event.html', locals(), {'event_id': event_id})
+    return render(request, 'event/change_event.html', locals(),
+                  {'event_id': event_id})
