@@ -14,6 +14,7 @@ from django.utils import timezone
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
+from reportlab.lib.utils import ImageReader
 
 
 def event(request):
@@ -46,8 +47,18 @@ def my_event(request):
 
 def generate_pdf(event):
     y = 200
+    y1 = 50
     buffer = BytesIO()
     p = canvas.Canvas(buffer, pagesize=letter)
+    p.setFont('Helvetica', 20)
+    p.drawString(25,30,"Ticket d'entrée")
+    p.setFont('Helvetica', 25)
+    p.drawString(25,60,event.title)
+
+    logo_epita = ImageReader("http://localhost:8000/static/img/epita_logo.png")
+    p.drawImage(logo_epita,10,10,mask='auto')
+
+
     p.setFont('Helvetica', 10)
     p.drawString(220, y,
                  "PDF generate at " + timezone.now().strftime('%Y-%b-%d'))
@@ -62,7 +73,6 @@ def generate_pdf(event):
 def register(request, current_event):
     my_event = Event.objects.get(id=current_event)
     my_user = myUser.objects.get(user=request.user)
-
     if Attend.objects.filter(event_id=my_event, user_id=my_user):
         return render(request, "event/register.html", {'res_event': None})
 
