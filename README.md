@@ -86,3 +86,9 @@ python manage.py migrate
 ```
 python3 manage.py runserver
 ```
+
+
+## email service
+    sendgrid.com :
+        Yakachoisir
+        yakachoisir2018

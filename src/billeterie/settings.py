@@ -39,9 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'paypal.standard.ipn',
+
     'database',
     'util',
     ]
+
+PAYPAL_TEST = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -152,3 +156,10 @@ SOCIAL_AUTH_EPITA_BETA = False
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
+
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_USE_TLS = True

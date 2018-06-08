@@ -9,6 +9,15 @@ from database.forms import createEventForm
 from database.forms import modifyEventForm
 from database.models import Members
 
+import smtplib
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.utils import timezone
+from io import BytesIO
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.utils import ImageReader
+
 
 def event(request):
     events = []
@@ -23,7 +32,8 @@ def event(request):
 def specific_event(request, event_id):
     res_event = Event.objects.filter(id=event_id)
     if len(res_event):
-        return render(request, 'event/specific_event.html', {'res_event': res_event})
+        return render(request, 'event/specific_event.html',
+                      {'res_event': res_event})
     return render(request, 'not_found.html')
 
 
@@ -43,11 +53,34 @@ def my_event(request):
     return render(request, 'event/my_event.html/', {'my_event': events, 'god':god})
 
 
+def generate_pdf(event):
+    y = 200
+    y1 = 50
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer, pagesize=letter)
+    p.setFont('Helvetica', 20)
+    p.drawString(25,30,"Ticket d'entrée")
+    p.setFont('Helvetica', 25)
+    p.drawString(25,60,event.title)
+
+    logo_epita = ImageReader("http://localhost:8000/static/img/epita_logo.png")
+    p.drawImage(logo_epita,10,10,mask='auto')
+
+
+    p.setFont('Helvetica', 10)
+    p.drawString(220, y,
+                 "PDF generate at " + timezone.now().strftime('%Y-%b-%d'))
+    p.showPage()
+    p.save()
+    pdf = buffer.getvalue()
+    buffer.close()
+    return pdf
+
+
 @login_required
 def register(request, current_event):
     my_event = Event.objects.get(id=current_event)
     my_user = myUser.objects.get(user=request.user)
-
     if Attend.objects.filter(event_id=my_event, user_id=my_user):
         return render(request, "event/register.html", {'res_event': None})
 
@@ -57,6 +90,24 @@ def register(request, current_event):
                         ticket_number="test")
     new_attend.save()
 
+    obj = "[inscription]" + my_event.title
+    message = "<h1> Votre inscription à l'évènement est enregistrée </h1><br>"
+    message += "Vous pourrez vous rendre à l'évènement avec le ticket transmit en " \
+               "pièce jointe soit imprimé soit présent sur votre téléphone <br>"
+    pdf = generate_pdf(my_event)
+    # send_mail(
+    #     obj,
+    #     message,
+    #     'event@epita.fr',
+    #     [my_user.user.email],
+    #     fail_silently=False,
+    # )
+    msg = EmailMessage(obj, message, to=[my_user.user.email])
+
+    msg.attach('ticket.pdf', pdf, 'application/pdf')
+
+    msg.content_subtype = "html"
+    msg.send()
     return render(request, "event/register.html", {'res_event': my_event})
 
 
