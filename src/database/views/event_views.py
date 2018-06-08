@@ -10,7 +10,10 @@ from database.forms import createEventForm
 import smtplib
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
-
+from django.utils import timezone
+from io import BytesIO
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 
 def event(request):
     events = []
@@ -40,7 +43,16 @@ def my_event(request):
 
 
 def generate_pdf(event):
-
+    y = 200
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer, pagesize=letter)
+    p.setFont('Helvetica', 10)
+    p.drawString(220, y, "PDF generate at "+timezone.now().strftime('%Y-%b-%d'))
+    p.showPage()
+    p.save()
+    pdf = buffer.getvalue()
+    buffer.close()
+    return pdf
 
 @login_required
 def register(request, current_event):
@@ -59,6 +71,7 @@ def register(request, current_event):
 
     obj = "[inscription]" + my_event.title
     message = "<h1> YOLOLO </h1>"
+    pdf = generate_pdf(my_event)
     # send_mail(
     #     obj,
     #     message,
@@ -67,6 +80,9 @@ def register(request, current_event):
     #     fail_silently=False,
     # )
     msg = EmailMessage(obj,message,to=[my_user.user.email])
+
+    msg.attach('my_pdf.pdf', pdf, 'application/pdf')
+
     msg.content_subtype = "html"
     msg.send()
     return render(request, "event/register.html", {'res_event': my_event})
