@@ -12,10 +12,6 @@ def user_information(request):
     user_info = myUser.objects.get(user=request.user)
     return render(request, 'user_settings/user_settings.html', {'user_info': user_info})
 
-'''
-=======
-
->>>>>>> [create_event] write the beginning of the create event function
 @login_required
 def modifyUserinfo(request):
     if request.method == 'POST':
@@ -24,9 +20,7 @@ def modifyUserinfo(request):
         user_to_modify = myUser.objects.get(user=request.user)
         user_to_modify.mail_secondary = form.data['secondary_email']
         user_to_modify.save()
-<<<<<<< HEAD
-<<<<<<< HEAD
-'''
+
 def user_modify(request):
     user_to_modify = myUser.objects.get(user=request.user)
     print(user_to_modify)
@@ -41,3 +35,4 @@ def user_modify(request):
             return render(request, 'user_settings/user_settings.html', {'user_info': user_to_modify})
     form = modifyUser()
     return render(request, 'user_settings/modify_user.html', locals(), {'user_info': user_to_modify})
+
