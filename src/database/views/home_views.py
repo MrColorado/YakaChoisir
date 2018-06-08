@@ -31,3 +31,13 @@ def home(request):
 
 
     return render(request, 'home/index.html', {'events': events, 'first': first, 'numbers': numbers, 'thirty': thirty})
+
+
+'''def searchBar(request):
+    if request.method == 'POST' :
+        e
+    else :
+        e
+
+    return render(request, 'base.html')
+'''
