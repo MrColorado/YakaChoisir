@@ -8,7 +8,6 @@ from database.models import Association
 from database.forms import createEventForm
 from database.forms import modifyEventForm
 from database.models import Members
-
 import smtplib
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
@@ -151,7 +150,6 @@ def create_event(request):
     assos = Association.objects.all()
     return render(request, 'event/create_event.html', locals(),
                   {'assos': assos})
-
 
 @login_required
 def modify_event(request, event_id):

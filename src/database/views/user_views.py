@@ -27,10 +27,8 @@ def user_information(request):
 
 def user_modify(request):
     user_to_modify = myUser.objects.get(user=request.user)
-    print(user_to_modify)
     if request.method == 'POST':
         form = modifyUser(request.POST)
-        print(form.is_valid)
         if form.data['mail_secondary'] != "":
             user_to_modify.mail_secondary = form.data['mail_secondary']
         if form.data['gender'] != "":

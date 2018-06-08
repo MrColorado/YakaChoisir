@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import datetime
 import pytz
+from database.models import Association
+from django.http import HttpResponseRedirect
 
 from database.models import Event
 
@@ -29,15 +31,15 @@ def home(request):
             cpt = cpt + 1
             continue
 
+    if request.method == 'GET':
+        search = request.GET.get('search_box')
+        if search:
+            res_event = Event.objects.filter(title=search)
+            res_asso = Association.objects.filter(name=search)
+            if len(res_event):
+                return render(request, 'event/specific_event.html', {'res_event': res_event})
+            if len(res_asso):
+                asso = Association.objects.get(id=res_asso[0].id)
+                return render(request, 'association/specific_association.html', {'res_asso': asso})
 
     return render(request, 'home/index.html', {'events': events, 'first': first, 'numbers': numbers, 'thirty': thirty})
-
-
-'''def searchBar(request):
-    if request.method == 'POST' :
-        e
-    else :
-        e
-
-    return render(request, 'base.html')
-'''
