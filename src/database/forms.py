@@ -94,7 +94,6 @@ class add_member_form(forms.Form):
     new_member = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Utilisateur'
-#<<<<<<< HEAD
     }
     ), choices=members)
 
@@ -120,11 +119,6 @@ class mod_asso(forms.Form):
         'value': 'Utilisateur'
     }
     ), choices=s)
-'''=======
-        }
-        ), choices=members)
-    role = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
->>>>>>> [DB] push the DB'''
 
 
 class modifyUser(forms.Form):
@@ -139,15 +133,4 @@ class modifyUser(forms.Form):
         'value': 'Gender'
     }
     ), choices=GENDER_OPTIONS)
-'''=======
-        )
-    gender = forms.MultipleChoiceField(widget=forms.Select(attrs={
-        'class': 'form-control',
-        'value': 'Gender'
-        }), choices=GENDER_OPTIONS)
-
-
-class modifyV2(forms.Form):
-    mail_secondary = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    gender = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
->>>>>>> [DB] push the DB'''
+    
