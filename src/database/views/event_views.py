@@ -114,7 +114,7 @@ def register(request, current_event):
 @login_required
 def create_event(request):
     if request.method == 'POST':
-        form = createEventForm(request.POST)
+        form = createEventForm(request.POST, request.FILES)
         assoc_name = form.data['association_name']
         title = form.data['title']
         description = form.data['description']
@@ -125,7 +125,7 @@ def create_event(request):
         date_begin = form.data['date_begin']
         date_end = form.data['date_end']
         date_deadline = form.data['date_deadline']
-        photo = form.data['photo']
+        photo = request.FILES['photo']
         assoc = Association.objects.get(id=assoc_name)
         newEvent = Event(association_id=assoc,
                          title=title,

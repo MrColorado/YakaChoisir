@@ -17,7 +17,7 @@
 
     {% if creer %}l'event a ete creer !{% endif %}
 
-<form action="{% url "create_event" %}" method="post">
+<form action="{% url "create_event" %}" method="post" enctype="multipart/form-data"é>
     {% csrf_token %}
 
     <div class="container" id="create_event">
