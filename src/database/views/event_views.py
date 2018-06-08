@@ -18,6 +18,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.utils import ImageReader
 
+import qrcode
+
 
 def event(request):
     events = []
@@ -66,6 +68,8 @@ def generate_pdf(event):
     logo_epita = ImageReader("http://localhost:8000/static/img/epita_logo.png")
     p.drawImage(logo_epita,10,10,mask='auto')
 
+    myqr = ImageReader("https://chart.googleapis.com/chart?cht=qr&chl=Nicolas&chs=160x160&chld=L|0")
+    p.drawImage(myqr, 100, 100, mask='auto')
 
     p.setFont('Helvetica', 10)
     p.drawString(220, y,
@@ -75,6 +79,8 @@ def generate_pdf(event):
     pdf = buffer.getvalue()
     buffer.close()
     return pdf
+
+
 
 
 @login_required
