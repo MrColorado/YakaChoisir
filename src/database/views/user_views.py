@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+import re
 
 from database.models import myUser
 from database.models import Members
@@ -33,13 +34,21 @@ def user_modify(request):
 
 
 def stat(request):
-    res = []
-    for i in Association.object.all():
-        asso = []
+    asso = []
+    for i in Association.objects.all():
         events = []
-        e = Event.object.filter(association_id=i)
+        e = Event.objects.filter(association_id=i)
         for j in e:
-            participants = Attend.object.filter(event_id=j)
-            events.append((j, len(participants)))
+            participants = Attend.objects.filter(event_id=j)
+            intern = 0
+            extern = 0
+            for p in participants:
+                email_user = p.user_id.user.email
+                email_user = re.search('[@].....', email_user)
+                if email_user.group(0) == "@epita":
+                    intern += 1
+                else:
+                    extern += 1
+            events.append((j, intern, extern))
         asso.append((i, events))
-    return render(request, 'user_settings/statistique.html', {'stats': res})
+    return render(request, 'user_settings/stat.html', {'stats': asso})
