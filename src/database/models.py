@@ -42,7 +42,7 @@ class AssociationsManager(models.Model):
     user_id = models.ForeignKey(myUser, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
-        return "{0} {1} ({2})".format(self.user_id.first_name, self.user_id.last_name, self.user_id.email)
+        return "{0} {1} ({2})".format(self.user_id.user.first_name, self.user_id.user.last_name, self.user_id.user.email)
 
 
 class Association(models.Model):

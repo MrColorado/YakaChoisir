@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from database.models import Association
+from database.models import AssociationsManager
 from database.models import myUser
 from database.models import Members
 
@@ -10,8 +11,11 @@ from database.forms import add_member_form
 
 
 def association(request):
+    manager = False
+    if len(AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
+        manager = True
     associations = Association.objects.all()
-    return render(request, 'association/association.html/', {'associations': associations})
+    return render(request, 'association/association.html/', {'associations': associations, 'manager':manager})
 
 
 def my_association(request):
@@ -34,7 +38,6 @@ def add_members(request, asso_id):
     for c in Members.objects.all():
         if c.association_id == res_asso:
             current_member.append(c.user_id.user.first_name + " " + c.user_id.user.last_name + " " + c.role)
-    print(current_member)
     if request.method == 'POST':
         form = add_member_form(request.POST)
         user_id = myUser.objects.get(id=form.data['new_member'])
