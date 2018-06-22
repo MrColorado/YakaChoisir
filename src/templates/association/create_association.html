@@ -26,9 +26,6 @@
         color: #0d2436;
         font-family: ralewayExtraBold;
     }
-#form{
-    margin-top: 5%;
-}
 </style>
 
 <form action="{% url "create_association" %}" method="post" enctype="multipart/form-data">
@@ -41,10 +38,8 @@
     {% endif %}
 
     <div class="container" id="create_event">
-    <div class="container">
-        <h1> Créez votre association</h1>
-    </div>
         <div class="container" id="form">
+            <h1> Créez votre association</h1>
             <div class="form-group row">
                 <label for="example-number-input" class="col-2 col-form-label">Nom de l'association :</label>
                 {{ form.name }}
@@ -81,6 +76,23 @@
                 <div class="col-10">
                     {{ form.statut }}
                 </div>
+            </div>
+            <h2>Selectionné les membres du bureau de cette association</h2>
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Président de l'association :</label>
+                {{ form.president }}
+            </div>
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Vice-Président de l'association :</label>
+                {{ form.vicepresident }}
+            </div>
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Trésorier de l'association :</label>
+                {{ form.tresorier }}
+            </div>
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Secrétaire de l'association :</label>
+                {{ form.secretaire }}
             </div>
         </div>
         <input type="submit" class="btn btn-primary" value="Submit" />

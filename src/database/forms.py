@@ -2,9 +2,9 @@ from django import forms
 from database.models import Association
 from database.models import myUser
 
-class createEventForm(forms.Form):
 
-    #if forms.is_valid() :
+class createEventForm(forms.Form):
+    # if forms.is_valid() :
     asso_list = []
     for a in Association.objects.all():
         asso_list.append((a.id, a.name))
@@ -32,27 +32,27 @@ class createEventForm(forms.Form):
     photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
                                                            'class': 'form-control-file'}))
 
+
 class modifyEventForm(forms.Form):
     def __init__(self, *args, **kwargs):
         event = kwargs.pop('event')
         super(modifyEventForm, self).__init__(*args, **kwargs)
         self.fields['association_name'].widget = forms.TextInput(attrs={'class': 'form-control',
-                                                            'value': event.association_id})
+                                                                        'value': event.association_id})
         self.fields['title'].widget = forms.TextInput(attrs={'class': 'form-control',
-                                                            'value': event.title})
+                                                             'value': event.title})
         self.fields['description'].widget = forms.Textarea(attrs={'class': 'form-control',
-                                                            'placeholder': event.description})
+                                                                  'placeholder': event.description})
         self.fields['price'].widget = forms.NumberInput(attrs={'class': 'form-control',
-                                                            'value': event.price})
+                                                               'value': event.price})
         self.fields['place'].widget = forms.TextInput(attrs={'class': 'form-control',
-                                                               'value': event.place})
+                                                             'value': event.place})
         self.fields['size_intern'].widget = forms.NumberInput(attrs={'class': 'form-control',
-                                                            'value': event.size_intern})
+                                                                     'value': event.size_intern})
         self.fields['size_extern'].widget = forms.NumberInput(attrs={'class': 'form-control',
-                                                            'value': event.size_extern})
+                                                                     'value': event.size_extern})
         self.fields['date_begin'].widget = forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local',
-                                                            'default': event.date_begin})
-
+                                                                      'default': event.date_begin})
 
     association_name = forms.CharField()
     title = forms.CharField()
@@ -69,6 +69,7 @@ class modifyEventForm(forms.Form):
     photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
                                                            'class': 'form-control-file'}))
 
+
 class createAssociationForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
@@ -84,6 +85,32 @@ class createAssociationForm(forms.Form):
         'value': 'Utilisateur'
     }
     ), choices=s)
+
+    members = []
+    for m in myUser.objects.all():
+        members.append((m.id, m.user.email))
+    members.sort(key=lambda tup: tup[1])
+
+    president = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
+        'class': 'form-control',
+        'value': 'Utilisateur'
+    }
+    ), choices=members)
+    vicepresident = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
+        'class': 'form-control',
+        'value': 'Utilisateur'
+    }
+    ), choices=members)
+    tresorier = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
+        'class': 'form-control',
+        'value': 'Utilisateur'
+    }
+    ), choices=members)
+    secretaire = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
+        'class': 'form-control',
+        'value': 'Utilisateur'
+    }
+    ), choices=members)
 
 
 class add_member_form(forms.Form):
@@ -122,7 +149,8 @@ class mod_asso(forms.Form):
 
 
 class modifyUser(forms.Form):
-    mail_secondary = forms.EmailField(initial="", required=False, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    mail_secondary = forms.EmailField(initial="", required=False,
+                                      widget=forms.EmailInput(attrs={'class': 'form-control'}))
     GENDER_OPTIONS = [
         ('', ''),
         ('Male', 'M'),
@@ -133,4 +161,3 @@ class modifyUser(forms.Form):
         'value': 'Gender'
     }
     ), choices=GENDER_OPTIONS)
-
