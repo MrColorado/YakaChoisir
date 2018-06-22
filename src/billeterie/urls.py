@@ -46,6 +46,7 @@ urlpatterns = [
     path('association/<int:asso_id>/', association_views.specific_association, name='specific_association'),
     path('association/<int:asso_id>/modification', association_views.modify_association, name='modify_association'),
     path('association/<int:asso_id>/ajout_membre', association_views.add_members, name='add_member'),
+    path('association/invitation', association_views.invite_member, name='invite_member'),
     path('mes_associations/', association_views.my_association, name='my_association'),
 
     path('mypaypal/',paypal_view.view_that_asks_for_money,name='view_that_asks_for_money'),

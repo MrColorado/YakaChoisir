@@ -161,3 +161,8 @@ class modifyUser(forms.Form):
         'value': 'Gender'
     }
     ), choices=GENDER_OPTIONS)
+
+
+class invite_member_form(forms.Form):
+    mail = forms.EmailField(initial="", required=True,
+                            widget=forms.EmailInput(attrs={'class': 'form-control'}))

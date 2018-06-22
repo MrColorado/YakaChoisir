@@ -8,6 +8,7 @@ from database.models import Members
 from database.forms import createAssociationForm
 from database.forms import mod_asso
 from database.forms import add_member_form
+from database.forms import invite_member_form
 
 
 def association(request):
@@ -15,7 +16,7 @@ def association(request):
     if len(AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
         manager = True
     associations = Association.objects.all()
-    return render(request, 'association/association.html/', {'associations': associations, 'manager':manager})
+    return render(request, 'association/association.html/', {'associations': associations, 'manager': manager})
 
 
 def my_association(request):
@@ -57,7 +58,8 @@ def add_members(request, asso_id):
         return render(request, 'association/specific_association.html', locals(),
                       {'current_member': current_member, 'res_asso': res_asso})
     form = add_member_form()
-    return render(request, 'association/add_member.html', locals(), {'current_member': current_member, 'res_asso': res_asso})
+    return render(request, 'association/add_member.html', locals(),
+                  {'current_member': current_member, 'res_asso': res_asso})
 
 
 def modify_association(request, asso_id):
@@ -102,14 +104,27 @@ def create_association(request):
             already = True
             return render(request, 'association/create_association.html', locals())
         assoc.save()
-        president = Members(user_id=myUser.objects.get(id=form.data["president"]), association_id=assoc, role="Président")
+        president = Members(user_id=myUser.objects.get(id=form.data["president"]), association_id=assoc,
+                            role="Président")
         president.save()
-        vicepresident = Members(user_id=myUser.objects.get(id=form.data["vicepresident"]), association_id=assoc, role="Vice-Président")
+        vicepresident = Members(user_id=myUser.objects.get(id=form.data["vicepresident"]), association_id=assoc,
+                                role="Vice-Président")
         vicepresident.save()
-        tresorier = Members(user_id=myUser.objects.get(id=form.data["secretaire"]), association_id=assoc, role="Trésorier")
+        tresorier = Members(user_id=myUser.objects.get(id=form.data["secretaire"]), association_id=assoc,
+                            role="Trésorier")
         tresorier.save()
-        secretaire = Members(user_id=myUser.objects.get(id=form.data["tresorier"]), association_id=assoc, role="Secrétaire")
+        secretaire = Members(user_id=myUser.objects.get(id=form.data["tresorier"]), association_id=assoc,
+                             role="Secrétaire")
         secretaire.save()
         return render(request, 'home/index.html')
     form = createAssociationForm()
     return render(request, 'association/create_association.html', locals())
+
+
+def invite_member(request):
+    if request.method == "POST":
+        form = invite_member_form(request.POST)
+        print("send mail to : " + form.data["mail"])
+        return render(request, "association/invite_member.html", {"form": form})
+    form = invite_member_form()
+    return render(request, 'association/invite_member.html', {"form": form})
