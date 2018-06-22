@@ -133,3 +133,4 @@ class modifyUser(forms.Form):
         'value': 'Gender'
     }
     ), choices=GENDER_OPTIONS)
+

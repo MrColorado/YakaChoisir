@@ -10,19 +10,28 @@ from database.models import Association
 from database.models import Event
 from database.models import Attend
 from database.forms import *
+import re
 
 
 def user_information(request):
     user_info = myUser.objects.get(user=request.user)
-    return render(request, 'user_settings/user_settings.html', {'user_info': user_info})
+
+    email_user = user_info.user.email
+    email_user = re.search('[@].....', email_user)
+    if email_user.group(0) == "@epita":
+        isfrom = "interne"
+        url_photo = 'https://photos.cri.epita.net/' + user_info.user.username
+    else:
+        isfrom = "externe"
+        url_photo = "https://pikmail.herokuapp.com/" + user_info.user.email + "?size=200"
+    return render(request, 'user_settings/user_settings.html',
+                  {'user_info': user_info, 'url_photo': url_photo, 'isfrom' : isfrom})
 
 
 def user_modify(request):
     user_to_modify = myUser.objects.get(user=request.user)
-    print(user_to_modify)
     if request.method == 'POST':
         form = modifyUser(request.POST)
-        print(form.is_valid)
         if form.data['mail_secondary'] != "":
             user_to_modify.mail_secondary = form.data['mail_secondary']
         if form.data['gender'] != "":
