@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.mail import EmailMessage
 
 from database.models import Association
 from database.models import AssociationsManager
@@ -124,7 +125,12 @@ def create_association(request):
 def invite_member(request):
     if request.method == "POST":
         form = invite_member_form(request.POST)
-        print("send mail to : " + form.data["mail"])
+        obj = "[INVITATION]"
+        message = "<br> Madame, Monsieur vous êtes invité à vous enregistrer sur la billeterie à cette adresse " \
+                  "127.0.0.1:8000 afin de pouvoir faire partie d'une association. \n\n Cordialement.</br>"
+        msg = EmailMessage(obj, message, to=[form.data["mail"]])
+        msg.content_subtype = "html"
+        msg.send()
         return render(request, "association/invite_member.html", {"form": form})
     form = invite_member_form()
     return render(request, 'association/invite_member.html', {"form": form})
