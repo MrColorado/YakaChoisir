@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     ]
 
 PAYPAL_TEST = True
+PAYPAL_RECEIVER_EMAIL = "yakachoisir@epita.fr"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

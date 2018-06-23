@@ -25,7 +25,6 @@ from database.views import home_views
 from database.views import association_views
 from database.views import user_views
 from django.contrib.auth import views
-from database.views import paypal_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -50,7 +49,6 @@ urlpatterns = [
     path('association/<int:asso_id>/ajout_membre', association_views.add_members, name='add_member'),
     path('mes_associations/', association_views.my_association, name='my_association'),
 
-    path('mypaypal/',paypal_view.view_that_asks_for_money,name='view_that_asks_for_money'),
 
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^login/$', views.login, name='login'),

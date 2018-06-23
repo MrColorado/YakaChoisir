@@ -17,6 +17,10 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.utils import ImageReader
 
+from django.urls import reverse
+from django.shortcuts import render
+from paypal.standard.forms import PayPalPaymentsForm
+import random
 
 def event(request):
     events = []
@@ -89,7 +93,20 @@ def register(request, current_event):
         return render(request, "event/register.html", {'res_event': None})
 
     if my_event.price > 0:
-        return render(request, "event/pay_event.html", {'event': my_event, 'current_event': current_event})
+        paypal_dict = {
+            "business": "yakachoisir@epita.fr",
+            "amount": str(my_event.price),
+            "item_name": "Ticket Evenement EPITA",
+            "invoice": str(random.randint(1,999999)), #TODO mettre hash du ticket
+            "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+            "return": 'http://127.0.0.1:8000/register_after_pay/' + str(current_event) , #TODO use hash pour secure
+            "cancel_return": 'http://127.0.0.1:8000', #TODO mettre page erreur paiement
+            "custom": "premium_plan",
+        # Custom command to correlate to some function later (optional)
+        }
+        form = PayPalPaymentsForm(initial=paypal_dict)
+        context = {"form": form}
+        return render(request, "event/pay_event.html", context )
     else:
         new_attend = Attend(user_id=my_user,
                             event_id=my_event,
