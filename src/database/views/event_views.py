@@ -89,19 +89,35 @@ def register(request, current_event):
         return render(request, "event/register.html", {'res_event': None})
 
     if my_event.price > 0:
-        return render(request, "event/pay_event.html", { 'event' : my_event})
+        return render(request, "event/pay_event.html", {'event': my_event, 'current_event': current_event})
     else:
-        isregistered(request, my_event)
+        new_attend = Attend(user_id=my_user,
+                            event_id=my_event,
+                            date_entry=timezone.now(),
+                            ticket_number="test")
+        new_attend.save()
+
+        obj = "[inscription]" + my_event.title
+        message = "<h1> Votre inscription à l'évènement est enregistrée </h1><br>"
+        message += "Vous pourrez vous rendre à l'évènement avec le ticket transmit en " \
+                   "pièce jointe soit imprimé soit présent sur votre téléphone <br>"
+        pdf = generate_pdf(my_event, my_user)
+
+        msg = EmailMessage(obj, message, to=[my_user.user.email])
+
+        msg.attach('ticket.pdf', pdf, 'application/pdf')
+
+        msg.content_subtype = "html"
+        msg.send()
+        return render(request, "event/register.html", {'res_event': my_event})
 
 
-@login_required
-def isregistered(request, current_event):
+def register_after_pay(request, current_event):
     my_event = Event.objects.get(id=current_event)
     my_user = myUser.objects.get(user=request.user)
 
     if Attend.objects.filter(event_id=my_event, user_id=my_user):
         return render(request, "event/register.html", {'res_event': None})
-
     new_attend = Attend(user_id=my_user,
                         event_id=my_event,
                         date_entry=timezone.now(),
