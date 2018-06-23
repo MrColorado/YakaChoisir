@@ -14,7 +14,7 @@ from database.forms import invite_member_form
 
 def association(request):
     manager = False
-    if len(AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
+    if request.user.is_authenticated and len(AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
         manager = True
     associations = Association.objects.all()
     return render(request, 'association/association.html/', {'associations': associations, 'manager': manager})
