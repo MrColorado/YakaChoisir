@@ -8,7 +8,7 @@
         {% if user.is_authenticated %}
             <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
         {% endif %}
-        <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
+        <a class="nav-item nav-link active" href="{% url 'association' %}"> Associations </a>
         {% if user.is_authenticated %}
             <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes Associations </a>
             <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
@@ -16,20 +16,7 @@
     </nav>
 {% endblock %}
 
-{% block body%}
-    <style>
-    #create_event{
-        margin-top: 2%;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        color: #0d2436;
-        font-family: ralewayExtraBold;
-    }
-#form{
-    margin-top: 5%;
-}
-</style>
+{% block body %}
     <div class="container" id="specific_event_container">
         <div class="row justify-content-center">
             <div class="col-sm-6">
@@ -49,19 +36,17 @@
 
                 <div class="d-flex" id="test">
                     <a href="{{ res_asso.site }}">
-                        <button class="btn btn-success">Pour plus d'informations</button>
+                        <button class="btn btn-primary">Pour plus d'informations</button>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="d-flex" id="test">
+        <div class="d-flex" style="justify-content: center; align-items: center">
             <a href="{% url "modify_association" res_asso.id %}">
-                <button class="btn btn-success">Modifier l'association</button>
+                <button class="btn btn-primary">Modifier l'association</button>
             </a>
-        </div>
-        <div class="d-flex" id="test">
             <a href="{% url "add_member" res_asso.id %}">
-                <button class="btn btn-success">Ajouter un nouveau membre</button>
+                <button class="btn btn-primary">Ajouter un nouveau membre</button>
             </a>
         </div>
     </div>
