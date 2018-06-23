@@ -88,6 +88,20 @@ def register(request, current_event):
     if Attend.objects.filter(event_id=my_event, user_id=my_user):
         return render(request, "event/register.html", {'res_event': None})
 
+    if my_event.price > 0:
+        return render(request, "event/pay_event.html", { 'event' : my_event})
+    else:
+        isregistered(request, my_event)
+
+
+@login_required
+def isregistered(request, current_event):
+    my_event = Event.objects.get(id=current_event)
+    my_user = myUser.objects.get(user=request.user)
+
+    if Attend.objects.filter(event_id=my_event, user_id=my_user):
+        return render(request, "event/register.html", {'res_event': None})
+
     new_attend = Attend(user_id=my_user,
                         event_id=my_event,
                         date_entry=timezone.now(),
@@ -99,13 +113,7 @@ def register(request, current_event):
     message += "Vous pourrez vous rendre à l'évènement avec le ticket transmit en " \
                "pièce jointe soit imprimé soit présent sur votre téléphone <br>"
     pdf = generate_pdf(my_event, my_user)
-    # send_mail(
-    #     obj,
-    #     message,
-    #     'event@epita.fr',
-    #     [my_user.user.email],
-    #     fail_silently=False,
-    # )
+
     msg = EmailMessage(obj, message, to=[my_user.user.email])
 
     msg.attach('ticket.pdf', pdf, 'application/pdf')
@@ -150,6 +158,7 @@ def create_event(request):
     assos = Association.objects.all()
     return render(request, 'event/create_event.html', locals(),
                   {'assos': assos})
+
 
 @login_required
 def modify_event(request, event_id):
