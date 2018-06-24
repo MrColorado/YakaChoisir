@@ -43,10 +43,8 @@
                        <li>
                            <form class="hidden-tablet" style="margin-top: 4px; margin-bottom: 4px;">
                                {% if user.is_authenticated %}
-                                   Bienvenue {{ user.username }}
                                     <a type="button" class="btn btn-light" href="{% url 'logout' %}">Deconnexion</a>
                                {% else %}
-                                   Not logged
                                     <a type="button" class="btn btn-light" href="{% url 'login' %}">Connexion</a>
                                {% endif %}
                            </form>
@@ -84,7 +82,7 @@
         {% block footer %}
             <footer class="container-fluid" id="footer">
                 <div class="row justify-content-center">
-                    <a class="nav-link js-scroll-trigger" href="">Site en développement</a>
+                    <a class="nav-link js-scroll-trigger">Billeterie</a>
                 </div>
             </footer>
         {% endblock %}
