@@ -25,6 +25,8 @@ from database.views import home_views
 from database.views import association_views
 from database.views import user_views
 from django.contrib.auth import views
+from database.views import paypal_view
+from database.views import base_views
 
 from api.resources import *
 
@@ -38,6 +40,7 @@ api.register(UsersResource())
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_views.home, name='home'),
+    path('base/', base_views.search, name='search'),
     path('user_settings/', user_views.user_information, name='settings'),
     path('user_settings/modification', user_views.user_modify, name='user_modify'),
     path('user_settings/stats', user_views.stat, name='stat'),

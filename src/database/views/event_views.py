@@ -16,6 +16,7 @@ from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.utils import ImageReader
+from database.views import base_views
 
 from django.urls import reverse
 from django.shortcuts import render
@@ -31,10 +32,18 @@ def event(request):
         if e.validated:
             if e.date_begin >= timezone.now():
                 events.append(e)
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     return render(request, 'event/page_event.html', {'events': events})
 
 
 def specific_event(request, event_id):
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     res_event = Event.objects.filter(id=event_id)
     if len(res_event):
         inscrit = False
@@ -49,6 +58,10 @@ def specific_event(request, event_id):
 
 @login_required
 def my_event(request):
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     my_user = myUser.objects.get(user=request.user)
     members = Members.objects.filter(user_id=my_user)
     god = False
@@ -166,6 +179,10 @@ def register_after_pay(request, current_event):
 
 @login_required
 def create_event(request):
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     if request.method == 'POST':
         form = createEventForm(request.POST, request.FILES)
         assoc_name = form.data['association_name']
@@ -203,6 +220,10 @@ def create_event(request):
 
 @login_required
 def modify_event(request, event_id):
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     res_event = Event.objects.get(id=event_id)
     if request.method == 'POST':
         form = createEventForm(request.POST)

@@ -10,9 +10,14 @@ from database.forms import createAssociationForm
 from database.forms import mod_asso
 from database.forms import add_member_form
 from database.forms import invite_member_form
+from database.views import base_views
 
 
 def association(request):
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     manager = False
     if request.user.is_authenticated and len(
             AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
@@ -22,6 +27,10 @@ def association(request):
 
 
 def my_association(request):
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     my_user = myUser.objects.get(user=request.user)
     member = Members.objects.filter(user_id=my_user)
     associations = []
@@ -31,6 +40,10 @@ def my_association(request):
 
 
 def specific_association(request, asso_id):
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     res_asso = Association.objects.get(id=asso_id)
     office = False
     if request.user.is_authenticated:
@@ -73,6 +86,10 @@ def add_members(request, asso_id):
 
 
 def modify_association(request, asso_id):
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     if request.method == 'POST':
         form = mod_asso(request.POST, request.FILES)
         asso = Association.objects.get(id=asso_id)
@@ -93,6 +110,10 @@ def modify_association(request, asso_id):
 
 
 def create_association(request):
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     already = False
     if request.method == 'POST':
         form = createAssociationForm(request.POST, request.FILES)

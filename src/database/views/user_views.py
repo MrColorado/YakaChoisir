@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-import re
 
 from database.models import myUser
 from database.models import Members
@@ -9,11 +8,16 @@ from database.models import SystemAdmin
 from database.models import Association
 from database.models import Event
 from database.models import Attend
+from database.views import base_views
 from database.forms import *
 import re
 
 
 def user_information(request):
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     user_info = myUser.objects.get(user=request.user)
 
     email_user = user_info.user.email
@@ -29,6 +33,10 @@ def user_information(request):
 
 
 def user_modify(request):
+    if request.method == 'GET':
+        something = base_views.search(request)
+        if something:
+            return something
     user_to_modify = myUser.objects.get(user=request.user)
     if request.method == 'POST':
         form = modifyUser(request.POST)
