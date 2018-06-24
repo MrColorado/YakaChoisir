@@ -24,7 +24,7 @@ SECRET_KEY = 'h%!eq=h1$zk=s1a4hrul8@(-ub)xws4ta7m85e^tfld!f6w-#c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ '*' ]
 
 # Application definition
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'paypal.standard.ipn',
     'database',
     'util',
+    'api'
     ]
 
 PAYPAL_TEST = True
