@@ -41,6 +41,7 @@
                 </div>
             </div>
         </div>
+        {% if office  %}
         <div class="d-flex" style="justify-content: center; align-items: center">
             <a href="{% url "modify_association" res_asso.id %}">
                 <button class="btn btn-primary">Modifier l'association</button>
@@ -49,5 +50,6 @@
                 <button class="btn btn-primary">Ajouter un nouveau membre</button>
             </a>
         </div>
+        {% endif %}
     </div>
 {% endblock %}

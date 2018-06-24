@@ -14,7 +14,8 @@ from database.forms import invite_member_form
 
 def association(request):
     manager = False
-    if request.user.is_authenticated and len(AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
+    if request.user.is_authenticated and len(
+            AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
         manager = True
     associations = Association.objects.all()
     return render(request, 'association/association.html/', {'associations': associations, 'manager': manager})
@@ -31,7 +32,15 @@ def my_association(request):
 
 def specific_association(request, asso_id):
     res_asso = Association.objects.get(id=asso_id)
-    return render(request, 'association/specific_association.html', {'res_asso': res_asso})
+    office = False
+    if request.user.is_authenticated:
+        if len(AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
+            office = True
+        asso_member = Members.objects.filter(association_id=res_asso)
+        for member in asso_member:
+            if member.user_id == myUser.objects.get(user=request.user) and member.role != "Membre":
+                office = True
+    return render(request, 'association/specific_association.html', {'res_asso': res_asso, "office": office})
 
 
 def add_members(request, asso_id):
