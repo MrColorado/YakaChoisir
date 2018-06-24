@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url, include
 from django.conf.urls.static import static
-
+from tastypie.api import Api
 
 from billeterie import settings
 from database.views import event_views
@@ -26,6 +26,15 @@ from database.views import association_views
 from database.views import user_views
 from django.contrib.auth import views
 from database.views import paypal_view
+
+from api.resources import *
+
+api = Api(api_name='v1')
+
+api.register(MembersResource())
+api.register(EventMembersResource())
+api.register(EventsResource())
+api.register(UsersResource())
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -56,6 +65,7 @@ urlpatterns = [
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^auth/', include('social_django.urls', namespace='social')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
+    url(r'^api/', include(api.urls))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
