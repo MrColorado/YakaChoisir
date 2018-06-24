@@ -65,8 +65,8 @@ def add_members(request, asso_id):
             member = Members.objects.get(association_id=res_asso, user_id=user_id)
             member.role = role
         member.save()
-        return render(request, 'association/specific_association.html', locals(),
-                      {'current_member': current_member, 'res_asso': res_asso})
+        office = True
+        return render(request, 'association/specific_association.html', {'current_member': current_member, 'res_asso': res_asso, "office": office})
     form = add_member_form()
     return render(request, 'association/add_member.html', locals(),
                   {'current_member': current_member, 'res_asso': res_asso})
