@@ -21,6 +21,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from paypal.standard.forms import PayPalPaymentsForm
 import random
+import uuid
 
 def event(request):
     events = []
@@ -57,7 +58,7 @@ def my_event(request):
                   {'my_event': events, 'god': god})
 
 
-def generate_pdf(event, user):
+def generate_pdf(event, user,hash_ticket):
     buffer = BytesIO()
     p = canvas.Canvas(buffer, pagesize=letter)
     p.setFont('Helvetica', 20)
@@ -68,7 +69,7 @@ def generate_pdf(event, user):
     logo_epita = ImageReader("http://localhost:8000/static/img/epita_logo.png")
     p.drawImage(logo_epita, 10, 10, mask='auto')
 
-    data_qr = user.user.first_name + user.user.last_name
+    data_qr = hash_ticket
     data_qr.replace(" ", "")
 
     myqr = ImageReader(
@@ -96,10 +97,11 @@ def register(request, current_event):
         paypal_dict = {
             "business": "yakachoisir@epita.fr",
             "amount": str(my_event.price),
+            "currency_code": "EUR",
             "item_name": "Ticket Evenement EPITA",
-            "invoice": str(random.randint(1,999999)), #TODO mettre hash du ticket
+            "invoice": my_user.user.email + my_event.title,
             "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
-            "return": 'http://127.0.0.1:8000/register_after_pay/' + str(current_event) , #TODO use hash pour secure
+            "return": 'http://127.0.0.1:8000/inscription_after_pay/' + str(current_event) , #TODO use hash pour secure
             "cancel_return": 'http://127.0.0.1:8000', #TODO mettre page erreur paiement
             "custom": "premium_plan",
         # Custom command to correlate to some function later (optional)
@@ -111,14 +113,14 @@ def register(request, current_event):
         new_attend = Attend(user_id=my_user,
                             event_id=my_event,
                             date_entry=timezone.now(),
-                            ticket_number="test")
+                            ticket_number=str(uuid.uuid1()))
         new_attend.save()
 
         obj = "[inscription]" + my_event.title
         message = "<h1> Votre inscription à l'évènement est enregistrée </h1><br>"
         message += "Vous pourrez vous rendre à l'évènement avec le ticket transmit en " \
                    "pièce jointe soit imprimé soit présent sur votre téléphone <br>"
-        pdf = generate_pdf(my_event, my_user)
+        pdf = generate_pdf(my_event, my_user,new_attend.ticket_number)
 
         msg = EmailMessage(obj, message, to=[my_user.user.email])
 
@@ -138,14 +140,14 @@ def register_after_pay(request, current_event):
     new_attend = Attend(user_id=my_user,
                         event_id=my_event,
                         date_entry=timezone.now(),
-                        ticket_number="test")
+                        ticket_number=str(uuid.uuid1()))
     new_attend.save()
 
     obj = "[inscription]" + my_event.title
     message = "<h1> Votre inscription à l'évènement est enregistrée </h1><br>"
     message += "Vous pourrez vous rendre à l'évènement avec le ticket transmit en " \
                "pièce jointe soit imprimé soit présent sur votre téléphone <br>"
-    pdf = generate_pdf(my_event, my_user)
+    pdf = generate_pdf(my_event, my_user,new_attend.ticket_number)
 
     msg = EmailMessage(obj, message, to=[my_user.user.email])
 
