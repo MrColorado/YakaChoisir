@@ -92,3 +92,13 @@ python3 manage.py runserver
     sendgrid.com :
         Yakachoisir
         yakachoisir2018
+
+## paypal account
+    yakachoisir@epita.fr   boutique
+    client1@epita.fr       client
+    client2@epita.fr       client
+
+    tous les mdp sont : yakachoisir
+
+
+
