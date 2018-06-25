@@ -1,1 +1,49 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block panel %}
+    <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
+        <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
+        <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
+        <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
+        <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
+        <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes associations </a>
+        <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <style>
+        #stats_title{
+            margin-top: 2%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            color: #0d2436;
+            font-family: ralewayExtraBold;
+        }
+        #form{
+            margin-top: 5%;
+        }
+    </style>
+
+
+    <div class="container" id="stats_title">
+        <h1> Statistique des evenements</h1>
+    </div>
+    <div class="container">
+    <div class="container" id="stats_title" style="flex-direction: row">
+        <div class="container"> <h3> Association </h3> </div>
+        <div class="container"> <h3> Evenements </h3> </div>
+        <div class="container">  Externe </div>
+        <div class="container">  Interne </div>
+    </div>
+    {% for a in stats %}
+        <div class="container">
+            {{ a.0 }}
+        </div>
+
+    {% endfor %}
+    </div>
+
+{%  endblock %}

@@ -43,7 +43,7 @@ urlpatterns = [
     path('base/', base_views.search, name='search'),
     path('user_settings/', user_views.user_information, name='settings'),
     path('user_settings/modification', user_views.user_modify, name='user_modify'),
-    path('user_settings/stats', user_views.stat, name='stat'),
+    path('user_settings/stat', user_views.stat, name='stat'),
 
     path('evenements/', event_views.event, name='event'),
     path('creation_evenement/', event_views.create_event, name='create_event'),

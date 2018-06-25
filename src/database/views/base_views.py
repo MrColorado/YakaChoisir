@@ -8,7 +8,6 @@ from database.models import Event
 
 def search(request):
 
-    print("lol ca devrai marcher")
     if request.method == 'GET':
         search = request.GET.get('search_box')
         if search:

@@ -68,4 +68,5 @@ def stat(request):
                     extern += 1
             events.append((j, intern, extern))
         asso.append((i, events))
+
     return render(request, 'user_settings/stat.html', {'stats': asso})
