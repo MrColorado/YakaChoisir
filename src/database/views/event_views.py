@@ -23,6 +23,7 @@ from paypal.standard.forms import PayPalPaymentsForm
 import random
 import uuid
 
+
 def event(request):
     events = []
     allEvents = Event.objects.all()
@@ -36,8 +37,13 @@ def event(request):
 def specific_event(request, event_id):
     res_event = Event.objects.filter(id=event_id)
     if len(res_event):
+        inscrit = False
+        if request.user.is_authenticated:
+            user = myUser.objects.get(user=request.user)
+            if len(Attend.objects.filter(user_id=user, event_id=event_id)):
+                inscrit = True
         return render(request, 'event/specific_event.html',
-                      {'res_event': res_event})
+                      {'res_event': res_event, 'inscrit': inscrit})
     return render(request, 'not_found.html')
 
 
@@ -58,7 +64,7 @@ def my_event(request):
                   {'my_event': events, 'god': god})
 
 
-def generate_pdf(event, user,hash_ticket):
+def generate_pdf(event, user, hash_ticket):
     buffer = BytesIO()
     p = canvas.Canvas(buffer, pagesize=letter)
     p.setFont('Helvetica', 20)
@@ -101,14 +107,14 @@ def register(request, current_event):
             "item_name": "Ticket Evenement EPITA",
             "invoice": my_user.user.email + my_event.title,
             "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
-            "return": 'http://127.0.0.1:8000/inscription_after_pay/' + str(current_event) , #TODO use hash pour secure
-            "cancel_return": 'http://127.0.0.1:8000', #TODO mettre page erreur paiement
+            "return": 'http://127.0.0.1:8000/inscription_after_pay/' + str(current_event),  # TODO use hash pour secure
+            "cancel_return": 'http://127.0.0.1:8000',  # TODO mettre page erreur paiement
             "custom": "premium_plan",
-        # Custom command to correlate to some function later (optional)
+            # Custom command to correlate to some function later (optional)
         }
         form = PayPalPaymentsForm(initial=paypal_dict)
         context = {"form": form}
-        return render(request, "event/pay_event.html", context )
+        return render(request, "event/pay_event.html", context)
     else:
         new_attend = Attend(user_id=my_user,
                             event_id=my_event,
@@ -120,7 +126,7 @@ def register(request, current_event):
         message = "<h1> Votre inscription à l'évènement est enregistrée </h1><br>"
         message += "Vous pourrez vous rendre à l'évènement avec le ticket transmit en " \
                    "pièce jointe soit imprimé soit présent sur votre téléphone <br>"
-        pdf = generate_pdf(my_event, my_user,new_attend.ticket_number)
+        pdf = generate_pdf(my_event, my_user, new_attend.ticket_number)
 
         msg = EmailMessage(obj, message, to=[my_user.user.email])
 
@@ -147,7 +153,7 @@ def register_after_pay(request, current_event):
     message = "<h1> Votre inscription à l'évènement est enregistrée </h1><br>"
     message += "Vous pourrez vous rendre à l'évènement avec le ticket transmit en " \
                "pièce jointe soit imprimé soit présent sur votre téléphone <br>"
-    pdf = generate_pdf(my_event, my_user,new_attend.ticket_number)
+    pdf = generate_pdf(my_event, my_user, new_attend.ticket_number)
 
     msg = EmailMessage(obj, message, to=[my_user.user.email])
 

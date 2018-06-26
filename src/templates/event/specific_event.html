@@ -31,7 +31,11 @@
                 <p>Nombre de places intern restantes: {{ res_event.first.size_intern }}</p>
                 <p>Nombre de places extern restantes: {{ res_event.first.size_ext }}</p>
                 <p>Lieu: {{ res_event.first.place }}</p>
-                <p>Inscrit: </p>
+                {% if inscrit %}
+                    <p>Inscrit</p>
+                {% else %}
+                    <p>Non inscrit</p>
+                {% endif %}
                 <p>Prix: {{ res_event.first.price }} euros </p>
                 <div class="d-flex" id="test">
                     <a href="{% url 'register' res_event.first.id %}">
