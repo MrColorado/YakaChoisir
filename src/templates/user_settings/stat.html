@@ -22,9 +22,6 @@
             color: #0d2436;
             font-family: ralewayExtraBold;
         }
-        #form{
-            margin-top: 5%;
-        }
     </style>
 
 
@@ -35,13 +32,34 @@
     <div class="container" id="stats_title" style="flex-direction: row">
         <div class="container"> <h3> Association </h3> </div>
         <div class="container"> <h3> Evenements </h3> </div>
-        <div class="container">  Externe </div>
-        <div class="container">  Interne </div>
+        <div class="container"> <h3> Externe </h3> </div>
+        <div class="container"> <h3> Interne </h3> </div>
     </div>
     {% for a in stats %}
-        <div class="container">
-            {{ a.0 }}
+        <div class="container" id="stats_title" style="flex-direction: row">
+            <div class="container"> {{ a.0 }} </div>
+            <div class="container"> </div>
+            <div class="container"> </div>
+            <div class="container"> </div>
         </div>
+
+        {% if a.1 %}
+        {% for e in a.1 %}
+            <div class="container" id="stats_title" style="flex-direction: row">
+                <div class="container"> </div>
+                <div class="container"> {{ e.0.title }} </div>
+                <div class="container"> {{ e.1 }} / {{ e.3 }}</div>
+                <div class="container"> {{ e.2 }} / {{ e.4 }}</div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="container" id="stats_title" style="flex-direction: row">
+            <div class="container"> </div>
+            <div class="container"> Pas d'evenement </div>
+            <div class="container"> </div>
+            <div class="container"> </div>
+            </div>
+        {% endif %}
 
     {% endfor %}
     </div>
