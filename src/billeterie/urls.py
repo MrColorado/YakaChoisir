@@ -25,7 +25,6 @@ from database.views import home_views
 from database.views import association_views
 from database.views import user_views
 from django.contrib.auth import views
-from database.views import paypal_view
 from database.views import base_views
 
 from api.resources import *
