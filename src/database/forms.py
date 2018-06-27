@@ -6,10 +6,8 @@ from database.models import myUser
 class createEventForm(forms.Form):
     # if forms.is_valid() :
     asso_list = []
-    '''
     for a in Association.objects.all():
         asso_list.append((a.id, a.name))
-    '''
     association_name = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Association'
@@ -56,7 +54,8 @@ class modifyEventForm(forms.Form):
                                                                      'value': event.size_extern})
         self.fields['date_begin'].widget = forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local',
                                                                       'default': event.date_begin})
-        self.fields['boutique'].widget = forms.EmailField(attrs={'class': 'form-control', 'value': event.boutique})
+        #self.fields['boutique'].widget = forms.CharField(attrs={'class': 'form-control',
+        #                                                         'value': event.boutique})
 
 
     association_name = forms.CharField()
@@ -68,7 +67,7 @@ class modifyEventForm(forms.Form):
     size_extern = forms.IntegerField()
     date_begin = forms.DateTimeField()
 
-    boutique = forms.EmailField()
+    #boutique = forms.CharField()
 
     date_end = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
                                                                      'type': 'datetime-local'}))
@@ -95,9 +94,8 @@ class createAssociationForm(forms.Form):
     ), choices=s)
 
     members = []
-    '''for m in myUser.objects.all():
+    for m in myUser.objects.all():
         members.append((m.id, m.user.email))
-    '''
     members.sort(key=lambda tup: tup[1])
 
     president = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
@@ -124,9 +122,8 @@ class createAssociationForm(forms.Form):
 
 class add_member_form(forms.Form):
     members = []
-    '''for m in myUser.objects.all():
+    for m in myUser.objects.all():
         members.append((m.id, m.user.email))
-    '''
     members.sort(key=lambda tup: tup[1])
     new_member = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
