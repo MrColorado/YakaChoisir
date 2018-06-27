@@ -43,6 +43,8 @@ class ScanQRCodeFragment : Fragment(), ZXingScannerView.ResultHandler {
                 else
                     "VALID TICKET: %s %s!".format(member.firstname, member.lastname)
         Toast.makeText(context, message, 2 * Toast.LENGTH_LONG).show()
+
+        scannerView?.resumeCameraPreview(this)
     }
 
     private fun getMatchingAttendMember(ticket_number: String): AttendMember? {

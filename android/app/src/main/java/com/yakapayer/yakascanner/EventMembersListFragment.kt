@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_event_members_list.*
 import retrofit2.Call
@@ -63,14 +64,18 @@ class EventMembersListFragment : Fragment(), TextWatcher {
                         if (responseData != null) {
                             val objectsList = responseData.objects
                             data = arguments!!.getSerializable("data") as ArrayList<AttendMember>
+                            data!!.clear()
+                            val token = arguments!!.getString("token")
                             for (member in objectsList) {
-                                data!!.add(AttendMember(
-                                        member.entry_date,
-                                        member.email,
-                                        member.firstname,
-                                        member.lastname,
-                                        member.ticket_number,
-                                        member.token))
+                                if (token == "" || member.token == token) {
+                                    data!!.add(AttendMember(
+                                            member.entry_date,
+                                            member.email,
+                                            member.firstname,
+                                            member.lastname,
+                                            member.ticket_number,
+                                            member.token))
+                                }
                             }
                             adapter = EventMembersListRecyclerAdapter(context!!, data!!)
                             event_members_list_recycler_view.adapter = adapter
@@ -82,8 +87,26 @@ class EventMembersListFragment : Fragment(), TextWatcher {
         service.getAttendingMembers().enqueue(callback)
     }
 
-    override fun afterTextChanged(s: Editable?) {
-        // TODO filter list with search bar.
+    override fun afterTextChanged(editable: Editable?) {
+        filter(editable.toString())
+    }
+
+    private fun filter(text: String) {
+        //new array list that will hold the filtered data
+        val filteredMembers = ArrayList<AttendMember>()
+
+        //looping through existing elements
+        for (member in data!!) {
+            //if the existing elements contains the search input
+            val textToCompareWith = text.toLowerCase()
+            if (member.firstname.toLowerCase().contains(textToCompareWith)
+                    || member.lastname.toLowerCase().contains(textToCompareWith)) {
+                //adding the element to filtered list
+                filteredMembers.add(member)
+            }
+        }
+        //calling a method of the adapter class and passing the filtered list
+        this.adapter!!.filterList(filteredMembers)
     }
 
 
