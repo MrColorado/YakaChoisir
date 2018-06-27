@@ -230,6 +230,11 @@ def create_event(request):
 
 @login_required
 def modify_event(request, event_id):
+    god = False
+    if request.user.is_authenticated:
+        if request.user.is_authenticated and len(
+                AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
+            god = True
     if request.method == 'GET':
         something = base_views.search(request)
         if something:
@@ -254,4 +259,4 @@ def modify_event(request, event_id):
     else:
         form = modifyEventForm(request.GET, event=res_event)
     return render(request, 'event/change_event.html', locals(),
-                  {'event_id': event_id})
+                  {'event_id': event_id, 'god': god})
