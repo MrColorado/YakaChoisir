@@ -22,6 +22,10 @@ def user_information(request):
             return something
     user_info = myUser.objects.get(user=request.user)
 
+    god = False
+    if request.user.is_authenticated:
+        if len(AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
+            god = True
     email_user = user_info.user.email
     email_user = re.search('[@].....', email_user)
     if email_user.group(0) == "@epita":
@@ -31,7 +35,7 @@ def user_information(request):
         isfrom = "externe"
         url_photo = "https://pikmail.herokuapp.com/" + user_info.user.email + "?size=200"
     return render(request, 'user_settings/user_settings.html',
-                  {'user_info': user_info, 'url_photo': url_photo, 'isfrom' : isfrom})
+                  {'user_info': user_info, 'god': god, 'url_photo': url_photo, 'isfrom' : isfrom})
 
 
 def user_modify(request):
