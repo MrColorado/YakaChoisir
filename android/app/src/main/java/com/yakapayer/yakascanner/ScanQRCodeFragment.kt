@@ -10,12 +10,14 @@ import android.widget.Toast
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.Result
 import me.dm7.barcodescanner.zxing.ZXingScannerView
+import java.time.LocalDateTime
+import java.util.*
 
 class ScanQRCodeFragment : Fragment(), ZXingScannerView.ResultHandler {
 
-    private var data : ArrayList<AttendMember>? = null
+    private var data: ArrayList<AttendMember>? = null
 
-    private var scannerView : ZXingScannerView? = null
+    private var scannerView: ZXingScannerView? = null
 
     private val FLASH_STATE = "FLASH_STATE"
     private val AUTO_FOCUS_STATE = "AUTO_FOCUS_STATE"
@@ -35,14 +37,21 @@ class ScanQRCodeFragment : Fragment(), ZXingScannerView.ResultHandler {
             Toast.makeText(context, "Scan failed!", Toast.LENGTH_LONG).show()
             return
         }
-        Log.d("TESTINGS", "result is %s".format(rawResult.text))
-        val member : AttendMember? = getMatchingAttendMember(rawResult.text)
-        val message =
-                if (member == null)
-                    "INVALID TICKET!"
-                else
-                    "VALID TICKET: %s %s!".format(member.firstname, member.lastname)
-        Toast.makeText(context, message, 2 * Toast.LENGTH_LONG).show()
+        val member: AttendMember? = getMatchingAttendMember(rawResult.text)
+        var message : String? = null
+        if (member == null) {
+            message = "INVALID TICKET!"
+        }
+        else if (member.entry_date != null){
+            message = "ALREADY SCANNED!" + System.lineSeparator() +
+                    "%s %s".format(member.firstname, member.lastname)
+        }
+        else {
+            message = "VALID TICKET!"+ System.lineSeparator() +
+                    "%s %s".format(member.firstname, member.lastname)
+            member.entry_date = Calendar.getInstance().time
+        }
+        Toast.makeText(context, message, 4 * Toast.LENGTH_LONG).show()
 
         scannerView?.resumeCameraPreview(this)
     }
@@ -67,7 +76,7 @@ class ScanQRCodeFragment : Fragment(), ZXingScannerView.ResultHandler {
         Log.d("QRCODE", data.toString())
 
         scannerView = ZXingScannerView(activity)
-        if(state != null) {
+        if (state != null) {
             flash = state.getBoolean(FLASH_STATE, false)
             autoFocus = state.getBoolean(AUTO_FOCUS_STATE, true)
             selectedIndices = state.getIntegerArrayList(SELECTED_FORMATS)
