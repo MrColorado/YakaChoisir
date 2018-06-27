@@ -241,7 +241,7 @@ def modify_event(request, event_id):
             return something
     res_event = Event.objects.get(id=event_id)
     if request.method == 'POST':
-        form = createEventForm(request.POST)
+        form = modifyEventForm(request.POST, request.FILES, event=res_event)
         res_event.title = form.data['title']
         res_event.description = form.data['description']
         res_event.price = form.data['price']
@@ -251,8 +251,7 @@ def modify_event(request, event_id):
         res_event.date_begin = form.data['date_begin']
         res_event.date_end = form.data['date_end']
         res_event.date_deadline = form.data['date_deadline']
-        res_event.photo = form.data['photo']
-        res_event.boutique = form.data['boutique']
+        res_event.photo = request.FILES['photo']
         res_event.premium = form.data['prenium']
         res_event.save()
         creer = True

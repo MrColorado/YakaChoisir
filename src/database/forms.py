@@ -30,8 +30,8 @@ class createEventForm(forms.Form):
                                                                      'type': 'datetime-local'}))
     date_deadline = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
                                                                           'type': 'datetime-local'}))
-    photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
-                                                           'class': 'form-control-file'}))
+    photo = forms.ImageField(initial="", required=True, widget=forms.FileInput(attrs={'type': 'file',
+                                                                                      'class': 'form-control'}))
     boutique = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
 
@@ -55,9 +55,6 @@ class modifyEventForm(forms.Form):
                                                                      'value': event.size_extern})
         self.fields['date_begin'].widget = forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local',
                                                                       'default': event.date_begin})
-        #self.fields['boutique'].widget = forms.CharField(attrs={'class': 'form-control',
-        #                                                         'value': event.boutique})
-
 
     association_name = forms.CharField()
     title = forms.CharField()
@@ -68,16 +65,15 @@ class modifyEventForm(forms.Form):
     size_extern = forms.IntegerField()
     date_begin = forms.DateTimeField()
 
-    #boutique = forms.CharField()
-
     date_end = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
                                                                      'type': 'datetime-local'}))
     date_deadline = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
                                                                           'type': 'datetime-local'}))
-    photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
-                                                           'class': 'form-control-file'}))
+    photo = forms.ImageField(required=True, widget=forms.FileInput(attrs={'type': 'file',
+                                                                          'class': 'form-control'}))
+
     prenChoice = ((False, 'Non'),
-           (True, 'Oui'))
+                  (True, 'Oui'))
     prenium = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Non'
