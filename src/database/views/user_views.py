@@ -108,7 +108,7 @@ def csv_download(request):
     response['Content-Disposition'] = 'attachment; filename="stat.csv"'
 
     writer = csv.writer(response)
-    writer.writerow(['Association', 'Evenement', 'Externe present', 'Externe place',
+    writer.writerow(['Association', 'Evenements', 'Externe present', 'Externe place',
                          'Interne present', 'Interne place'])
 
     for i in asso:

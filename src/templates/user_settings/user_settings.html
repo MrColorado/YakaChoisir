@@ -21,7 +21,7 @@
                     <h3> Informations personnels</h3>
                     <ul>
                         <li> Nom : {{ user_info.user.last_name }} </li>
-                        <li> Prenom : {{ user_info.user.first_name }}</li>
+                        <li> Prénom : {{ user_info.user.first_name }}</li>
                         <li> Pseudo : {{ user_info.user.username }} </li>
                         <li> Genre : {{ user_info.gender }}</li>
                         <li> Mail principale : {{ user_info.user.email }}</li>
@@ -43,12 +43,12 @@
     </div>
     <div class="d-flex" id="test">
         <a href="{% url "user_modify" %}">
-            <button class="btn btn-success">Modifier vos information personelles</button>
+            <button class="btn btn-success">Modifier vos informations personelles</button>
         </a>
     </div>
     <div class="d-flex" id="test">
         <a href="{% url "stat" %}">
-            <button class="btn btn-success">Voir les statistique des associations</button>
+            <button class="btn btn-success">Voir les statistiques des associations</button>
         </a>
     </div>
 
