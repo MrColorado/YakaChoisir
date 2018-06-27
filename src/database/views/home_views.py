@@ -20,9 +20,9 @@ def home(request):
     for e in allEvents:
         aware = datetime.datetime(e.date_begin.year, e.date_begin.month, e.date_begin.day, e.date_begin.hour,
                                 e.date_begin.minute, e.date_begin.second, 0, pytz.UTC)
-        if e.date_begin > now and datetime.timedelta(days=30) + now >= aware >= now:
+        if e.date_begin > now and datetime.timedelta(days=30) + now >= aware >= now and e.validated:
             thirty.append(e)
-        if cpt == 0 and e.premium and aware > now:
+        if cpt == 0 and e.premium and aware > now and e.validated:
             first.append(e)
             cpt = cpt + 1
             continue
