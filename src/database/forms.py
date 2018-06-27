@@ -6,8 +6,10 @@ from database.models import myUser
 class createEventForm(forms.Form):
     # if forms.is_valid() :
     asso_list = []
+    '''
     for a in Association.objects.all():
         asso_list.append((a.id, a.name))
+    '''
     association_name = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
         'value': 'Association'
@@ -93,8 +95,9 @@ class createAssociationForm(forms.Form):
     ), choices=s)
 
     members = []
-    for m in myUser.objects.all():
+    '''for m in myUser.objects.all():
         members.append((m.id, m.user.email))
+    '''
     members.sort(key=lambda tup: tup[1])
 
     president = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
@@ -121,8 +124,9 @@ class createAssociationForm(forms.Form):
 
 class add_member_form(forms.Form):
     members = []
-    for m in myUser.objects.all():
+    '''for m in myUser.objects.all():
         members.append((m.id, m.user.email))
+    '''
     members.sort(key=lambda tup: tup[1])
     new_member = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
         'class': 'form-control',
