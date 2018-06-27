@@ -15,6 +15,7 @@ class createEventForm(forms.Form):
     ), choices=asso_list)
 
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    token = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
     price = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control',
                                                                'value': '0.0'}))
@@ -75,6 +76,13 @@ class modifyEventForm(forms.Form):
                                                                           'type': 'datetime-local'}))
     photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
                                                            'class': 'form-control-file'}))
+    prenChoice = ((False, 'Non'),
+           (True, 'Oui'))
+    prenium = forms.MultipleChoiceField(required=True, widget=forms.Select(attrs={
+        'class': 'form-control',
+        'value': 'Non'
+    }
+    ), choices=prenChoice)
 
 
 class createAssociationForm(forms.Form):

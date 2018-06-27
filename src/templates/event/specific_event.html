@@ -42,11 +42,13 @@
                         <button class="btn btn-success">Inscription</button>
                     </a>
                 </div>
+                {% if god %}
                 <div class="d-flex" id="test">
                     <a href="{% url 'modify_event' res_event.first.id %}">
                         <button class="btn btn-success">Modifier L'evenemt</button>
                     </a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>

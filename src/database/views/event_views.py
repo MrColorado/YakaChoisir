@@ -18,6 +18,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.utils import ImageReader
 from database.views import base_views
 
+from database.models import AssociationsManager
 from django.urls import reverse
 from django.shortcuts import render
 from paypal.standard.forms import PayPalPaymentsForm
@@ -40,6 +41,10 @@ def event(request):
 
 
 def specific_event(request, event_id):
+    god = False
+    if request.user.is_authenticated:
+        if len(AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
+            god = True
     if request.method == 'GET':
         something = base_views.search(request)
         if something:
@@ -52,7 +57,7 @@ def specific_event(request, event_id):
             if len(Attend.objects.filter(user_id=user, event_id=event_id)):
                 inscrit = True
         return render(request, 'event/specific_event.html',
-                      {'res_event': res_event, 'inscrit': inscrit})
+                      {'res_event': res_event, 'inscrit': inscrit, 'god': god})
     return render(request, 'not_found.html')
 
 
@@ -63,10 +68,10 @@ def my_event(request):
         if something:
             return something
     my_user = myUser.objects.get(user=request.user)
-    members = Members.objects.filter(user_id=my_user)
     god = False
-    if members:
-        god = True
+    if request.user.is_authenticated:
+        if len(AssociationsManager.objects.filter(user_id=myUser.objects.get(user=request.user))):
+            god = True
 
     events = []
     event_id = Attend.objects.filter(user_id=my_user)
@@ -196,9 +201,8 @@ def create_event(request):
         date_end = form.data['date_end']
         date_deadline = form.data['date_deadline']
         photo = request.FILES['photo']
-
         boutique = form.data['boutique'] #TODO
-
+        token = form.data['token']
         assoc = Association.objects.get(id=assoc_name)
         newEvent = Event(association_id=assoc,
                          title=title,
@@ -212,7 +216,9 @@ def create_event(request):
                          place=place,
                          photo=photo,
                          size_intern=size_intern,
-                         size_extern=size_extern)
+                         size_extern=size_extern,
+                         token_staff=token
+                         )
         newEvent.save()
         creer = True
     else:
@@ -242,6 +248,7 @@ def modify_event(request, event_id):
         res_event.date_deadline = form.data['date_deadline']
         res_event.photo = form.data['photo']
         res_event.boutique = form.data['boutique']
+        res_event.premium = form.data['prenium']
         res_event.save()
         creer = True
     else:
