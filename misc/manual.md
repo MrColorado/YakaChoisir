@@ -53,7 +53,7 @@ deactivate
 Executer les commandes suivante:
 ```
 cd src 
-pyhton3 manage.py runserver
+python3 manage.py runserver
 ```
 
 Si vous souhaitez rajouter un compte administrateur:
