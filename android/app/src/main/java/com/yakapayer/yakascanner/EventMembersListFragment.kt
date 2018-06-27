@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class EventMembersListFragment : Fragment(), TextWatcher {
 
-    private val data = ArrayList<AttendMember>()
+    private var data : ArrayList<AttendMember>? = null
     private var adapter: EventMembersListRecyclerAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -37,11 +37,7 @@ class EventMembersListFragment : Fragment(), TextWatcher {
                 LinearLayoutManager.VERTICAL,
                 false
         )
-
         fillDataList()
-
-        adapter = EventMembersListRecyclerAdapter(context!!, data)
-        event_members_list_recycler_view.adapter = adapter
 
         // Search Bar
         event_members_list_search_bar.addTextChangedListener(this)
@@ -49,25 +45,26 @@ class EventMembersListFragment : Fragment(), TextWatcher {
 
     /**
      * Makes Retrofit GET request to get all EventMembers items
+     * If GET Request succeed, this.data is filled up and given to RecyclerView adapter
      */
     private fun fillDataList() {
-        // TODO Retrofit request
         val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
-        val retrofit = Retrofit.Builder().baseUrl("http://127.0.0.1:8000/api/v1/").addConverterFactory(jsonConverter).build()
+        val retrofit = Retrofit.Builder().baseUrl("https://yaka-choisir.herokuapp.com/api/v1/").addConverterFactory(jsonConverter).build()
         val service: WSInterface = retrofit.create(WSInterface::class.java)
-        val callback = object : Callback<List<AttendMember>> {
-            override fun onFailure(call: Call<List<AttendMember>>?, t: Throwable?) {
+        val callback = object : Callback<EventMembersFullRequest> {
+            override fun onFailure(call: Call<EventMembersFullRequest>?, t: Throwable?) {
                 Log.d("Retrofit", "GET Request error")
             }
 
-            override fun onResponse(call: Call<List<AttendMember>>?, response: Response<List<AttendMember>>?) {
+            override fun onResponse(call: Call<EventMembersFullRequest>?, response: Response<EventMembersFullRequest>?) {
                 if (response != null) {
                     if (response.code() == 200) {
                         val responseData = response.body()
                         if (responseData != null) {
-                            for (member in responseData) {
-                                Log.d("GET REQUEST", member.toString())
-                                data.add(AttendMember(
+                            val objectsList = responseData.objects
+                            data = arguments!!.getSerializable("data") as ArrayList<AttendMember>
+                            for (member in objectsList) {
+                                data!!.add(AttendMember(
                                         member.entry_date,
                                         member.email,
                                         member.firstname,
@@ -75,6 +72,8 @@ class EventMembersListFragment : Fragment(), TextWatcher {
                                         member.ticket_number,
                                         member.token))
                             }
+                            adapter = EventMembersListRecyclerAdapter(context!!, data!!)
+                            event_members_list_recycler_view.adapter = adapter
                         }
                     }
                 }

@@ -3,7 +3,7 @@ package com.yakapayer.yakascanner
 import java.util.*
 
 data class AttendMember(
-        val entry_date : Date,
+        val entry_date : Date?,
         val email : String,
         val firstname : String,
         val lastname : String,

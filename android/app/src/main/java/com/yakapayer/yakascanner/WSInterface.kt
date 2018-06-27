@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface WSInterface {
     @GET("event_members")
-    fun getAttendingMembers() : Call<List<AttendMember>>
+    fun getAttendingMembers() : Call<EventMembersFullRequest>
 }
