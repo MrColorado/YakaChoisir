@@ -36,6 +36,10 @@ class ChooseEventFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         fragment_choose_event_sendTokenButton.setOnClickListener{
+            if (event_choose_token_editText.text.isEmpty()) {
+                Toast.makeText(context, "Please choose an event token.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             dataBundle.putString("token", event_choose_token_editText.text.toString())
             launchFragment(EventMembersListFragment())
         }

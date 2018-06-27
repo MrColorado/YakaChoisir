@@ -255,6 +255,19 @@ def modify_event(request, event_id):
         res_event.premium = form.data['prenium']
         res_event.save()
         creer = True
+
+        l = Attend.objects.filter(event_id=event_id)
+        for x in l:
+            mail = x.user_id.user.email
+            obj = "[modification évènement]" + res_event.title
+            message = "L'évènement a été modifié, nous vous invitons à vous rendre sur le site web pour" \
+                      "en prendre connaissance. <br> " \
+                      "Merci <br>"
+            msg = EmailMessage(obj, message, to=[mail])
+            msg.content_subtype = "html"
+            msg.send()
+
+
     else:
         form = modifyEventForm(request.GET, event=res_event)
     return render(request, 'event/change_event.html', locals(),

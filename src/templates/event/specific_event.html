@@ -28,8 +28,8 @@
                 <p>Date de début: {{ res_event.first.date_begin }}</p>
                 <p>Date de fin: {{ res_event.first.date_end }} </p>
                 <p>Date deadline: {{ res_event.first.date_deadline }}</p>
-                <p>Nombre de places intern restantes: {{ res_event.first.size_intern }}</p>
-                <p>Nombre de places extern restantes: {{ res_event.first.size_ext }}</p>
+                <p>Nombre de places interne restantes: {{ res_event.first.size_intern }}</p>
+                <p>Nombre de places externe restantes: {{ res_event.first.size_ext }}</p>
                 <p>Lieu: {{ res_event.first.place }}</p>
                 {% if inscrit %}
                     <p>Inscrit</p>
@@ -45,7 +45,7 @@
                 {% if god %}
                 <div class="d-flex" id="test">
                     <a href="{% url 'modify_event' res_event.first.id %}">
-                        <button class="btn btn-success">Modifier L'evenemt</button>
+                        <button class="btn btn-success">Modifier L'évènement</button>
                     </a>
                 </div>
                 {% endif %}
