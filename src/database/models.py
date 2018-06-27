@@ -81,13 +81,15 @@ class Event(models.Model):
     date_deadline = models.DateTimeField()
     validated = models.BooleanField()
     description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=6, decimal_places=2)  # TODO find a better way to store money fields
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     place = models.CharField(max_length=100)
     photo = models.ImageField(upload_to='event')
     size_intern = models.IntegerField()
     size_extern = models.IntegerField()
     premium = models.NullBooleanField()
     token_staff = models.CharField(max_length=100)
+    boutique = models.EmailField(max_length=100)
+
 
     def __str__(self):
         return "{0} par {1}".format(self.title, self.association_id.name)

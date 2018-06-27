@@ -114,7 +114,7 @@ def register(request, current_event):
 
     if my_event.price > 0:
         paypal_dict = {
-            "business": "yakachoisir@epita.fr",
+            "business": my_event.boutique,#"yakachoisir@epita.fr",
             "amount": str(my_event.price),
             "currency_code": "EUR",
             "item_name": "Ticket Evenement EPITA",
@@ -196,6 +196,9 @@ def create_event(request):
         date_end = form.data['date_end']
         date_deadline = form.data['date_deadline']
         photo = request.FILES['photo']
+
+        boutique = form.data['boutique'] #TODO
+
         assoc = Association.objects.get(id=assoc_name)
         newEvent = Event(association_id=assoc,
                          title=title,
@@ -205,6 +208,7 @@ def create_event(request):
                          validated=True,
                          description=description,
                          price=price,
+                         boutique=boutique,
                          place=place,
                          photo=photo,
                          size_intern=size_intern,
@@ -237,6 +241,7 @@ def modify_event(request, event_id):
         res_event.date_end = form.data['date_end']
         res_event.date_deadline = form.data['date_deadline']
         res_event.photo = form.data['photo']
+        res_event.boutique = form.data['boutique']
         res_event.save()
         creer = True
     else:

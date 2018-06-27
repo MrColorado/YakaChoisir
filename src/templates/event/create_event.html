@@ -81,6 +81,13 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="example-text-input" class="col-2 col-form-label">email Boutique (nécessaire si payant)</label>
+                <div class="col-10">
+                    {{ form.boutique }}
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label for="exampleInputFile">Affiche de l'evenement :</label>
                 {{ form.photo }}
                 <small id="fileHelp" class="form-text text-muted">Importer l'affiche de votre evenement en .jpg</small>

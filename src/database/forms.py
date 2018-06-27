@@ -31,6 +31,7 @@ class createEventForm(forms.Form):
                                                                           'type': 'datetime-local'}))
     photo = forms.ImageField(widget=forms.FileInput(attrs={'type': 'file',
                                                            'class': 'form-control-file'}))
+    boutique = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
 
 class modifyEventForm(forms.Form):
@@ -53,6 +54,8 @@ class modifyEventForm(forms.Form):
                                                                      'value': event.size_extern})
         self.fields['date_begin'].widget = forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local',
                                                                       'default': event.date_begin})
+        self.fields['boutique'].widget = forms.EmailField(attrs={'class': 'form-control', 'value': event.boutique})
+
 
     association_name = forms.CharField()
     title = forms.CharField()
@@ -62,6 +65,9 @@ class modifyEventForm(forms.Form):
     size_intern = forms.IntegerField()
     size_extern = forms.IntegerField()
     date_begin = forms.DateTimeField()
+
+    boutique = forms.EmailField()
+
     date_end = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
                                                                      'type': 'datetime-local'}))
     date_deadline = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
