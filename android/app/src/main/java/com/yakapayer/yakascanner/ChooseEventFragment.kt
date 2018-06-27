@@ -1,7 +1,10 @@
 package com.yakapayer.yakascanner
 
 import android.Manifest
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -12,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_choose_event.*
 
 
@@ -21,6 +25,7 @@ class ChooseEventFragment : Fragment() {
         data = ArrayList()
         Log.d("TESTINGS", "init")
     }
+    val dataBundle = Bundle()
     private val ZBAR_CAMERA_PERMISSION = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -30,11 +35,8 @@ class ChooseEventFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d("TESTINGS", "arguments = " + arguments?.getSerializable("data").toString())
-        Log.d("TESTINGS", "data = " + data.toString())
-
-
         fragment_choose_event_sendTokenButton.setOnClickListener{
+            dataBundle.putString("token", event_choose_token_editText.text.toString())
             launchFragment(EventMembersListFragment())
         }
 
@@ -51,7 +53,6 @@ class ChooseEventFragment : Fragment() {
     }
 
     private fun launchFragment(fragment: Fragment) {
-        val dataBundle = Bundle()
         dataBundle.putSerializable("data", data)
         fragment.arguments = dataBundle
         Log.d("TESTINGS", data.toString())

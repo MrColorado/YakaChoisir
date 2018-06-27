@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.main_container, ChooseEventFragment()).addToBackStack("MAIN_FRAGMENT")
+        fragmentTransaction.replace(R.id.main_container, ChooseEventFragment())
 
         fragmentTransaction.commit()
     }
