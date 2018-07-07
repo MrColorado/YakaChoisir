@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block panel %}
+    <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel"
+         xmlns:background-image="http://www.w3.org/1999/xhtml" xmlns:background-image="http://www.w3.org/1999/xhtml">
+        <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
+        <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
+        <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
+        <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
+        <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes associations </a>
+        <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
+    </nav>
+{% endblock %}
+
+{% block body %}
+<style>
+    #create_event{
+        margin-top: 2%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color: #0d2436;
+        font-family: ralewayExtraBold;
+    }
+}
+</style>
+
+<form action="{% url "invite_member" %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container" id="create_event">
+        <h2>Inviter des personnes à s'inscrire sur ce site</h2>
+        <div class="form-group row">
+            <label for="example-datetime-local-input" class="col-4 col-form-label">Adresse mail de la personne à inviter : </label>
+            <div class="col-10">
+                {{ form.mail }}
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Envoyer" />
+    </div>
+</form>
+
+{% endblock %}

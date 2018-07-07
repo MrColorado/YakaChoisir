@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block panel %}
+    <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
+        <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
+        <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
+        <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
+        <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
+        <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes associations </a>
+        <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <style>
+        #stats_title{
+            margin-top: 2%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            color: #0d2436;
+            font-family: ralewayExtraBold;
+        }
+    </style>
+
+
+    <div class="container" id="stats_title">
+        <h1> Statistique des évènements</h1>
+    </div>
+    <div class="container">
+    <div class="container" id="stats_title" style="flex-direction: row">
+        <div class="container"> <h3> Association </h3> </div>
+        <div class="container"> <h3> Evènement </h3> </div>
+        <div class="container"> <h3> Externe </h3> </div>
+        <div class="container"> <h3> Interne </h3> </div>
+    </div>
+    {% for a in stats %}
+        <div class="container" id="stats_title" style="flex-direction: row">
+            <div class="container"> {{ a.0 }} </div>
+            <div class="container"> </div>
+            <div class="container"> </div>
+            <div class="container"> </div>
+        </div>
+
+        {% if a.1 %}
+        {% for e in a.1 %}
+            <div class="container" id="stats_title" style="flex-direction: row">
+                <div class="container"> </div>
+                <div class="container"> {{ e.0.title }} </div>
+                <div class="container"> {{ e.1 }} / {{ e.3 }}</div>
+                <div class="container"> {{ e.2 }} / {{ e.4 }}</div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="container" id="stats_title" style="flex-direction: row">
+            <div class="container"> </div>
+            <div class="container"> Pas d'évènement </div>
+            <div class="container"> </div>
+            <div class="container"> </div>
+            </div>
+        {% endif %}
+
+    {% endfor %}
+    </div>
+    <div class="d-flex" id="test" style="margin-top: 5%">
+        <a href="{% url 'download_stat' %}">
+            <button class="btn btn-success">Télécharger les statistiques</button>
+        </a>
+    </div>
+
+{%  endblock %}

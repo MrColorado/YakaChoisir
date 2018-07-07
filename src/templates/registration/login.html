@@ -5,33 +5,18 @@
     <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
         <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
         <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
-        <a class="nav-item nav-link disabled" href="#"> Mes événements </a>
-        <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
+        <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
     </nav>
 {% endblock %}
 
 {%  block body%}
 
     <div class="d-flex" id="test">
-        <div class="d-flex" id="flex_login">
-
-            <div class="d-flex" id="test">
-                <h2>Connexion en tant qu'admin</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Login</button>
-                 </form>
-            </div>
-
-            <div class="d-flex flex-column" style="padding-top: 10px">
-                <div class="mb-auto p-2">
-                    <a href="{% url 'social:begin' 'google-oauth2' %}"> <img src="{% static "img/google.jpg" %}"></a>
-                </div>
-                <div class="mb-auto p-2">
-                    <a href="{% url 'social:begin' backend='epita' %}"> <img src="{% static "img/cri.jpg" %}"></a>
-                </div>
-            </div>
+        <div class="mb-auto p-2">
+            <a href="{% url 'social:begin' 'google-oauth2' %}"> <img src="{% static "img/google.png" %}"></a>
+        </div>
+        <div class="mb-auto p-2">
+            <a href="{% url 'social:begin' backend='epita' %}"> <img src="{% static "img/cri.png" %}"></a>
         </div>
     </div>
 

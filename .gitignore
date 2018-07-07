@@ -11,8 +11,6 @@
 *.pyc
 __pycache__/
 local_settings.py
-db.sqlite3
-media
 
 # If your build process includes running collectstatic, then you probably don't
 # need or want to include staticfiles/
@@ -228,3 +226,15 @@ venv.bak/
 
 
 # End of https://www.gitignore.io/api/python,django,pycharm,intellij
+
+# ANDROID GITIGNORE
+*.iml
+.gradle
+/local.properties
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild

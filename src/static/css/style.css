@@ -143,3 +143,38 @@
     height:1000%;
     height: auto;
 }
+
+#flex_register {
+    background: lightgray;
+    border: gray 1px solid;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 1px 1px 12px #555;
+    font-family: ralewayMedium;
+    align-self: center;
+    padding: 15px;
+}
+
+#create_event{
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: #0d2436;
+    font-family: ralewayExtraBold;
+}
+#form{
+    margin-top: 5%;
+}
+
+/*-------------------------------------------------------STAT---------------------------------------------------------*/
+
+#stats_title {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: #0d2436;
+    font-family: ralewayExtraBold;
+}

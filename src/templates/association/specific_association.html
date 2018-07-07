@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block panel %}
+    <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
+        <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
+        <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
+        {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
+        {% endif %}
+        <a class="nav-item nav-link active" href="{% url 'association' %}"> Associations </a>
+        {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes Associations </a>
+            <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
+        {% endif %}
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <div class="container" id="specific_event_container">
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                {% if res_asso.photo %}
+                    <img src="{{res_asso.photo.url}}" id="event_img">
+                {% else %}
+                    <img src="{% static "img/lonely_kitten.jpg" %}" id="event_img">
+                {% endif %}
+            </div>
+
+            <div class="col-sm-12" id="specific_event_col">
+                <h1> {{ res_asso.name }}</h1>
+                <p>Description: {{ res_asso.description }}</p>
+                <p>Date de création: {{ res_asso.date_creation }}</p>
+                <p>Mail: {{ res_asso.mail }}</p>
+                <p>Statut: {{ res_asso.statut }}</p>
+
+                <div class="d-flex" id="test">
+                    <a href="{{ res_asso.site }}">
+                        <button class="btn btn-primary">Pour plus d'informations</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% if office  %}
+        <div class="d-flex" style="justify-content: center; align-items: center">
+            <a href="{% url "modify_association" res_asso.id %}">
+                <button class="btn btn-primary">Modifier l'association</button>
+            </a>
+            <a href="{% url "add_member" res_asso.id %}">
+                <button class="btn btn-primary">Ajouter un nouveau membre</button>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -29,11 +29,12 @@
                             <h3>Billetterie</h3>
                         </div>
                     </div>
+                {{ user.username }}
                     <ul class="nav nav-pills pull-right" id="base_nav_input">
                        <li style="margin-right: 4px;">
-                           <form class="input-append hidden-tablet" style="margin-bottom: 4px; margin-top: 4px;">
+                           <form type="get" action="." class="input-append hidden-tablet" style="margin-bottom: 4px; margin-top: 4px;">
                                <div class="input-group">
-                                   <input id="kw" class="span2" title="Enter keyword(s) to find" name="kw" maxlength="40" type="texte" style="margin-right: 0px">
+                                   <input id="search_box" class="span2" title="Enter keyword(s) to find" placeholder="Rechercher..." name="search_box" maxlength="40" type="texte" style="margin-right: 0px">
                                    <button class="btn btn-light" type="submit">
                                        <i class ="fa fa-search" title="Search"></i>
                                    </button>
@@ -43,10 +44,8 @@
                        <li>
                            <form class="hidden-tablet" style="margin-top: 4px; margin-bottom: 4px;">
                                {% if user.is_authenticated %}
-                                   Bienvenue {{ user.username }}
                                     <a type="button" class="btn btn-light" href="{% url 'logout' %}">Deconnexion</a>
                                {% else %}
-                                   Not logged
                                     <a type="button" class="btn btn-light" href="{% url 'login' %}">Connexion</a>
                                {% endif %}
                            </form>
@@ -59,8 +58,14 @@
             <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
                 <a class="nav-item nav-link active" href="{% url 'home' %}"> Accueil </a>
                 <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
-                <a class="nav-item nav-link disabled" href="#"> Mes événements </a>
-                <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
+                {% endif %}
+                <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes associations </a>
+                    <a class="nav-item nav-link" href="{% url 'settings' %}"> Mon compte </a>
+                {% endif %}
             </nav>
             {% endblock %}
 
@@ -78,7 +83,7 @@
         {% block footer %}
             <footer class="container-fluid" id="footer">
                 <div class="row justify-content-center">
-                    <a class="nav-link js-scroll-trigger" href="">Site en développement</a>
+                    <a class="nav-link js-scroll-trigger">Billetterie</a>
                 </div>
             </footer>
         {% endblock %}

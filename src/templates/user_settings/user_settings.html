@@ -5,37 +5,54 @@
     <nav class="nav nav-pills nav-fill navbar-dark" id="base_panel">
         <a class="nav-item nav-link" href="{% url 'home' %}"> Accueil </a>
         <a class="nav-item nav-link" href="{% url 'event' %}"> Evénements </a>
-        <a class="nav-item nav-link disabled" href="#"> Mes événements </a>
+        <a class="nav-item nav-link" href="{% url 'my_event' %}"> Mes événements </a>
+        <a class="nav-item nav-link" href="{% url 'association' %}"> Associations </a>
+        <a class="nav-item nav-link" href="{% url 'my_association' %}"> Mes associations </a>
         <a class="nav-item nav-link active" href="{% url 'settings' %}"> Mon compte </a>
     </nav>
 {% endblock %}
 
 {% block body %}
+
     <div class="container-fluid">
         <div class="row justify-content-around">
             <div class="col-xs-12 col-md-8">
                 <div class="d-flex" id="test">
                     <h3> Informations personnels</h3>
                     <ul>
-                        <li> nom : {{ user_info.user.last_name }} </li>
-                        <li> prenom : {{ user_info.user.first_name }}</li>
-                        <li> pseudo : {{ user_info.user.username }} </li>
-                        <li> genre : {{ user_info.gender }}</li>
-                        <li> mail principale : {{ user_info.user.email }}</li>
-                        <li> mail secondaire  : {{ user_info.mail_secondary }}</li>
-                        <li> externe </li>
-                        <li> date d'inscription :  </li>
+                        <li> Nom : {{ user_info.user.last_name }} </li>
+                        <li> Prénom : {{ user_info.user.first_name }}</li>
+                        <li> Pseudo : {{ user_info.user.username }} </li>
+                        <li> Genre : {{ user_info.gender }}</li>
+                        <li> Mail principale : {{ user_info.user.email }}</li>
+                        <li> Mail secondaire  : {{ user_info.mail_secondary }}</li>
+                        <li> Status : {{ isfrom }}</li>
+                        <li> Date d'inscription :  {{ user_info.user.last_login.date }}</li>
                     </ul>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-2" style="border: 3px dashed #ffc107">
+            <div class="col-xs-12 col-md-2">
                 <div class="d-flex" id="test1">
                     <div class="d-flex" id="test">
-                        <img src="{% static 'img/unknown.png' %}">
-                        <p>Admin</p>
+                        <img width=143 src={{ url_photo }}>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
+    <div class="d-flex" id="test">
+        <a href="{% url "user_modify" %}">
+            <button class="btn btn-success">Modifier vos informations personelles</button>
+        </a>
+    </div>
+    {% if god %}
+    <div class="d-flex" id="test">
+        <a href="{% url "stat" %}">
+            <button class="btn btn-success">Voir les statistiques des associations</button>
+        </a>
+    </div>
+    {% endif %}
+
+
 {% endblock %}

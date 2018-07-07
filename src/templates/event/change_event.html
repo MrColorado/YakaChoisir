@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<style>
+    #modify_event{
+        margin-top: 2%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color: #0d2436;
+        font-family: ralewayExtraBold;
+    }
+#form{
+    margin-top: 5%;
+}
+</style>
+
+    {% if creer %}l'event a ete changer!{% endif %}
+
+    <form action="{% url 'modify_event' event_id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="container" id="modify_event">
+    <div class="container">
+    <h1> Modifiez l'evenement</h1></div>
+        <div class="container" id="form">
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Votre association :</label>
+                {{ form.association_name }}
+            </div>
+            <div class="form-group row">
+                <label for="example-text-input" class="col-2 col-form-label">Nom de l'evenement</label>
+                <div class="col-10">
+                    {{ form.title }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="exampleTextarea">Description :</label>
+                {{ form.description }}
+            </div>
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Nombre maximum d'interne IONIS</label>
+                <div class="col-10">
+                    {{ form.size_intern }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Nombre maximum d'externe IONIS</label>
+                <div class="col-10">
+                    {{ form.size_extern }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Date et heure du debut</label>
+                <div class="col-10">
+                    {{ form.date_begin }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Date et heure de fin</label>
+                <div class="col-10">
+                    {{ form.date_end }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-2 col-form-label">Date et heure de fin d'inscription</label>
+                <div class="col-10">
+                    {{ form.date_deadline }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-text-input" class="col-2 col-form-label">Adresse</label>
+                <div class="col-10">
+                    {{ form.place }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Prix en euro</label>
+                <div class="col-10">
+                    {{ form.price }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="exampleInputFile">Affiche de l'évènement :</label>
+                {{ form.photo }}
+                <small id="fileHelp" class="form-text text-muted">Importer l'affiche de votre évènement en .jpg</small>
+            </div>
+            {% if god %}
+            <div class="form-group row">
+                <label for="example-number-input" class="col-2 col-form-label">Evènement Premium :</label>
+                {{ form.prenium }}
+            </div>
+            {% endif %}
+        </div>
+        <input type="submit" class="btn btn-primary" value="Modifier" />
+    </div>
+</form>
+{% endblock %}
