@@ -18,4 +18,3 @@ class MyUserTests(TestCase):
         userExtend.mail_secondary = 'hello@gmail.com'
 
         self.assertEqual(userExtend.mail_secondary, 'hello@gmail.com')
-
